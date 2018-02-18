@@ -94,21 +94,21 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: image(<c:url value="/resources/img/pic.jpg" />)">
+            <div class="carousel-item active" style="background-image:  url('http://wallfon.com/download.php?id=20811') " >
                 <div class="carousel-caption d-none d-md-block">
                     <h3>First Slide</h3>
                     <p>This is a description for the first slide.</p>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+            <div class="carousel-item" style="background-image: url('http://stalkers.info/wp-content/uploads/2017/10/Abandoned-Orient-Express-Train-in-Belgium-10-930x530_c.jpg')">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Second Slide</h3>
                     <p>This is a description for the second slide.</p>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+            <div class="carousel-item" style="background-image: url('https://img-fotki.yandex.ru/get/5813/19268491.125/0_b1e31_6459fa0b_orig.jpg')">
                 <div class="carousel-caption d-none d-md-block">
                     <h3>Third Slide</h3>
                     <p>This is a description for the third slide.</p>
@@ -129,11 +129,11 @@
 <!-- Page Content -->
 <div class="container">
 
-    <h1 class="my-4">Welcome to Modern Business</h1>
+    <h1 class="my-4"> железные дороги</h1>
 
     <!-- Marketing Icons Section -->
     <div class="row">
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-8 mb-8">
             <div class="card h-100">
                 <h4 class="card-header">Card Title</h4>
                 <div class="card-body">
@@ -144,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
+        <div class="col-lg-4 mb-3">
             <div class="card h-100">
                 <h4 class="card-header">Card Title</h4>
                 <div class="card-body">
@@ -155,17 +155,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mb-4">
-            <div class="card h-100">
-                <h4 class="card-header">Card Title</h4>
-                <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!-- /.row -->
 
