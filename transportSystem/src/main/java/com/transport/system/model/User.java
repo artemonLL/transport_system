@@ -1,23 +1,30 @@
 package com.transport.system.model;
 
 
+import com.sun.javafx.beans.IDProperty;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class User {
 
-    private int user_id;
+
+    private String user_id;
     private String first_name;
     private String password;
     private String email;
     private Date date_birth;
     private String last_name;
-   // private Role role_id;
+    private Role role_id;
 
-    public int getUser_id() {
+
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
