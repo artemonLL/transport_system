@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.transport.system.model.Schedule" table="schedule" schema="transportdatabase">
+        <id name="scheduleId">
+            <column name="schedule_id" sql-type="int(11)"/>
+        </id>
+        <property name="trainId">
+            <column name="train_id" sql-type="int(11)"/>
+        </property>
+        <property name="stationId">
+            <column name="station_id" sql-type="int(11)"/>
+        </property>
+        <property name="timeMsk">
+            <column name="time_msk" sql-type="datetime(6)"/>
+        </property>
+        <property name="freePlaces">
+            <column name="free_places" sql-type="int(11)"/>
+        </property>
+        <property name="wayPosition">
+            <column name="way_position" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="trainByTrainId" class="com.transport.system.model.Train">
+            <column name="train_id"/>
+        </many-to-one>
+        <many-to-one name="stationByStationId" class="com.transport.system.model.Station">
+            <column name="station_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,8 +1,6 @@
 package com.transport.system.controller;
 
 
-import com.transport.system.dao.UserDao;
-import com.transport.system.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
