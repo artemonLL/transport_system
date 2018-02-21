@@ -13,23 +13,19 @@ import java.util.List;
 public class HomeController {
 
 
-    private UserDao userDao=new UserDao();
+
 
     @RequestMapping("/")
     public String home(Model model)
     {
-        List<User> userList= userDao.getUserList();
-        model.addAttribute("users",userList);
+
         return "home";
     }
 
     @RequestMapping("/viewSchedule/{user_id}")
     public String viewSchedule(@PathVariable String user_id,Model model) throws IOException
     {
-        User user=userDao.getUserByID(user_id);
-        model.addAttribute(user);
         return "viewSchedule";
     }
-
 
 }

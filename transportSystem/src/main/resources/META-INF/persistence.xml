@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence  xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="transportSystem" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.transport.system.model.User</class>
+        <class>com.transport.system.model.Role</class>
+        <class>com.transport.system.model.Ticket</class>
+        <class>com.transport.system.model.Train</class>
+        <class>com.transport.system.model.Schedule</class>
+        <class>com.transport.system.model.Station</class>
+
+
+
+
+
+
+    </persistence-unit>
+
+</persistence>

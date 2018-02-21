@@ -5,19 +5,35 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
+@Table(name = "user")
 public class User {
-    private Integer userId;
-    private String firstName;
-    private String password;
-    private String email;
-    private Date dateBirth;
-    private String lastName;
-    private Integer roleId;
-    private Collection<Ticket> ticketsByUserId;
-    private Role roleByRoleId;
+
 
     @Id
-    @Column(name = "user_id", nullable = false)
+    @Column(name="usr_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "date_birth")
+    @Temporal(TemporalType.DATE)
+    private Date dateBirth;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     public Integer getUserId() {
         return userId;
     }
@@ -26,8 +42,6 @@ public class User {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "first_name", nullable = false, length = 45)
     public String getFirstName() {
         return firstName;
     }
@@ -36,8 +50,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "password", nullable = false, length = 45)
     public String getPassword() {
         return password;
     }
@@ -46,8 +58,6 @@ public class User {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "email", nullable = false, length = 45)
     public String getEmail() {
         return email;
     }
@@ -56,8 +66,6 @@ public class User {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "date_birth", nullable = false)
     public Date getDateBirth() {
         return dateBirth;
     }
@@ -66,8 +74,6 @@ public class User {
         this.dateBirth = dateBirth;
     }
 
-    @Basic
-    @Column(name = "last_name", nullable = false, length = 45)
     public String getLastName() {
         return lastName;
     }
@@ -76,14 +82,25 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "role_id", nullable = false)
-    public Integer getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", dateBirth=" + dateBirth +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                '}';
     }
 
     @Override
@@ -93,45 +110,24 @@ public class User {
 
         User user = (User) o;
 
-        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        if (dateBirth != null ? !dateBirth.equals(user.dateBirth) : user.dateBirth != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (roleId != null ? !roleId.equals(user.roleId) : user.roleId != null) return false;
-
-        return true;
+        if (userId != user.userId) return false;
+        if (!firstName.equals(user.firstName)) return false;
+        if (!password.equals(user.password)) return false;
+        if (!email.equals(user.email)) return false;
+        if (!dateBirth.equals(user.dateBirth)) return false;
+        if (!lastName.equals(user.lastName)) return false;
+        return role.equals(user.role);
     }
 
     @Override
     public int hashCode() {
-        int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (dateBirth != null ? dateBirth.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (roleId != null ? roleId.hashCode() : 0);
+        int result = userId;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + dateBirth.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + role.hashCode();
         return result;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<Ticket> getTicketsByUserId() {
-        return ticketsByUserId;
-    }
-
-    public void setTicketsByUserId(Collection<Ticket> ticketsByUserId) {
-        this.ticketsByUserId = ticketsByUserId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
-    public Role getRoleByRoleId() {
-        return roleByRoleId;
-    }
-
-    public void setRoleByRoleId(Role roleByRoleId) {
-        this.roleByRoleId = roleByRoleId;
     }
 }
