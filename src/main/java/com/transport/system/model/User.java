@@ -2,29 +2,48 @@ package com.transport.system.model;
 
 
 import com.sun.javafx.beans.IDProperty;
+import org.hibernate.annotations.Proxy;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
-
+import javax.persistence.*;
+import java.sql.Date;
+@Entity
+@Proxy(lazy=false)
+@Table(name = "user")
 public class User {
 
+    @Id
+    @Column(name = "user_id")
+    private Integer user_id;
 
-    private String user_id;
+    @Column(name = "first_name")
     private String first_name;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "email")
     private String email;
-    private Date date_birth;
+
+
+    @Column(name = "last_name")
     private String last_name;
-    private Role role_id;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", first_name='" + first_name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", last_name='" + last_name + '\'' +
+                '}';
+    }
 
-    public String getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
@@ -52,13 +71,13 @@ public class User {
         this.email = email;
     }
 
-    public Date getDate_birth() {
-        return date_birth;
-    }
-
-    public void setDate_birth(Date date_birth) {
-        this.date_birth = date_birth;
-    }
+  //  public Date getDate_birth() {
+    //    return date_birth;
+  //  }
+//
+  //  public void setDate_birth(Date date_birth) {
+   //     this.date_birth = date_birth;
+  //  }
 
     public String getLast_name() {
         return last_name;

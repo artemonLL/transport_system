@@ -1154,37 +1154,16 @@ arrival_station_id</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="237" name="date_birth">
+    <column id="277" parent="237" name="last_name">
       <Position>5</Position>
-      <DataType>date|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="278" parent="237" name="last_name">
-      <Position>6</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="237" name="role_id">
-      <Position>7</Position>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="280" parent="237" name="fk1_idx">
-      <ColNames>role_id</ColNames>
-    </index>
-    <key id="281" parent="237" name="PRIMARY">
+    <key id="278" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="282" parent="237" name="fk1">
-      <ColNames>role_id</ColNames>
-      <RefSchemaName>transportdatabase</RefSchemaName>
-      <RefTableName>role</RefTableName>
-      <RefColNames>role_id</RefColNames>
-    </foreign-key>
   </database-model>
 </dataSource>
