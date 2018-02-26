@@ -13,7 +13,16 @@ public class User {
 
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Column(name = "first_name")
     private String first_name;
@@ -24,6 +33,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "date_birth")
+    private Date date_birth;
+
+    @ManyToOne (optional = false,cascade = CascadeType.ALL)
+    @JoinColumn (name = "role_id")
+    private Role role;
 
     @Column(name = "last_name")
     private String last_name;
@@ -71,13 +86,12 @@ public class User {
         this.email = email;
     }
 
-  //  public Date getDate_birth() {
-    //    return date_birth;
-  //  }
-//
-  //  public void setDate_birth(Date date_birth) {
-   //     this.date_birth = date_birth;
-  //  }
+  public Date getDate_birth() {
+    return date_birth;
+ }
+
+ public void setDate_birth(Date date_birth) {
+    this.date_birth = date_birth;}
 
     public String getLast_name() {
         return last_name;

@@ -1,15 +1,12 @@
 package com.transport.system.dao;
 
 import com.transport.system.model.Role;
-import com.transport.system.model.User;
 
-import java.util.Date;
-import java.util.List;
+public interface RoleDao
+{
+    public Role getRoleById(int role_id) ;
 
-public class RoleDao {
-
-
-
+    public Role getRoleByName(String role_name);
 
 
 

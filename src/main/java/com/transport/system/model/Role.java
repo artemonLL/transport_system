@@ -1,11 +1,26 @@
 package com.transport.system.model;
 
 
+import org.hibernate.annotations.Proxy;
+import org.hibernate.mapping.Collection;
 
+import javax.persistence.*;
 
+@Entity
+@Proxy(lazy=false)
+@Table(name = "role")
 public class Role {
 
+
+
+    @Id
+    @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int role_id;
+
+
+
+    @Column(name = "role_name")
     private String role_name;
 
     public int getRole_id() {

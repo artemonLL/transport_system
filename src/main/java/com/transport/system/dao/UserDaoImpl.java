@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserById(int id) {
        Session session=this.sessionFactory.getCurrentSession();
-       User user=(User)session.load(User.class,new Integer(2));
+       User user=(User)session.load(User.class,new Integer(id));
 
 
         return user;
@@ -35,8 +35,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-     //   Session session=this.sessionFactory.getCurrentSession();
-      //  session.persist(user);
+        Session session=this.sessionFactory.getCurrentSession();
+        session.persist(user);
 
     }
 
@@ -51,42 +51,39 @@ public class UserDaoImpl implements UserDao {
     }
 
 
-    @Transactional
     @Override
-    public User getUserByNameLastName(String first_name, String last_name) {
-   //     Session session=this.sessionFactory.getCurrentSession();
-  //      Criteria userCriteria=session.createCriteria(User.class);
-  //      userCriteria.add(Restrictions.eq("first_name",first_name))
- //                   .add(Restrictions.eq("last_name",last_name));
-   //     User user=(User)userCriteria.uniqueResult();
+    public User getUserByNameLastName(String first_name, String last_name,Date date_birth) {
+       Session session=this.sessionFactory.getCurrentSession();
+       Criteria userCriteria=session.createCriteria(User.class);
+      userCriteria.add(Restrictions.eq("first_name",first_name))
+                    .add(Restrictions.eq("last_name",last_name))
+              .add(Restrictions.eq("date_birth",date_birth));
+        User user=(User)userCriteria.uniqueResult();
         return null;
     }
 
 
-    @Transactional
     @Override
     public int getUserId(User user) {
-     //   Session session=this.sessionFactory.getCurrentSession();
-     //   Criteria userCriteria=session.createCriteria(User.class);
-     //   userCriteria
-      //          .add(Restrictions.eq("first_name",user.getFirst_name()))
-     //           .add(Restrictions.eq("last_name",user.getLast_name()))
-       //         .add(Restrictions.eq("email",user.getEmail()));
-       // User newUser=(User)userCriteria.uniqueResult();
+        Session session=this.sessionFactory.getCurrentSession();
+       Criteria userCriteria=session.createCriteria(User.class);
+      userCriteria
+               .add(Restrictions.eq("first_name",user.getFirst_name()))
+              .add(Restrictions.eq("last_name",user.getLast_name()))
+              .add(Restrictions.eq("email",user.getEmail()));
+        User newUser=(User)userCriteria.uniqueResult();
 
         return 1;
     }
 
-
-    @Transactional
     @Override
     public void removeUser(int id) {
-    //    Session session=this.sessionFactory.getCurrentSession();
-   //     User user=(User)session.load(User.class,new Integer(id));
-     //   if(user!=null)
-    //    {
-     //       session.delete(user);
-    //    }
+       Session session=this.sessionFactory.getCurrentSession();
+       User user=(User)session.load(User.class,new Integer(id));
+        if(user!=null)
+       {
+           session.delete(user);
+       }
 
 
     }
