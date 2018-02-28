@@ -17,6 +17,8 @@ public interface TrainDao
 
     public List<Train> getTrainList();
 
+    public int getTrainIdByName(String train_number);
+
 
 
 

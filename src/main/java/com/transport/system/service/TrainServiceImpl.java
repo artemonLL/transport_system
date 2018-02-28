@@ -40,5 +40,10 @@ public class TrainServiceImpl implements TrainService {
         return this.trainDao.getTrainList();
     }
 
+    @Override
+    public int getTrainIdByName(String train_number) {
+        return this.trainDao.getTrainIdByName(train_number);
+    }
+
 
 }

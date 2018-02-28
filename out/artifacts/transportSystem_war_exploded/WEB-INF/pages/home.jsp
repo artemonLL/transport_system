@@ -41,7 +41,7 @@
           <!-- Page Content -->
         <div class="container">
 
-            <h1 class="my-4">Some Railways</h1>
+            <h1 class="my-4">Any Railways</h1>
 
             <!-- Marketing Icons Section -->
             <div class="row">
@@ -50,33 +50,26 @@
                         <h4 class="card-header">Schedule</h4>
                         <div class="card-body">
                             <table class="table table-striped table-hover table-bordered">
-
                                 <thead>
                                 <tr>
 
-                                    <th>user_id</th>
-                                    <th>first_name</th>
-                                    <th>password</th>
-                                    <th>email</th>
-                                    <th>last_name</th>
-                                    <th>date</th>
-                                    <th>role</th>
+                                    <th>Train</th>
+                                    <th>Station</th>
+                                    <th>Date</th>
 
                                 </tr>
                                 </thead>
-                                <c:forEach items="${userList}" var="userr">
-                                    <tr>
-                                        <td>${userr.first_name}</td>
-                                        <td>${userr.first_name}</td>
-                                        <td>${userr.password}</td>
-                                        <td>${userr.email}</td>
-                                        <td>${userr.last_name}</td>
-                                        <td>${userr.date_birth}</td>
-                                        <td>${userr.role.role_name}</td>
 
+
+                                <c:forEach items="${selectscheduleList}" var="oneschedule"  >
+                                    <tr>
+                                        <td>${oneschedule.train.train_nomber}</td>
+                                        <td>${oneschedule.station.station_name}</td>
+                                        <td>${oneschedule.time_msk}</td>
 
                                     </tr>
                                 </c:forEach>
+                            </table>
 
 
 
@@ -98,34 +91,34 @@
             <div class="row">
                 <div class="col-lg-4 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="#"><img class="card-img-top" src="http://kto-chto-gde.ru/wp-content/uploads/2016/08/Bernina2.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Project One</a>
+                                <a href="#">inf about Prices</a>
                             </h4>
-                            <p class="card-text">Trains its cool</p>
+                            <p class="card-text">            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="#"><img class="card-img-top" src="http://www.thameslinkprogramme.co.uk/wp-content/uploads/2015/12/Class-700.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Project Two</a>
+                                <a href="#">inf about Tickets</a>
                             </h4>
-                            <p class="card-text">Trains its very cool.</p>
+                            <p class="card-text">            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-6 portfolio-item">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                        <a href="#"><img class="card-img-top" src="http://2d.by/wallpapers/p/poezd_zimoy.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Project Three</a>
+                                <a href="#">inf about trains</a>
                             </h4>
-                            <p class="card-text">Trains its very  cool</p>
+                            <p class="card-text">                  </p>
                         </div>
                     </div>
                 </div>
@@ -159,10 +152,10 @@
 
                 <!-- Call to Action Section -->
                 <div class="row mb-4">
-                    <div class="col-md-8"> another text</p>
+                    <div class="col-md-8"></p>
                     </div>
                     <div class="col-md-4">
-                        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+
                     </div>
                 </div>
 

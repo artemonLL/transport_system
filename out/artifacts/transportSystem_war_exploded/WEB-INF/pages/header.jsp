@@ -37,11 +37,11 @@
         <a class="navbar-brand" href="<c:url value="/" />" >Any railways</a>
 
 
-        <a class="navbar-brand" href="<c:url value="/createallschedule" />" >Train schedule</a>
+        <a class="navbar-brand" href="<c:url value="createallschedule" />" >Train schedule</a>
 
 
 
-        <a class="navbar-brand" href="<c:url value="/user/singin/" />" >Sing In</a>
+        <a class="navbar-brand" href="<c:url value="singin" />" >Sing In</a>
 
 
 
@@ -58,7 +58,7 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/user/registration/" />" >  Registration </a>
+                    <a class="nav-link" href="<c:url value="registration" />" >  Registration </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="createallschedule" />" > Admin  </a>

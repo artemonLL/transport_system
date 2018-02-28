@@ -22,13 +22,13 @@ public class Schedule {
     @ManyToOne
     @JoinColumn (name = "train_id")
     private Train train;
-/*
+
     @ManyToOne
     @JoinColumn (name = "station_id")
     private Station station;
-*/
-  //  @Column(name = "time_msk")
-  //  private Date time_msk;
+
+    @Column(name = "time_msk")
+    private Date time_msk;
 
     @Column(name = "way_position")
     private int way_position;
@@ -59,7 +59,7 @@ public class Schedule {
     public void setTrain(Train train) {
         this.train = train;
     }
-/*
+
     public Station getStation() {
         return station;
     }
@@ -67,8 +67,7 @@ public class Schedule {
     public void setStation(Station station) {
         this.station = station;
     }
-*/
-/*
+
     public Date getTime_msk() {
         return time_msk;
     }
@@ -76,7 +75,7 @@ public class Schedule {
     public void setTime_msk(Date time_msk) {
         this.time_msk = time_msk;
     }
-*/
+
 
     public int getWay_position() {
         return way_position;

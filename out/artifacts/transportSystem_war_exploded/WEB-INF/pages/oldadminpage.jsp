@@ -41,10 +41,10 @@
                                             <!-- Text input-->
                                             <div class="form-group">
                                                 <div class="control-label col-xs-3"><form:label
-                                                        path="way_position">Train Num</form:label></div>
+                                                        path="way_position">Way Position</form:label></div>
                                                 <div class="col-xs-6">
-                                                    <form:hidden path="schedule_id" value="${scheduleObject.schedule_id}"/>
-                                                    <form:input cssClass="form-control" path="way_position"
+                      <form:hidden path="schedule_id" value="${scheduleObject.schedule_id}"/>
+              <form:input cssClass="form-control" path="way_position"
                                                                 value="${scheduleObject.way_position}"/>
                                                 </div>
                                             </div>
@@ -53,9 +53,28 @@
                                             <div class="form-group">
                            <form:label path="train.train_id" cssClass="control-label col-xs-3">train</form:label>
                                                 <div class="col-xs-6">
-                         <form:input cssClass="form-control" path="train.train_id" value="${scheduleObject.train.train_id}"/>
+                       <form:input cssClass="form-control" path="train.train_id" value="${scheduleObject.train.train_id}"/>
+
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                 <form:label path="station.station_id" cssClass="control-label col-xs-3">Station</form:label>
+                                                <div class="col-xs-6">
+                 <form:input cssClass="form-control" path="station.station_id" value="${scheduleObject.station.station_id}"/>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                   <form:label path="time_msk" cssClass="control-label col-xs-3">DATE(YYYY:mm:dd)</form:label>
+                                                <div class="col-xs-6">
+                                <form:input cssClass="form-control" path="time_msk" value="${trainObject.time_msk}"/>
+                                                </div>
+                                            </div>
+
+
+
+
+
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-xs-4">
@@ -82,26 +101,28 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Schedule List</a>
+                                <a href="<c:url value="schedulelist" />" > Schedule List </a>
 
                             </h4>
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
                                 <tr>
 
-                                    <th>Schedule train</th>
-                                    <th>Schedule ID</th>
-                                    <th>Schedule way position</th>
+                                    <th>Train</th>
+                                    <th>Station</th>
+                                    <th>Way position</th>
+                                    <th>Date</th>
 
                                 </tr>
                                 </thead>
 
 
-                                <c:forEach items="${scheduleList}" var="oneschedule">
+                                <c:forEach items="${scheduleList}" var="oneschedule"  begin="0" step="1" end="5">
                                     <tr>
                                         <td>${oneschedule.train.train_nomber}</td>
-                                        <td>${oneschedule.schedule_id}</td>
+                                        <td>${oneschedule.station.station_name}</td>
                                         <td>${oneschedule.way_position}</td>
+                                        <td>${oneschedule.time_msk}</td>
 
                                     </tr>
                                 </c:forEach>
@@ -177,7 +198,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Train List</a>
+                            <a href="<c:url value="trainlist" />" > Tains </a>
 
                         </h4>
                         <table class="table table-striped table-hover table-bordered">
@@ -186,15 +207,17 @@
 
                                 <th>Train Nomber</th>
                                 <th>Free Places</th>
+                                <th>train ID</th>
 
                             </tr>
                             </thead>
 
 
-                            <c:forEach items="${trainList}" var="onetrain">
+                            <c:forEach items="${trainList}" var="onetrain"  begin="0" step="1" end="3">
                                 <tr>
                                     <td>${onetrain.train_nomber}</td>
                                     <td>${onetrain.places}</td>
+                                    <td>${onetrain.train_id}</td>
                                 </tr>
                             </c:forEach>
                         </table>
@@ -259,7 +282,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Station List</a>
+                            <a href="<c:url value="stationlist" />" > Stations </a>
 
                         </h4>
                         <table class="table table-striped table-hover table-bordered">
@@ -267,12 +290,14 @@
                             <tr>
 
                                 <th>Station Name</th>
+                                <th>Station ID</th>
 
                             </tr>
                             </thead>
-                            <c:forEach items="${stationList}" var="station">
+                            <c:forEach items="${stationList}" var="station"  begin="0" step="1" end="3">
                                 <tr>
                                     <td>${station.station_name}</td>
+                                    <td>${station.station_id}</td>
                                 </tr>
                             </c:forEach>
                         </table>

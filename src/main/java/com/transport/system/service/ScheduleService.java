@@ -2,6 +2,7 @@ package com.transport.system.service;
 
 import com.transport.system.model.Schedule;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ScheduleService {
@@ -15,6 +16,10 @@ public interface ScheduleService {
     public void updateSchedule(Schedule schedule);
 
     public List<Schedule> getScheduleList();
+
+
+    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo);
+
 
 
 

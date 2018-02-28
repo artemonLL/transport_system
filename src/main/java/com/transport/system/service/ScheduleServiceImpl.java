@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -34,8 +35,19 @@ public class ScheduleServiceImpl implements ScheduleService {
         this.scheduleDao.updateSchedule(schedule);
     }
 
+
+
+
+
+
+
     @Override
     public List<Schedule> getScheduleList() {
         return this.scheduleDao.getScheduleList();
+    }
+
+    @Override
+    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
+        return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,stationOne,stationTwo);
     }
 }

@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 public class UserControllers {
 
     @Autowired
     UserService userService;
 
 
-    @RequestMapping("/saveuser")
+    @RequestMapping("saveuser")
     public String saveuser(Model model)
     {
 
@@ -27,13 +27,13 @@ public class UserControllers {
 
 
 
-    @RequestMapping("/registration")
+    @RequestMapping("registration")
     public String registration(Model model)
     {
 
         return "registration";
     }
-    @RequestMapping("/singin")
+    @RequestMapping("singin")
     public String singin(Model model)
     {
 
@@ -41,7 +41,7 @@ public class UserControllers {
     }
 
 
-    @RequestMapping("/buyticket")
+    @RequestMapping("buyticket")
     public String buyticket(Model model)
     {
 

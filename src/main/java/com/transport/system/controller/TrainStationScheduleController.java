@@ -9,16 +9,14 @@ import com.transport.system.service.TrainService;
 import com.transport.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.util.Calendar;
 
 
 @Controller
@@ -37,14 +35,68 @@ public class TrainStationScheduleController {
     ScheduleService scheduleService;
 
 
-    @RequestMapping("/")
-    public String home(Model model)
-    {
-        model.addAttribute("userList",userService.getUserList());
-        model.addAttribute("trainList",stationService.getStationList());
 
-        return "home";
+
+
+    @RequestMapping("schedulelist")
+    public ModelAndView schedulelist(@ModelAttribute Schedule schedule)
+    {
+
+        ModelAndView mod=new ModelAndView("schedulelist");
+        mod.addObject("scheduleList",scheduleService.getScheduleList());
+
+        return mod;
     }
+    @RequestMapping("stationlist")
+    public ModelAndView stationlist(@ModelAttribute Station station)
+    {
+
+        ModelAndView mod=new ModelAndView("stationlist");
+        mod.addObject("stationList",stationService.getStationList());
+
+        return mod;
+    }
+
+
+    @RequestMapping("trainlist")
+    public ModelAndView trainlist(@ModelAttribute Train train)
+    {
+
+        ModelAndView mod=new ModelAndView("trainlist");
+        mod.addObject("trainList",trainService.getTrainList());
+        return mod;
+    }
+
+
+
+
+    @RequestMapping("/")
+    public ModelAndView home(@ModelAttribute Schedule schedule)
+    {
+        ModelAndView mod=new ModelAndView("home");
+
+
+
+        Calendar c=Calendar.getInstance();
+        c.set(2001 , 2, 7);
+
+        Date newdate2=new Date(c.getTimeInMillis());
+
+        Calendar d=Calendar.getInstance();
+        d.set(2004 , 2, 7);
+
+        Date newdate3=new Date(d.getTimeInMillis());
+
+
+ mod.addObject("selectscheduleList",scheduleService.selectByDatesAndStations(newdate2,newdate3,2,8));
+
+        return mod;
+    }
+
+
+
+
+
 ////////// Page to control Train and Station
     @RequestMapping("createallschedule")
     public ModelAndView createallschedule(@ModelAttribute Train train,Station station,Schedule schedule)
@@ -70,7 +122,6 @@ public class TrainStationScheduleController {
         schedule = scheduleService.getScheduleById(id);
         return new ModelAndView("createallschedule", "scheduleObject",schedule);
     }
-
 
 
 

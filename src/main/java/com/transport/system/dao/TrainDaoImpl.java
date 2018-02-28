@@ -36,6 +36,17 @@ public class TrainDaoImpl implements TrainDao {
         return train;
     }
 
+
+    @Override
+    public int getTrainIdByName(String train_number) {
+        Session session=this.sessionFactory.getCurrentSession();
+        Criteria userCriteria=session.createCriteria(Train.class);
+        userCriteria.add(Restrictions.eq("station_name",train_number));
+        Train train=(Train)userCriteria.uniqueResult();
+
+        return train.getTrain_id();
+    }
+
     @Override
     public void addTrain(Train train) {
         Session session=this.sessionFactory.getCurrentSession();

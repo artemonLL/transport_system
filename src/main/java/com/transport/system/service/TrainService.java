@@ -22,6 +22,10 @@ public interface TrainService
 
 
 
+    public int getTrainIdByName(String train_number);
+
+
+
 
 
 

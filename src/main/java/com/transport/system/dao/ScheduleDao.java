@@ -3,6 +3,7 @@ package com.transport.system.dao;
 import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ScheduleDao {
@@ -16,7 +17,8 @@ public interface ScheduleDao {
 
     public List<Schedule> getScheduleList();
 
-    public Schedule getScheduleByTrainId(int trainId);
+
+    public List<Schedule> selectByDatesAndStations(Date dateOne,Date dateTwo,int stationOne,int stationTwo);
 
 
 

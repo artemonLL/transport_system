@@ -1,7 +1,9 @@
 package com.transport.system.service;
 
+import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface StationService {
