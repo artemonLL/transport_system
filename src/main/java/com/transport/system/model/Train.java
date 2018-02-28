@@ -3,7 +3,7 @@ package com.transport.system.model;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-
+import java.util.Collection;
 
 
 @Entity
@@ -18,18 +18,25 @@ public class Train
 
 
 
-    @Column(name = "train_nomber")
-    private String train_nomber;
+    @Column(name = "train_number")
+    private String train_number;
 
     @Column(name = "places")
     private int places;
+
+
+    @ManyToOne
+    @JoinColumn()
+
+
+
 
 
     @Override
     public String toString() {
         return "Train{" +
                 "train_id=" + train_id +
-                ", train_nomber='" + train_nomber + '\'' +
+                ", train_number='" + train_number + '\'' +
                 ", places=" + places +
                 '}';
     }
@@ -43,11 +50,11 @@ public class Train
     }
 
     public String getTrain_nomber() {
-        return train_nomber;
+        return train_number;
     }
 
     public void setTrain_nomber(String train_nomber) {
-        this.train_nomber = train_nomber;
+        this.train_number = train_nomber;
     }
 
     public int getPlaces() {

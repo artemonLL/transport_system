@@ -9,7 +9,7 @@ public interface TrainDao
 
     public Train getTrainById(int train_id) ;
 
-    public Train getTrainByName(String train_nomber);
+    public Train getTrainByName(String train_number);
 
     public void addTrain(Train train);
 

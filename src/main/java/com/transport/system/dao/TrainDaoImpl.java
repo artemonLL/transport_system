@@ -27,10 +27,10 @@ public class TrainDaoImpl implements TrainDao {
     }
 
     @Override
-    public Train getTrainByName(String train_nomber) {
+    public Train getTrainByName(String train_number) {
         Session session=this.sessionFactory.getCurrentSession();
         Criteria userCriteria=session.createCriteria(Train.class);
-        userCriteria.add(Restrictions.eq("station_name",train_nomber));
+        userCriteria.add(Restrictions.eq("station_name",train_number));
         Train train=(Train)userCriteria.uniqueResult();
 
         return train;

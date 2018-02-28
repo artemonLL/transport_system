@@ -1,8 +1,13 @@
 package com.transport.system.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Proxy(lazy=false)
@@ -18,6 +23,7 @@ public class Station {
 
     @Column(name = "station_name")
     private String station_name;
+
 
 
     public int getStation_id() {

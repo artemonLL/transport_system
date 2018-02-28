@@ -23,6 +23,12 @@
     <!-- Specifying the Dependencies -->
     <dependencies>
 
+        <dependency>
+            <groupId>net.kzn</groupId>
+            <artifactId>shoppingbackend</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- Spring 4 dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>

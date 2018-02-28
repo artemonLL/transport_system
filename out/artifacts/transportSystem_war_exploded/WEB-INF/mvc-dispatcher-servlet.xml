@@ -35,6 +35,7 @@
         <property name="password" value="${database.password}" />
 
 
+
         <property name="acquireIncrement" value="${connection.acquireIncrement}" />
         <property name="minPoolSize" value="${connection.minPoolSize}" />
         <property name="maxPoolSize" value="${connection.maxPoolSize}" />
@@ -54,6 +55,10 @@
             </props>
         </property>
         <property name="packagesToScan" value="com.transport.system.model"></property>
+
+
+
+
     </bean>
 
     <!-- Transaction -->

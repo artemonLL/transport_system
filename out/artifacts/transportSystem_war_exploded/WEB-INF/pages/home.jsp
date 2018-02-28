@@ -18,7 +18,7 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <!-- Slide One - Set the background image for this slide in the line below -->
-                <div class="carousel-item active" style="background-image:  url('https://witbanknews.co.za/wp-content/uploads/sites/105/2015/08/GTR2.jpg') " >
+                <div class="carousel-item active" style="background-image:  url('http://i50.tinypic.com/2d9cnyb.jpg') " >
                     <div class="carousel-caption d-none d-md-block">
                         <h3>Any railways</h3>
                         <!--   <p>This is a description for the third slide.</p>-->

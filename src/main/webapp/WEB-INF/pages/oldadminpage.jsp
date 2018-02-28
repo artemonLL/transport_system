@@ -17,6 +17,106 @@
 
 <section>
     <!-- Page Content -->
+
+
+    <div class="container">
+
+
+        <div class="container">
+
+            <!-- Marketing Icons Section -->
+            <div class="row">
+                <div class="col-lg-6 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#">Add Shedule</a>
+
+
+                                <fieldset>
+                                    <form:form id="ScheduleRegisterForm" cssClass="form-horizontal" modelAttribute="schedule"
+                                               method="post" action="saveschedule">
+                                        <form>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <div class="control-label col-xs-3"><form:label
+                                                        path="way_position">Way Position</form:label></div>
+                                                <div class="col-xs-6">
+                                                    <form:hidden path="schedule_id" value="${scheduleObject.schedule_id}"/>
+                                                    <form:input cssClass="form-control" path="way_position"
+                                                                value="${scheduleObject.way_position}"/>
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                           <form:label path="train.train_id" cssClass="control-label col-xs-3">train</form:label>
+                                                <div class="col-xs-6">
+                         <form:input cssClass="form-control" path="train.train_id" value="${scheduleObject.train.train_id}"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <input type="submit" id="saveschedule" class="btn btn-primary"
+                                                               value="Save" onclick="return submitScheduleForm();"/>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </form:form>
+                                </fieldset>
+
+
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#">Schedule List</a>
+
+                            </h4>
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead>
+                                <tr>
+
+                                    <th>Schedule train</th>
+                                    <th>Schedule ID</th>
+                                    <th>Schedule way position</th>
+
+                                </tr>
+                                </thead>
+
+
+                                <c:forEach items="${scheduleList}" var="oneschedule">
+                                    <tr>
+                                        <td>${oneschedule.train.train_nomber}</td>
+                                        <td>${oneschedule.schedule_id}</td>
+                                        <td>${oneschedule.way_position}</td>
+
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+<!-- TRAIN///////////////////////////////////////////////////////////////-->
+
+
     <div class="container">
 
         <!-- Marketing Icons Section -->
@@ -47,7 +147,7 @@
 
                                         <!-- Text input-->
                                         <div class="form-group">
-                                            <form:label path="places" cssClass="control-label col-xs-3">places</form:label>
+                                            <form:label path="places" cssClass="control-label col-xs-3">Places</form:label>
                                             <div class="col-xs-6">
                                                 <form:input cssClass="form-control" path="places" value="${trainObject.places}"/>
                                             </div>
@@ -68,6 +168,7 @@
 
                                 </form:form>
                             </fieldset>
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -78,19 +179,13 @@
                         <h4 class="card-title">
                             <a href="#">Train List</a>
 
-
-
-
-
                         </h4>
                         <table class="table table-striped table-hover table-bordered">
-
                             <thead>
                             <tr>
 
                                 <th>Train Nomber</th>
-                                <th>Free Plases</th>
-
+                                <th>Free Places</th>
 
                             </tr>
                             </thead>
@@ -102,10 +197,6 @@
                                     <td>${onetrain.places}</td>
                                 </tr>
                             </c:forEach>
-
-
-
-
                         </table>
                     </div>
                 </div>
@@ -113,41 +204,78 @@
         </div>
     </div>
 
+    <!-- Station///////////////////////////////////////////////////////////////-->
+
     <div class="container">
+
         <!-- Marketing Icons Section -->
         <div class="row">
-            <div class="col-lg-12 mb-12">
+            <div class="col-lg-6 col-sm-6 portfolio-item">
                 <div class="card h-100">
-                    <h4 class="card-header">AddTrain</h4>
+
                     <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Add Station</a>
+
+
+                            <fieldset>
+
+                                <form:form id="StationRegisterForm" cssClass="form-horizontal" modelAttribute="station" method="post" action="savestation">
+                                    <form>
 
 
 
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="control-label col-xs-3"> <form:label path="station_name">Station Name</form:label> </div>
+                                            <div class="col-xs-6">
+                                                <form:hidden path="station_id" value="${stationObject.station_id}"/>
+                                                <form:input cssClass="form-control" path="station_name" value="${stationObject.station_name}"/>
+                                            </div>
+                                        </div>
 
 
-
-                        <div class="container">
-                            <section class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Panel heading</h3>
-                                </div>
-                                <div class="panel-body">
-                                </div>
-                                <!-- panel-body // -->
-                            </section>
-                            <!-- panel// -->
-                        </div>
-                        <!-- container// -->
-
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <input type="submit" id="saveStation" class="btn btn-primary" value="Save" onclick="return submitStationForm();"/>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
 
 
+                                </form:form>
+                            </fieldset>
+                        </h4></div>
+                </div>
+            </div>
 
+            <div class="col-lg-6 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Station List</a>
 
+                        </h4>
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                            <tr>
 
+                                <th>Station Name</th>
 
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Learn More</a>
+                            </tr>
+                            </thead>
+                            <c:forEach items="${stationList}" var="station">
+                                <tr>
+                                    <td>${station.station_name}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -155,26 +283,7 @@
     </div>
 
 
-
-    <div class="container">
-
-        <!-- Marketing Icons Section -->
-        <div class="row">
-            <div class="col-lg-12 mb-12">
-                <div class="card h-100">
-                    <h4 class="card-header">AddStation</h4>
-                    <div class="card-body">
-
-                        adminnnn
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+</div>
 </section>
 
 
@@ -201,7 +310,37 @@
         }
         return true;
     };
+
+
+    function submitStationForm() {
+
+        // getting the employee form values
+        var name = $('#station_name').val().trim();
+
+        if(name.length ==0) {
+            alert('Please enter name');
+            $('#station_name').focus();
+            return false;
+        }
+
+        return true;
+    };
+    function submitScheduleForm() {
+
+        // getting the employee form values
+        var name = $('#way_position').val().trim();
+
+        if(name.length ==0) {
+            alert('Please enter name');
+            $('#way_position').focus();
+            return false;
+        }
+
+        return true;
+    };
 </script>
+
+
 
 
 
