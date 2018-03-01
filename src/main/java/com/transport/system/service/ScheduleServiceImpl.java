@@ -36,11 +36,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
 
-
-
-
-
-
     @Override
     public List<Schedule> getScheduleList() {
         return this.scheduleDao.getScheduleList();
@@ -48,6 +43,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
+
         return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,stationOne,stationTwo);
     }
 }

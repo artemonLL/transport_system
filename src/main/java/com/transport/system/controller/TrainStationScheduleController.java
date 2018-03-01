@@ -1,6 +1,7 @@
 package com.transport.system.controller;
 
 import com.transport.system.model.Schedule;
+import com.transport.system.model.Selectform;
 import com.transport.system.model.Station;
 import com.transport.system.model.Train;
 import com.transport.system.service.ScheduleService;
@@ -9,6 +10,7 @@ import com.transport.system.service.TrainService;
 import com.transport.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 @Controller
@@ -39,7 +43,7 @@ public class TrainStationScheduleController {
 
 
     @RequestMapping("schedulelist")
-    public ModelAndView schedulelist(@ModelAttribute Schedule schedule)
+    public ModelAndView schedulelist()
     {
 
         ModelAndView mod=new ModelAndView("schedulelist");
@@ -71,31 +75,37 @@ public class TrainStationScheduleController {
 
 
     @RequestMapping("/")
-    public ModelAndView home(@ModelAttribute Schedule schedule)
+    public ModelAndView home(@ModelAttribute Selectform selectform)
     {
         ModelAndView mod=new ModelAndView("home");
 
-
-
-        Calendar c=Calendar.getInstance();
-        c.set(2001 , 2, 7);
-
-        Date newdate2=new Date(c.getTimeInMillis());
-
-        Calendar d=Calendar.getInstance();
-        d.set(2004 , 2, 7);
-
-        Date newdate3=new Date(d.getTimeInMillis());
-
-
- mod.addObject("selectscheduleList",scheduleService.selectByDatesAndStations(newdate2,newdate3,2,8));
 
         return mod;
     }
 
 
+    @RequestMapping("homeselect")
+    public ModelAndView homeselect(@ModelAttribute Selectform selectform)
+    {
+        ModelAndView mod=new ModelAndView("homeselect");
+        return mod;
+    }
 
+    @RequestMapping("selecttrain")
+    public ModelAndView selecttrain(@ModelAttribute Selectform selectform)
+    {
 
+        List<Schedule> list=scheduleService.selectByDatesAndStations(selectform.getDateOne(),selectform.getDateTwo(),selectform.getStationOne(),selectform.getStationTwo());
+        ModelAndView mod=new ModelAndView("homeselect");
+        mod.addObject("list",list);
+        return  mod;
+    }
+
+    @RequestMapping("editselecttrain")
+    public ModelAndView editselecttrain(@RequestParam int id ,@ModelAttribute Selectform selectform) {
+
+        return new ModelAndView("homeselect", "selectObject",selectform);
+    }
 
 ////////// Page to control Train and Station
     @RequestMapping("createallschedule")

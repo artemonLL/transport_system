@@ -60,6 +60,16 @@ public class ScheduleDaoIml implements ScheduleDao{
     @Override
     public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
 
+/*
+        Calendar cal1=Calendar.getInstance();
+        cal1.set(2000,10,10);
+        Calendar cal2=Calendar.getInstance();
+        cal2.set(2006,10,10);
+        Date date1=new Date(cal1.getTimeInMillis());
+
+        Date date2=new Date(cal2.getTimeInMillis());
+*/
+
         Session session=this.sessionFactory.getCurrentSession();
         String queryString1 = " from Schedule   where station.station_id= :stationTwo";
         Query query1=session.createQuery(queryString1);
@@ -81,7 +91,7 @@ public class ScheduleDaoIml implements ScheduleDao{
         query.setParameter("dateTwo",dateTwo);
         query.setParameter("stationOneId",stationOne);
 
-        List list=query.list();
+        List <Schedule> list=query.list();
 
         return list;
     }
