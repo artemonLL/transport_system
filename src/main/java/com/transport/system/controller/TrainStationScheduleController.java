@@ -88,6 +88,10 @@ public class TrainStationScheduleController {
     public ModelAndView homeselect(@ModelAttribute Selectform selectform)
     {
         ModelAndView mod=new ModelAndView("homeselect");
+
+
+
+        mod.addObject("stationList",stationService.getStationList());
         return mod;
     }
 
@@ -97,6 +101,7 @@ public class TrainStationScheduleController {
 
         List<Schedule> list=scheduleService.selectByDatesAndStations(selectform.getDateOne(),selectform.getDateTwo(),selectform.getStationOne(),selectform.getStationTwo());
         ModelAndView mod=new ModelAndView("homeselect");
+        mod.addObject("stationList",stationService.getStationList());
         mod.addObject("list",list);
         return  mod;
     }
