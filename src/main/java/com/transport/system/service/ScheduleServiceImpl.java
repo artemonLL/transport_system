@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -42,8 +44,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
+    public List<Schedule> selectByDatesAndStations (Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo) {
 
-        return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,stationOne,stationTwo);
+        return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,date,stationOne,stationTwo);
     }
 }

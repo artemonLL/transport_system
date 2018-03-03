@@ -4,6 +4,8 @@ import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ScheduleDao {
@@ -18,7 +20,7 @@ public interface ScheduleDao {
     public List<Schedule> getScheduleList();
 
 
-    public List<Schedule> selectByDatesAndStations(Date dateOne,Date dateTwo,int stationOne,int stationTwo);
+    public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo,Date date, int stationOne, int stationTwo);
 
 
 

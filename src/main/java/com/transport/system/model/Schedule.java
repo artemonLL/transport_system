@@ -5,11 +5,12 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.sql.Date;
-
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 @Entity
-@Proxy(lazy=false)
 @Table(name = "schedule")
 public class Schedule {
 
@@ -28,21 +29,25 @@ public class Schedule {
     private Station station;
 
     @Column(name = "time_msk")
-    private Date time_msk;
+    private Timestamp time_msk;
 
     @Column(name = "way_position")
     private int way_position;
+
 
     @Override
     public String toString() {
         return "Schedule{" +
                 "schedule_id=" + schedule_id +
-                ", train="  +
-                ", station=" +
-
+                ", train=" + train +
+                ", station=" + station +
+                ", time_msk=" + time_msk +
                 ", way_position=" + way_position +
                 '}';
     }
+
+
+
 
     public Integer getSchedule_id() {
         return schedule_id;
@@ -68,11 +73,11 @@ public class Schedule {
         this.station = station;
     }
 
-    public Date getTime_msk() {
+    public Timestamp getTime_msk() {
         return time_msk;
     }
 
-    public void setTime_msk(Date time_msk) {
+    public void setTime_msk(Timestamp time_msk) {
         this.time_msk = time_msk;
     }
 

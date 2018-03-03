@@ -6,6 +6,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+/**
+ * Service Class for UserBean{@link User}
+ */
 public interface UserService {
 
 
@@ -15,5 +21,9 @@ public interface UserService {
     public User getUserByNameLastName(String first_name, String last_name,Date date_birth);
     public int getUserId(User user);
     public void removeUser(int id);
+    public User getUserByName(String username);
+
+
+
 
 }

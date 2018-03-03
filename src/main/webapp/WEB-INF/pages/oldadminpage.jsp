@@ -38,7 +38,7 @@
                                                modelAttribute="schedule"
                                                method="post" action="saveschedule">
                                         <form>
-                                            <!-- Text input-->
+                                            <!-- WAY nput-->
                                             <div class="form-group">
                                                 <div class="control-label col-xs-3"><form:label
                                                         path="way_position">Way Position</form:label></div>
@@ -48,33 +48,58 @@
                                                     <form:input cssClass="form-control" path="way_position"
                                                                 value="${scheduleObject.way_position}"/>
                                                 </div>
-                                            </div>
 
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <form:label path="train.train_id"
-                                                            cssClass="control-label col-xs-3">train</form:label>
-                                                <div class="col-xs-6">
-                                                    <form:input cssClass="form-control" path="train.train_id"
-                                                                value="${scheduleObject.train.train_id}"/>
 
+                                            <!-- TRAIN input-->
+
+                                                <div class="form-group">
+                                                    <div  cssClass="control-label col-xs-3">Station</div>
+
+                                                    <div class="col-xs-6">
+
+                                                        <form:select   path="train.train_id" class="form-control" >
+                                                            <option value="${stationList.get(1).station_id}" >select</option>
+
+                                                            <c:forEach var="onestation" items="${trainList}" >
+                                                                <option value="${onestation.train_id}"> ${onestation.train_nomber} </option>
+                                                            </c:forEach>
+
+
+                                                        </form:select>
+
+
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <form:label path="station.station_id"
-                                                            cssClass="control-label col-xs-3">Station</form:label>
-                                                <div class="col-xs-6">
-                                                    <form:input cssClass="form-control" path="station.station_id"
-                                                                value="${scheduleObject.station.station_id}"/>
 
+
+
+                                                <!-- TRAIN input-->
+
+                                                <div class="form-group">
+                                                    <div  cssClass="control-label col-xs-3">Train</div>
+
+                                                    <div class="col-xs-6">
+
+                                                        <form:select   path="station.station_id" class="form-control" >
+                                                            <option value="${stationList.get(1).station_id}" >select</option>
+
+                                                            <c:forEach var="onestation" items="${stationList}" >
+                                                                <option value="${onestation.station_id}"> ${onestation.station_name} </option>
+                                                            </c:forEach>
+                                                        </form:select>
+                                                    </div>
                                                 </div>
-                                            </div>
+
+
+                                                <!-- DATE input-->
+
                                             <div class="form-group">
                                                 <form:label path="time_msk"
                                                             cssClass="control-label col-xs-3">DATE(YYYY:mm:dd)</form:label>
                                                 <div class="col-xs-6">
                                                     <form:input cssClass="form-control" path="time_msk"
-                                                                value="${trainObject.time_msk}"/>
+                                                                value=" "/>
                                                 </div>
                                             </div>
 
@@ -155,21 +180,28 @@
 
                                 <fieldset>
 
-                                    <form:form id="TrainRegisterForm" cssClass="form-horizontal" modelAttribute="train"
+         <form:form id="TrainRegisterForm" cssClass="form-horizontal" modelAttribute="train"
                                                method="post" action="savetrain">
                                         <form>
 
-
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <div class="control-label col-xs-3"><form:label
-                                                        path="train_nomber">Train Num</form:label></div>
+              <div class="control-label col-xs-3"><form:label  path="train_nomber">Train Num</form:label></div>
                                                 <div class="col-xs-6">
-                                                    <form:hidden path="train_id" value="${trainObject.train_id}"/>
+                               <form:hidden path="train_id" value="${trainObject.train_id}"/>
                                                     <form:input cssClass="form-control" path="train_nomber"
                                                                 value="${trainObject.train_nomber}"/>
                                                 </div>
                                             </div>
+
+
+
+
+
+
+
+
+
 
                                             <!-- Text input-->
                                             <div class="form-group">
@@ -324,7 +356,9 @@
 </section>
 
 
-<%@include file="/WEB-INF/pages/footer.jsp" %>
+
+
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -379,6 +413,10 @@
 </script>
 
 
+
+
+
+<%@include file="/WEB-INF/pages/footer.jsp" %>
 
 
 

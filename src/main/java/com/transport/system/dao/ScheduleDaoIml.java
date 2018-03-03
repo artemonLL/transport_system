@@ -9,8 +9,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -24,6 +25,7 @@ public class ScheduleDaoIml implements ScheduleDao{
     @Autowired
     private TrainService trainService;
 
+  //  private static final Logger logger = LogManager.getLogger(ScheduleDaoIml.class);
 
 
     @Override
@@ -58,7 +60,10 @@ public class ScheduleDaoIml implements ScheduleDao{
 
 
     @Override
-    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
+    public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo) {
+ Timestamp timestamp1=new Timestamp(date.getTime()+dateOne.getTime());
+ Timestamp timestamp2=new Timestamp(date.getTime()+dateTwo.getTime());
+
 
 /*
         Calendar cal1=Calendar.getInstance();
@@ -69,6 +74,7 @@ public class ScheduleDaoIml implements ScheduleDao{
 
         Date date2=new Date(cal2.getTimeInMillis());
 */
+
 
         Session session=this.sessionFactory.getCurrentSession();
         String queryString1 = " from Schedule   where station.station_id= :stationTwo";
@@ -84,14 +90,16 @@ public class ScheduleDaoIml implements ScheduleDao{
             flag=false;
         }
 
- String queryString = " from Schedule  where time_msk > :dateOne and time_msk < :dateTwo  AND station.station_id= :stationOneId" +
+ String queryString = " from Schedule  where time_msk >= :dateOne and time_msk <= :dateTwo  AND station.station_id= :stationOneId" +
          " AND train.train_id in("+str+")" ;
      Query query=session.createQuery(queryString);
-     query.setParameter("dateOne",dateOne);
-        query.setParameter("dateTwo",dateTwo);
+     query.setParameter("dateOne",timestamp1);
+        query.setParameter("dateTwo",timestamp2);
         query.setParameter("stationOneId",stationOne);
 
         List <Schedule> list=query.list();
+
+   //     logger.info(String.format("Successfully %s auto logged in",list));
 
         return list;
     }

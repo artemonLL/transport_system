@@ -6,6 +6,12 @@ import org.hibernate.mapping.Collection;
 
 import javax.persistence.*;
 
+
+
+
+/**
+ * Simple JavaBean object that represents Role of {@link User}.
+ */
 @Entity
 @Proxy(lazy=false)
 @Table(name = "role")

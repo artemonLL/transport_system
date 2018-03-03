@@ -6,8 +6,12 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.sql.Date;
+
+
+/**
+ * Simple JavaBean  object that represents a User
+ */
 @Entity
-@Proxy(lazy=false)
 @Table(name = "user")
 public class User {
 
@@ -16,19 +20,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Column(name = "first_name")
     private String first_name;
 
     @Column(name = "password")
     private String password;
+
+    @Transient
+    private String confirmPassword;
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     @Column(name = "email")
     private String email;
@@ -43,6 +52,11 @@ public class User {
     @Column(name = "last_name")
     private String last_name;
 
+
+
+
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -53,6 +67,16 @@ public class User {
                 ", last_name='" + last_name + '\'' +
                 '}';
     }
+
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 
     public Integer getUser_id() {
         return user_id;

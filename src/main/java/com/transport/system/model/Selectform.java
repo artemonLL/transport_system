@@ -1,30 +1,44 @@
 package com.transport.system.model;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Selectform {
 
-    private Date dateOne;
+    private Time dateOne;
 
-    private Date dateTwo;
+    private Time dateTwo;
+
+    public Date getDateForSelect() {
+        return dateForSelect;
+    }
+
+    public void setDateForSelect(Date dateForSelect) {
+        this.dateForSelect = dateForSelect;
+    }
+
+    private Date dateForSelect;
+
+
 
     private int stationOne;
 
     private int stationTwo;
 
-    public Date getDateOne() {
+    public Time getDateOne() {
         return dateOne;
     }
 
-    public void setDateOne(Date dateOne) {
+    public void setDateOne(Time dateOne) {
         this.dateOne = dateOne;
     }
 
-    public Date getDateTwo() {
+    public Time getDateTwo() {
         return dateTwo;
     }
 
-    public void setDateTwo(Date dateTwo) {
+    public void setDateTwo(Time dateTwo) {
         this.dateTwo = dateTwo;
     }
 

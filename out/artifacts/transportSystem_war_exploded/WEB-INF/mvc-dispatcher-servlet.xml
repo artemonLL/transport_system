@@ -8,11 +8,11 @@
 
     <!-- Specifying base package of the Components like Controller, Service,
         DAO -->
-    <context:component-scan
-            base-package="com.transport.system" />
 
-    <!-- Getting Database properties -->
-    <context:property-placeholder location="classpath:application.properties" />
+
+
+
+
 
     <mvc:annotation-driven />
 

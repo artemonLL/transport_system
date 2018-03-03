@@ -3,6 +3,8 @@ package com.transport.system.service;
 import com.transport.system.model.Schedule;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ScheduleService {
@@ -18,7 +20,7 @@ public interface ScheduleService {
     public List<Schedule> getScheduleList();
 
 
-    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo);
+    public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo);
 
 
 

@@ -7,7 +7,6 @@ import java.util.Collection;
 
 
 @Entity
-@Proxy(lazy=false)
 @Table(name = "train")
 public class Train
 {
@@ -23,12 +22,6 @@ public class Train
 
     @Column(name = "places")
     private int places;
-
-
-    @ManyToOne
-    @JoinColumn()
-
-
 
 
 

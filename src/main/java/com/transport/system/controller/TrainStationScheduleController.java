@@ -1,5 +1,6 @@
 package com.transport.system.controller;
 
+import com.transport.system.dao.ScheduleDaoIml;
 import com.transport.system.model.Schedule;
 import com.transport.system.model.Selectform;
 import com.transport.system.model.Station;
@@ -8,6 +9,7 @@ import com.transport.system.service.ScheduleService;
 import com.transport.system.service.StationService;
 import com.transport.system.service.TrainService;
 import com.transport.system.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.apache.log4j.Logger;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,9 @@ import java.util.List;
 
 @Controller
 public class TrainStationScheduleController {
+
+
+    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
 
     @Autowired
     TrainService trainService;
@@ -74,10 +79,15 @@ public class TrainStationScheduleController {
 
 
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public ModelAndView home(@ModelAttribute Selectform selectform)
     {
         ModelAndView mod=new ModelAndView("home");
+        logr.debug("home");
+        logr.debug("home");
+        logr.debug("home");
+        logr.debug("home");
+
 
 
         return mod;
@@ -90,16 +100,26 @@ public class TrainStationScheduleController {
         ModelAndView mod=new ModelAndView("homeselect");
 
 
+        logr.warn("WARNWARNWARN");
+        logr.warn("WARNWARNWARN");
 
         mod.addObject("stationList",stationService.getStationList());
-        return mod;
+
+return mod;
     }
 
     @RequestMapping("selecttrain")
     public ModelAndView selecttrain(@ModelAttribute Selectform selectform)
     {
 
-        List<Schedule> list=scheduleService.selectByDatesAndStations(selectform.getDateOne(),selectform.getDateTwo(),selectform.getStationOne(),selectform.getStationTwo());
+
+        logr.warn("WARNWARNWARN");
+        logr.warn("WARNWARNWARN");
+
+        List<Schedule> list=scheduleService.selectByDatesAndStations(selectform.getDateOne(),selectform.getDateTwo(),selectform.getDateForSelect(),selectform.getStationOne(),selectform.getStationTwo());
+
+    //    logger.info(String.format("Select with date %s and time from= %s to %s  ",selectform.getDateOne()// //.toString(),selectform.getDateTwo().toString(),selectform.getDateForSelect().toString()));
+
         ModelAndView mod=new ModelAndView("homeselect");
         mod.addObject("stationList",stationService.getStationList());
         mod.addObject("list",list);
@@ -127,6 +147,8 @@ public class TrainStationScheduleController {
 
     @RequestMapping("saveschedule")
     public ModelAndView saveSchedule(@ModelAttribute Schedule schedule ) {
+
+
         scheduleService.addSchedule(schedule);
 
         return new ModelAndView("redirect:createallschedule");
@@ -141,9 +163,10 @@ public class TrainStationScheduleController {
 
 
 ///////// ADD TRAIN
-    @RequestMapping("savetrain")
+    @RequestMapping("createallschedule/savetrain")
     public ModelAndView saveTrain(@ModelAttribute Train train)
     {
+
         trainService.addTrain(train);
         return new ModelAndView("redirect:createallschedule");
     }

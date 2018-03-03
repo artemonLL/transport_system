@@ -88,4 +88,16 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    @Override
+    public User getUserByName(String username) {
+        Session session=this.sessionFactory.getCurrentSession();
+        Criteria userCriteria=session.createCriteria(User.class);
+        userCriteria
+                .add(Restrictions.eq("first_name",username));
+
+        User newUser=(User)userCriteria.uniqueResult();
+
+        return newUser;
+    }
+
 }
