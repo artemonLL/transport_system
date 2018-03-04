@@ -1,11 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Администратор
-  Date: 16.02.2018
-  Time: 18:52
-  To change this template use File | Settings | File Templates.
---%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
+
 
 <%@include file="/WEB-INF/pages/header.jsp" %>
 <section>
@@ -79,7 +77,7 @@
 
             <!-- Portfolio Section -->
 
-    <!-- /.container -->
+            <!-- /.container -->
 
-    <!-- Footer -->
-    <%@include file="/WEB-INF/pages/homenews.jsp" %>
+            <!-- Footer -->
+            <%@include file="/WEB-INF/pages/homenews.jsp" %>

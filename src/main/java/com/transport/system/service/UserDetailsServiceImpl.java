@@ -13,22 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-public class UserDetailsServiceImpl implements UserDetailsService
-{
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user=userDao.getUserByName(username);
+        User user = userDao.getUserByName(username);
 
-        Set<GrantedAuthority> grantedAuthorities=new HashSet<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRole_name()));
-
-  return new org.springframework.security.core.userdetails.User(user.getFirst_name(),user.getPassword(),grantedAuthorities);
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
 
+            grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRole_name()));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }

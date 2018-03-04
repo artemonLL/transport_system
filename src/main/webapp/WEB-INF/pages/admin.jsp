@@ -9,6 +9,7 @@
 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,6 +18,10 @@
 <section>
     <!-- Page Content -->
 
+    <div class="container">
+
+
+    </div>
 
     <div class="container">
 

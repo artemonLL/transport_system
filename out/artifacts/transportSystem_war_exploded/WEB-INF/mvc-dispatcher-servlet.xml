@@ -9,15 +9,18 @@
     <!-- Specifying base package of the Components like Controller, Service,
         DAO -->
 
-
-
-
-
-
     <mvc:annotation-driven />
 
     <!-- Specifying the Resource location to load JS, CSS, Images etc -->
     <mvc:resources mapping="/resources/**" location="/WEB-INF/res/" />
+
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="validation"/>
+    </bean>
+
+
 
     <!-- View Resolver -->
     <bean
@@ -60,6 +63,9 @@
 
 
     </bean>
+
+
+
 
     <!-- Transaction -->
     <bean id="transactionManager"

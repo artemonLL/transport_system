@@ -1,14 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Администратор
-  Date: 25.02.2018
-  Time: 1:47
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@include file="/WEB-INF/pages/header.jsp"%>
 
 <style>
 
@@ -33,139 +31,113 @@
     }
 </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-<%@include file="/WEB-INF/pages/header.jsp"%>
-<section>
-    <!-- Page Content -->
-    <div class="container" >
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-            <div class="col-lg-12 mb-12 ">
+<div class="container">
 
-                <!------ Include the above in your HEAD tag ---------->
+    <form:form method="POST" modelAttribute="userForm" class="form-signin">
 
-                <form action="#" name="myForm" method="post" onsubmit="return(validate());">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="well center-block">
-                                <div class="well-header">
-                                    <h3 class="text-center text-success"> Register to buy Ticket </h3>
-                                    <hr>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                </div>
-                                                <input type="text" placeholder="First Name" name="txtfname" class="form-control">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="well center-block">
+                    <div class="well-header">
+                        <h3 class="text-center text-success"> Sing In </h3>
+                        <hr>
+                    </div>
 
-                                            </div>
-                                        </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-user"></i>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                </div>
-                                                <input type="text" placeholder="Last Name" name="txtlname" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-lock"></i>
-                                                </div>
-                                                <input type="password" minlength="8" maxlength="20" placeholder="Password" name="txtpass" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-phone"></i>
-                                                </div>
-                                                <input type="number" minlength="10" maxlength="12" class="form-control" name="txtmobile" placeholder="Mobile No.">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-envelope"></i>
-                                                </div>
-                                                <input type="email" class="form-control" name="txtmail" placeholder="E-Mail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-list-alt"></i>
-                                                </div>
-                                                <textarea class="form-control" name="txtadd" placeholder="Address"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-xs-12 col-sm-12">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="glyphicon glyphicon-calendar"></i>
-                                                </div>
-                                                <input type="text" name="dob" placeholder="Date Of Birth" class="form-control" id="datepicker">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row widget">
-                                    <div class="col-md-12 col-xs-12 col-sm-12">
-                                        <button class="btn btn-warning btn-block"> Submit </button>
-                                    </div>
+        <spring:bind path="username">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="text" path="username" class="form-control" placeholder="Username"
+                            autofocus="true"></form:input>
+                <form:errors path="username"></form:errors>
+            </div>
+        </spring:bind>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-                </form>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </div>
 
 
+
+
+                    <spring:bind path="password">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="password" path="password" class="form-control" placeholder="Password"></form:input>
+                <form:errors path="password"></form:errors>
             </div>
-    </div>
-    </section>
+        </spring:bind>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-lock"></i>
+                                    </div>
+
+
+                    <spring:bind path="confirmPassword">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="password" path="confirmPassword" class="form-control"
+                            placeholder="Confirm your password"></form:input>
+                <form:errors path="confirmPassword"></form:errors>
+            </div>
+        </spring:bind>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row widget">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </form:form>
+</div>
 
 
 
-<%@include file="/WEB-INF/pages/footer.jsp"%>
+<%@include file="/WEB-INF/pages/footer.jsp" %>
+
+

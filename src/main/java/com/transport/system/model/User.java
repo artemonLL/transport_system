@@ -21,6 +21,16 @@ public class User {
     private Integer user_id;
 
 
+    @Column(name = "username")
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     @Column(name = "first_name")
     private String first_name;

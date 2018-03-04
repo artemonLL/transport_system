@@ -79,19 +79,7 @@ public class TrainStationScheduleController {
 
 
 
-    @RequestMapping("/home")
-    public ModelAndView home(@ModelAttribute Selectform selectform)
-    {
-        ModelAndView mod=new ModelAndView("home");
-        logr.debug("home");
-        logr.debug("home");
-        logr.debug("home");
-        logr.debug("home");
 
-
-
-        return mod;
-    }
 
 
     @RequestMapping("homeselect")
@@ -136,7 +124,7 @@ return mod;
     @RequestMapping("createallschedule")
     public ModelAndView createallschedule(@ModelAttribute Train train,Station station,Schedule schedule)
     {
-        ModelAndView mod=new ModelAndView("oldadminpage");
+        ModelAndView mod=new ModelAndView("admin");
         mod.addObject("trainList",trainService.getTrainList());
         mod.addObject("stationList",stationService.getStationList());
         mod.addObject("scheduleList",scheduleService.getScheduleList());
@@ -163,7 +151,7 @@ return mod;
 
 
 ///////// ADD TRAIN
-    @RequestMapping("createallschedule/savetrain")
+    @RequestMapping("savetrain")
     public ModelAndView saveTrain(@ModelAttribute Train train)
     {
 

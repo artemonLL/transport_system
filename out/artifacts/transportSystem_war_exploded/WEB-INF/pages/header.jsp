@@ -8,6 +8,8 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -30,6 +32,11 @@
 </head>
 
 <body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
 
@@ -40,7 +47,7 @@
         <a class="navbar-brand" href="<c:url value="createallschedule" />">Train schedule</a>
 
 
-        <a class="navbar-brand" href="<c:url value="singin" />">Sing In</a>
+        <a class="navbar-brand" href="<c:url value="/login" />">Sing In</a>
 
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -49,9 +56,36 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <div class="container">
+
+
+
+        </div>
 
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
+
+
+                    <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <li class="nav-item">
+                        <h5 a class="nav-link" >${pageContext.request.userPrincipal.name} <a  onclick="document.forms['logoutForm'].submit()"></a>
+                        </h5>
+                </li>
+
+                        <li class="nav-item">
+                            <form id="logoutForm" method="POST" action="${pageContext.request.contextPath}/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+
+           <h5 a class="nav-link" ><a  onclick="document.forms['logoutForm'].submit()">Logout</a>
+                            </h5>
+                        </li>
+
+
+
+                    </c:if>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="registration" />"> Registration </a>

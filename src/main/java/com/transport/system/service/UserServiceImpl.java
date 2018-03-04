@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByNameLastName(String first_name, String last_name,Date date_birth) {
-        return this.userDao.getUserByNameLastName(first_name,last_name,date_birth);
+    public User getUserByNameLastName(String username, String last_name,Date date_birth) {
+        return this.userDao.getUserByNameLastName(username,last_name,date_birth);
     }
 
     @Override

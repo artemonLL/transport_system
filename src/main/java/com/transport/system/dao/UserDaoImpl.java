@@ -52,10 +52,10 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public User getUserByNameLastName(String first_name, String last_name,Date date_birth) {
+    public User getUserByNameLastName(String username, String last_name,Date date_birth) {
        Session session=this.sessionFactory.getCurrentSession();
        Criteria userCriteria=session.createCriteria(User.class);
-      userCriteria.add(Restrictions.eq("first_name",first_name))
+      userCriteria.add(Restrictions.eq("username",username))
                     .add(Restrictions.eq("last_name",last_name))
               .add(Restrictions.eq("date_birth",date_birth));
         User user=(User)userCriteria.uniqueResult();
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
         Session session=this.sessionFactory.getCurrentSession();
        Criteria userCriteria=session.createCriteria(User.class);
       userCriteria
-               .add(Restrictions.eq("first_name",user.getFirst_name()))
+               .add(Restrictions.eq("username",user.getUsername()))
               .add(Restrictions.eq("last_name",user.getLast_name()))
               .add(Restrictions.eq("email",user.getEmail()));
         User newUser=(User)userCriteria.uniqueResult();
@@ -93,7 +93,7 @@ public class UserDaoImpl implements UserDao {
         Session session=this.sessionFactory.getCurrentSession();
         Criteria userCriteria=session.createCriteria(User.class);
         userCriteria
-                .add(Restrictions.eq("first_name",username));
+                .add(Restrictions.eq("username",username));
 
         User newUser=(User)userCriteria.uniqueResult();
 
