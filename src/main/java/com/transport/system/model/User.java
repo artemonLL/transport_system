@@ -12,6 +12,8 @@ import java.sql.Date;
  * Simple JavaBean  object that represents a User
  */
 @Entity
+
+@Proxy(lazy=false)
 @Table(name = "user")
 public class User {
 
@@ -63,9 +65,30 @@ public class User {
     private String last_name;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        User user = (User) o;
 
+        return user_id != null ? !user_id.equals(user.user_id) : user.user_id != null;
 
+    }
+
+    @Override
+    public int hashCode() {
+        int result = user_id != null ? user_id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (first_name != null ? first_name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (confirmPassword != null ? confirmPassword.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (date_birth != null ? date_birth.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (last_name != null ? last_name.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public String toString() {

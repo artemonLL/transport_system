@@ -9,6 +9,8 @@
           <element id="library" level="application" name="html5shiv" />
           <element id="library" level="application" name="respond" />
           <element id="library" level="application" name="jquery" />
+          <element id="library" level="application" name="jquery-1.11.1" />
+          <element id="library" level="application" name="bootstrap-select" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />

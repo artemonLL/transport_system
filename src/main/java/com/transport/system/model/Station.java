@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
+
+@Proxy(lazy=false)
 @Table(name = "station")
 public class Station {
 

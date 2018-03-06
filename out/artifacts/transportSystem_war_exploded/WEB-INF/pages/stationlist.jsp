@@ -37,14 +37,16 @@
                                 <tr>
 
                                     <th>Station Name</th>
-                                    <th>Station ID</th>
+                                    <th>Trains Schedule</th>
 
                                 </tr>
                                 </thead>
                                 <c:forEach items="${stationList}" var="station">
                                     <tr>
                                         <td>${station.station_name}</td>
-                                        <td>${station.station_id}</td>
+                                        <td>
+                                            <a href="<c:url value="/stationschedule/${station.station_id}" />" class="btn btn-primary">Users</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </table>

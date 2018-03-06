@@ -1,7 +1,11 @@
 package com.transport.system.dao;
 
+import com.transport.system.controller.TrainStationScheduleController;
+import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 import com.transport.system.model.Train;
+import com.transport.system.service.StationService;
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,9 +19,14 @@ import java.util.List;
 @Repository
 public class TrainDaoImpl implements TrainDao {
 
-
+    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    private StationService stationService;
+
+
 
     @Override
     public Train getTrainById(int train_id) {
@@ -30,7 +39,7 @@ public class TrainDaoImpl implements TrainDao {
     public Train getTrainByName(String train_number) {
         Session session=this.sessionFactory.getCurrentSession();
         Criteria userCriteria=session.createCriteria(Train.class);
-        userCriteria.add(Restrictions.eq("station_name",train_number));
+        userCriteria.add(Restrictions.eq("train_number",train_number));
         Train train=(Train)userCriteria.uniqueResult();
 
         return train;
@@ -39,13 +48,28 @@ public class TrainDaoImpl implements TrainDao {
 
     @Override
     public int getTrainIdByName(String train_number) {
+
+        logr.warn(String.format("----------trainDAO getTrainIdByName get "+train_number));
         Session session=this.sessionFactory.getCurrentSession();
         Criteria userCriteria=session.createCriteria(Train.class);
-        userCriteria.add(Restrictions.eq("station_name",train_number));
+        userCriteria.add(Restrictions.eq("train_number",train_number));
         Train train=(Train)userCriteria.uniqueResult();
+
+        logr.warn(String.format("----------trainDAO getfrom database"+train.getTrain_number()+" "+train.getTrain_id()));
 
         return train.getTrain_id();
     }
+
+    @Override
+    public int getFreePlaces(int train_id) {
+
+            Session session=this.sessionFactory.getCurrentSession();
+            Train train=(Train)session.load(Train.class,new Integer(train_id));
+            return train.getPlaces();
+
+    }
+
+
 
     @Override
     public void addTrain(Train train) {

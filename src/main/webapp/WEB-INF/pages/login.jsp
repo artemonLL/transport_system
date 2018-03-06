@@ -91,7 +91,7 @@
             <div class="row widget">
                 <div class="col-md-12 col-xs-12 col-sm-12">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${pageContext.request.contextPath}/registration">Create an account</a></h4>
+ <h4 class="text-center"><a href="${pageContext.request.contextPath}/registration">Registration</a></h4>
                 </div>
             </div>
         </div>

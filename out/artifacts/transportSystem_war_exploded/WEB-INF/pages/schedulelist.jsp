@@ -29,7 +29,6 @@
 
                                     <th>Train</th>
                                     <th>Station</th>
-                                    <th>Way position</th>
                                     <th>Date</th>
 
                                 </tr>
@@ -38,9 +37,8 @@
 
                                 <c:forEach items="${scheduleList}" var="oneschedule">
                                     <tr>
-                                        <td>${oneschedule.train.train_nomber}</td>
+                                        <td>${oneschedule.train.train_number}</td>
                                         <td>${oneschedule.station.station_name}</td>
-                                        <td>${oneschedule.way_position}</td>
                                         <td>${oneschedule.time_msk}</td>
 
                                     </tr>

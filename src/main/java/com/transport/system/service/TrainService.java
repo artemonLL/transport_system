@@ -20,6 +20,8 @@ public interface TrainService
 
     public List<Train> getTrainList();
 
+    public int getFreePlaces(int train_id);
+
 
 
     public int getTrainIdByName(String train_number);

@@ -38,16 +38,39 @@
 
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+
     <div class="container">
 
+
+        <style>
+            .bootstrap-select.show>.dropdown-menu>.dropdown-menu {
+                display: block;
+            }
+
+            .bootstrap-select > .dropdown-menu > .dropdown-menu li.hidden{
+                display:none;
+            }
+
+            .bootstrap-select > .dropdown-menu > .dropdown-menu li a{
+                display: block;
+                width: 100%;
+                padding: 3px 1.5rem;
+                clear: both;
+                font-weight: 400;
+                color: #292b2c;
+                text-align: inherit;
+                white-space: nowrap;
+                background: 0 0;
+                border: 0;
+            }
+        </style>
 
         <a class="navbar-brand" href="<c:url value="/" />">Any railways</a>
 
 
-        <a class="navbar-brand" href="<c:url value="createallschedule" />">Train schedule</a>
+        <a class="navbar-brand" href="<c:url value="/stationlist" />">Train schedule</a>
 
 
-        <a class="navbar-brand" href="<c:url value="/login" />">Sing In</a>
 
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -83,15 +106,31 @@
                         </li>
 
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/tickets" />"> Tickets </a>
+                        </li>
+
 
                     </c:if>
 
 
+
+
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/registration" />"> Registration </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/login" />">Sing_In</a>
+                    </li>
+
+                </c:if>
+
+
+
+
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="registration" />"> Registration </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="createallschedule" />"> Admin </a>
+                    <a class="nav-link" href="<c:url value="/admin" />"> Admin </a>
                 </li>
 
             </ul>

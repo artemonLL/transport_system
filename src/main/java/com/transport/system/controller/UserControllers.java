@@ -1,25 +1,31 @@
 package com.transport.system.controller;
 
 
-import com.transport.system.model.Selectform;
-import com.transport.system.model.User;
-import com.transport.system.service.SecurityService;
-import com.transport.system.service.UserService;
+import com.transport.system.dao.UserDao;
+import com.transport.system.model.*;
+import com.transport.system.service.*;
 import com.transport.system.validator.UserValidator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping
 public class UserControllers {
+
+    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
+
 
     @Autowired
     private UserService userService;
@@ -31,22 +37,56 @@ public class UserControllers {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    ScheduleService scheduleService;
+
+    @Autowired
+    private TicketService ticketService;
+
+    @Autowired
+    private TrainService trainService;
+
+    @Autowired
+    private StationService stationService;
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
 
 
-    @RequestMapping(value = {"/", "/home"},method = RequestMethod.GET)
-    public ModelAndView home(@ModelAttribute Selectform selectform)
+    @RequestMapping(value = "/tickets")
+    public ModelAndView tickets(@ModelAttribute Ticket ticket)
     {
-        ModelAndView mod=new ModelAndView("home");
+
+        logr.warn(String.format("-----------/tickets/ USER GET---------------Yes"));
+        ModelAndView mod=new ModelAndView("tickets");
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+     //GET USER FROM SECURITY
+        Object obj = auth.getPrincipal();
+        String username = "";
+        if (obj instanceof UserDetails) {
+            username = ((UserDetails) obj).getUsername();
+        } else {
+            username = obj.toString();
+        }
+        User user1 = userService.getUserByName(username);
+        logr.warn(String.format("-----------/tickets/ USER GET---------------Yes"));
+
+        List<Ticket> ticketList =ticketService.getTicketListsByUser(user1);
+
+logr.warn(String.format("-----------/tickets/ GET USER TICKETS---------------Yes"+ticketList.size()));
+
+        mod.addObject("ticketList",ticketList);
 
         return mod;
     }
+
+
 
 
 
@@ -69,6 +109,21 @@ public class UserControllers {
     }
 
 
+    @RequestMapping(value = {"/", "/home"},method = RequestMethod.GET)
+    public ModelAndView home(@ModelAttribute Selectform selectform)
+    {
+
+
+        ModelAndView mod=new ModelAndView("home");
+
+
+        mod.addObject("stationList",stationService.getStationList());
+        mod.addObject("selectform",new Selectform());
+
+        return mod;
+    }
+
+
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(Model model,String error,String logout)
     {
@@ -84,12 +139,51 @@ public class UserControllers {
 
         return "login"; }
 
+    @RequestMapping(value = "/buybuybuy/{train_number}")
+    public ModelAndView buybuybuy(@PathVariable String train_number) {
 
-        @RequestMapping(value = "/admin")
-        public String admin(Model model)
-        {
-            return "admin";
+
+        logr.warn(String.format("-----------train number "+train_number));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object obj = auth.getPrincipal();
+        String username = "";
+        if (obj instanceof UserDetails) {
+            username = ((UserDetails) obj).getUsername();
+        } else {
+            username = obj.toString();
         }
+
+        User user1 = userService.getUserByName(username);
+
+
+        logr.warn(String.format("-----------User "+ user1.getUsername()));
+
+
+       Train train= trainService.getTrainByName(train_number);
+
+
+        logr.warn(String.format("-----------train train "+train.getTrain_number()));
+
+        if(trainService.getFreePlaces(train.getTrain_id())!=0)
+        {
+
+            Ticket  ticket=new Ticket();
+            ticket.setUser_id(user1);
+            Station station=new Station();
+            station.setStation_id(2);
+            ticket.setArrival_station_id(station);
+            ticket.setArrival_station_id(station);
+            ticket.setTrain_id(train);
+            ticketService.addTicket(ticket);
+        }
+
+
+
+        Ticket  ticket=new Ticket();
+        ModelAndView mod=new  ModelAndView("redirect:tickets");
+
+        return mod;
+    }
 
 
 
@@ -107,19 +201,4 @@ public class UserControllers {
 
 
 
-
-    @RequestMapping("singin")
-    public String singin(Model model)
-    {
-
-        return "singin";
-    }
-
-
-    @RequestMapping("buyticket")
-    public String buyticket(Model model)
-    {
-
-        return "buyticket";
-    }
 }

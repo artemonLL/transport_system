@@ -31,7 +31,7 @@
 
                                     <th>Train Nomber</th>
                                     <th>Free Places</th>
-                                    <th>train ID</th>
+                                    <th>Users</th>
 
                                 </tr>
                                 </thead>
@@ -39,9 +39,12 @@
 
                                 <c:forEach items="${trainList}" var="onetrain">
                                     <tr>
-                                        <td>${onetrain.train_nomber}</td>
+                                        <td>${onetrain.train_number}</td>
                                         <td>${onetrain.places}</td>
-                                        <td>${onetrain.train_id}</td>
+                                        <td>
+
+     <a href="<c:url value="/usersfromtrain/${onetrain.train_id}" />" class="btn btn-primary">Users</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </table>

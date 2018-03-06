@@ -1,9 +1,12 @@
 package com.transport.system.dao;
 
+import com.transport.system.controller.TrainStationScheduleController;
 import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 import com.transport.system.model.Train;
+import com.transport.system.service.StationService;
 import com.transport.system.service.TrainService;
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,14 @@ public class ScheduleDaoIml implements ScheduleDao{
     @Autowired
     private TrainService trainService;
 
+    @Autowired
+    private StationService stationService;
+
   //  private static final Logger logger = LogManager.getLogger(ScheduleDaoIml.class);
+
+
+    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
+
 
 
     @Override
@@ -57,7 +67,39 @@ public class ScheduleDaoIml implements ScheduleDao{
         return scheduleList;
     }
 
+    @Override
+    public List<Schedule> getScheduleByTrainId(int train_id) {
+        Session session=this.sessionFactory.getCurrentSession();
+        Criteria scheduleCriteria=session.createCriteria(Schedule.class);
+        scheduleCriteria.add(Restrictions.eq("train",trainService.getTrainById(train_id)));
+        List<Schedule> scheduleList =scheduleCriteria.list();
+        return scheduleList;
 
+    }
+
+    @Override
+    public List<Schedule> getScheduleListByStation(int station_id) {
+        logr.warn("-----------------getScheduleListByStation -----station_id--- "+station_id);
+        Session session=this.sessionFactory.getCurrentSession();
+        Criteria userCriteria=session.createCriteria(Schedule.class);
+        userCriteria.add(Restrictions.eq("station",stationService.getStationById(station_id)));
+        List<Schedule> scheduleList=userCriteria.list();
+        logr.warn("-----------------getScheduleListByStation -----scheduleList--- "+scheduleList.size());
+        return scheduleList;
+    }
+
+
+
+/*
+    @Override
+    public List<Station> getTrainListFromStation(int station_id) {
+        Session session=this.sessionFactory.getCurrentSession();
+        Criteria stationCriteria=session.createCriteria(Schedule.class);
+        stationCriteria.add(Restrictions.eq("station",stationService.getStationById(station_id)));
+        List<Station> trainFromstationList =stationCriteria.list();
+        return trainFromstationList;
+    }
+*/
 
     @Override
     public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo) {
@@ -77,9 +119,10 @@ public class ScheduleDaoIml implements ScheduleDao{
 
 
         Session session=this.sessionFactory.getCurrentSession();
-        String queryString1 = " from Schedule   where station.station_id= :stationTwo";
+        String queryString1 = " from Schedule   where station.station_id= :stationTwo AND time_msk > :timestamp2";
         Query query1=session.createQuery(queryString1);
         query1.setParameter("stationTwo",stationTwo);
+      query1.setParameter("timestamp2",timestamp2);
         List<Schedule> list1=query1.list();
         String str="";
         boolean flag=true;
@@ -99,8 +142,15 @@ public class ScheduleDaoIml implements ScheduleDao{
 
         List <Schedule> list=query.list();
 
-   //     logger.info(String.format("Successfully %s auto logged in",list));
-
+        if(list!=null) {
+            logr.warn(String.format("----FIND THIS STATIONS-------", list));
+            logr.warn(String.format("----FIND THIS STATIONS-------", list));
+        }
+        else
+            {
+                logr.warn(String.format("-----------LIST NUUULLL---------------"));
+                logr.warn(String.format("-----------LIST NUUULLL-----------------"));
+            }
         return list;
     }
 

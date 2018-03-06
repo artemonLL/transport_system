@@ -1,5 +1,6 @@
 package com.transport.system.dao;
 
+import com.transport.system.model.Schedule;
 import com.transport.system.model.Train;
 
 import java.util.List;
@@ -18,6 +19,10 @@ public interface TrainDao
     public List<Train> getTrainList();
 
     public int getTrainIdByName(String train_number);
+
+    public int getFreePlaces(int train_id);
+
+
 
 
 

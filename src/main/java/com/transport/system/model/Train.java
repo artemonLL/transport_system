@@ -7,6 +7,8 @@ import java.util.Collection;
 
 
 @Entity
+
+@Proxy(lazy=false)
 @Table(name = "train")
 public class Train
 {
@@ -19,6 +21,14 @@ public class Train
 
     @Column(name = "train_number")
     private String train_number;
+
+    public String getTrain_number() {
+        return train_number;
+    }
+
+    public void setTrain_number(String train_number) {
+        this.train_number = train_number;
+    }
 
     @Column(name = "places")
     private int places;
@@ -42,13 +52,6 @@ public class Train
         this.train_id = train_id;
     }
 
-    public String getTrain_nomber() {
-        return train_number;
-    }
-
-    public void setTrain_nomber(String train_nomber) {
-        this.train_number = train_nomber;
-    }
 
     public int getPlaces() {
         return places;

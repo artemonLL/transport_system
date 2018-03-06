@@ -20,8 +20,6 @@ public class Selectform {
 
     private Date dateForSelect;
 
-
-
     private int stationOne;
 
     private int stationTwo;

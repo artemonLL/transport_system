@@ -933,254 +933,302 @@
     <table id="236" parent="8" name="train">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="237" parent="8" name="user">
+    <table id="237" parent="8" name="train_id">
       <Engine>InnoDB</Engine>
     </table>
-    <column id="238" parent="232" name="role_id">
+    <table id="238" parent="8" name="user">
+      <Engine>InnoDB</Engine>
+    </table>
+    <column id="239" parent="232" name="role_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="232" name="role_name">
+    <column id="240" parent="232" name="role_name">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="240" parent="232" name="PRIMARY">
+    <index id="241" parent="232" name="role_name_UNIQUE">
+      <ColNames>role_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="242" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>role_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="241" parent="233" name="schedule_id">
+    <key id="243" parent="232" name="role_name_UNIQUE">
+      <ColNames>role_name</ColNames>
+      <UnderlyingIndexName>role_name_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="244" parent="233" name="schedule_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="242" parent="233" name="train_id">
+    <column id="245" parent="233" name="train_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="243" parent="233" name="station_id">
+    <column id="246" parent="233" name="station_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="233" name="time_msk">
+    <column id="247" parent="233" name="time_msk">
       <Position>4</Position>
       <DataType>datetime(6)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="233" name="free_places">
+    <column id="248" parent="233" name="free_places">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="233" name="way_position">
+    <column id="249" parent="233" name="way_position">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="247" parent="233" name="fk9_idx">
+    <index id="250" parent="233" name="fk9_idx">
       <ColNames>train_id</ColNames>
     </index>
-    <index id="248" parent="233" name="dfghj_idx">
+    <index id="251" parent="233" name="dfghj_idx">
       <ColNames>station_id</ColNames>
     </index>
-    <key id="249" parent="233" name="PRIMARY">
+    <key id="252" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>schedule_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="250" parent="233" name="fok25">
+    <foreign-key id="253" parent="233" name="fok25">
       <ColNames>train_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>train</RefTableName>
       <RefColNames>train_id</RefColNames>
     </foreign-key>
-    <foreign-key id="251" parent="233" name="forK24">
+    <foreign-key id="254" parent="233" name="forK24">
       <ColNames>station_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>station</RefTableName>
       <RefColNames>station_id</RefColNames>
     </foreign-key>
-    <column id="252" parent="234" name="station_id">
+    <column id="255" parent="234" name="station_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="253" parent="234" name="name">
+    <column id="256" parent="234" name="station_name">
       <Position>2</Position>
-      <DataType>varchar(45)|0</DataType>
+      <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="254" parent="234" name="PRIMARY">
+    <index id="257" parent="234" name="station_name_UNIQUE">
+      <ColNames>station_name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="258" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>station_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="255" parent="235" name="ticket_id">
+    <key id="259" parent="234" name="station_name_UNIQUE">
+      <ColNames>station_name</ColNames>
+      <UnderlyingIndexName>station_name_UNIQUE</UnderlyingIndexName>
+    </key>
+    <column id="260" parent="235" name="ticket_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="256" parent="235" name="departure_station_id">
+    <column id="261" parent="235" name="departure_station_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="235" name="arrival_station_id">
+    <column id="262" parent="235" name="arrival_station_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="235" name="user_id">
+    <column id="263" parent="235" name="user_id">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="235" name="train_id">
+    <column id="264" parent="235" name="train_id">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="260" parent="235" name="pk4_idx">
+    <index id="265" parent="235" name="pk4_idx">
       <ColNames>departure_station_id
 arrival_station_id</ColNames>
     </index>
-    <index id="261" parent="235" name="pk6_idx">
+    <index id="266" parent="235" name="pk6_idx">
       <ColNames>arrival_station_id</ColNames>
     </index>
-    <index id="262" parent="235" name="pk7_idx">
+    <index id="267" parent="235" name="pk7_idx">
       <ColNames>user_id</ColNames>
     </index>
-    <index id="263" parent="235" name="pk1_idx">
+    <index id="268" parent="235" name="pk1_idx">
       <ColNames>train_id</ColNames>
     </index>
-    <key id="264" parent="235" name="PRIMARY">
+    <key id="269" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ticket_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="265" parent="235" name="pk5">
+    <foreign-key id="270" parent="235" name="pk5">
       <ColNames>departure_station_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>station</RefTableName>
       <RefColNames>station_id</RefColNames>
     </foreign-key>
-    <foreign-key id="266" parent="235" name="pk6">
+    <foreign-key id="271" parent="235" name="pk6">
       <ColNames>arrival_station_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>station</RefTableName>
       <RefColNames>station_id</RefColNames>
     </foreign-key>
-    <foreign-key id="267" parent="235" name="pk7">
+    <foreign-key id="272" parent="235" name="pk7">
       <ColNames>user_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>user_id</RefColNames>
     </foreign-key>
-    <foreign-key id="268" parent="235" name="pk4">
+    <foreign-key id="273" parent="235" name="pk4">
       <ColNames>train_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>train</RefTableName>
       <RefColNames>train_id</RefColNames>
     </foreign-key>
-    <column id="269" parent="236" name="train_id">
+    <column id="274" parent="236" name="train_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="236" name="train_nomber">
+    <column id="275" parent="236" name="train_number">
       <Position>2</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="236" name="places">
+    <column id="276" parent="236" name="places">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="272" parent="236" name="PRIMARY">
+    <key id="277" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>train_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="273" parent="237" name="user_id">
+    <column id="278" parent="237" name="train_train_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="279" parent="237" name="schedules_schedule_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="280" parent="237" name="UK_x77dygyo0d08j53hicepel2o">
+      <ColNames>schedules_schedule_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="281" parent="237" name="FK_9pbsbs0ae920u4t95figrp9bx">
+      <ColNames>train_train_id</ColNames>
+    </index>
+    <key id="282" parent="237" name="UK_x77dygyo0d08j53hicepel2o">
+      <ColNames>schedules_schedule_id</ColNames>
+      <UnderlyingIndexName>UK_x77dygyo0d08j53hicepel2o</UnderlyingIndexName>
+    </key>
+    <foreign-key id="283" parent="237" name="FK_9pbsbs0ae920u4t95figrp9bx">
+      <ColNames>train_train_id</ColNames>
+      <RefSchemaName>transportdatabase</RefSchemaName>
+      <RefTableName>train</RefTableName>
+      <RefColNames>train_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="284" parent="237" name="FK_x77dygyo0d08j53hicepel2o">
+      <ColNames>schedules_schedule_id</ColNames>
+      <RefSchemaName>transportdatabase</RefSchemaName>
+      <RefTableName>schedule</RefTableName>
+      <RefColNames>schedule_id</RefColNames>
+    </foreign-key>
+    <column id="285" parent="238" name="user_id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="237" name="first_name">
+    <column id="286" parent="238" name="first_name">
       <Position>2</Position>
       <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="237" name="password">
+    <column id="287" parent="238" name="password">
       <Position>3</Position>
-      <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>varchar(255)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="237" name="email">
+    <column id="288" parent="238" name="email">
       <Position>4</Position>
       <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="237" name="last_name">
+    <column id="289" parent="238" name="last_name">
       <Position>5</Position>
       <DataType>varchar(45)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="237" name="date_birth">
+    <column id="290" parent="238" name="date_birth">
       <Position>6</Position>
-      <DataType>datetime|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>date|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="279" parent="237" name="role_id">
+    <column id="291" parent="238" name="role_id">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="280" parent="237" name="fkey27_idx">
+    <column id="292" parent="238" name="username">
+      <Position>8</Position>
+      <DataType>varchar(45)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="293" parent="238" name="fkey27_idx">
       <ColNames>role_id</ColNames>
     </index>
-    <key id="281" parent="237" name="PRIMARY">
+    <key id="294" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="282" parent="237" name="fk03">
+    <foreign-key id="295" parent="238" name="fkey27">
       <ColNames>role_id</ColNames>
       <RefSchemaName>transportdatabase</RefSchemaName>
       <RefTableName>role</RefTableName>

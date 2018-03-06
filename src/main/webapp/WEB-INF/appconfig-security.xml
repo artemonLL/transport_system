@@ -8,12 +8,22 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/admin" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/savestation" access="hasRole('ROLE_USER , ROLE_ADMIN')"/>
+        <intercept-url pattern="/savetrain" access="hasRole('ROLE_USER , ROLE_ADMIN')"/>
+        <intercept-url pattern="/saveschedule" access="hasRole('ROLE_USER , ROLE_ADMIN')"/>
+        <intercept-url pattern="/editschedule" access="hasRole('ROLE_USER, ROLE_ADMIN')"/>
+        <intercept-url pattern="/edittrain" access="hasRole('ROLE_USER, ROLE_ADMIN')"/>
+        <intercept-url pattern="/editstation" access="hasRole('ROLE_USER, ROLE_ADMIN')"/>
+        <intercept-url pattern="/saveschedule" access="hasRole('ROLE_USER, ROLE_ADMIN')"/>
 
         <form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login?error"
                     username-parameter="username" password-parameter="password"/>
 
         <logout logout-success-url="/login?logout"/>
+
+        <csrf disabled="true" />
+
     </http>
 
     <authentication-manager alias="authenticationManager">

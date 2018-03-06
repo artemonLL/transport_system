@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 
 
 @Entity
+@Proxy(lazy=false)
 @Table(name = "schedule")
 public class Schedule {
 

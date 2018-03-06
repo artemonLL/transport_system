@@ -9,13 +9,15 @@
 
 
 
-
 <%@include file="/WEB-INF/pages/header.jsp" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
 <section >
 <header >
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -64,45 +66,9 @@
 <!-- Marketing Icons Section -->
 <div class="row">
     <div class="col-lg-12 mb-12">
-        <div class="card h-100">
-            <h4 class="card-header" style="background-color: #ced4da">Schedule</h4>
-            <div class="card-body" >
-                <table class="table table-striped table-hover table-bordered" >
-                    <thead>
-                    <tr>
 
-                        <th>Train</th>
-                        <th>Station</th>
-                        <th>Date</th>
-
-                    </tr>
-                    </thead>
-
-
-                    <c:forEach items="${list}" var="oneschedule">
-                        <tr>
-                            <td>${oneschedule.train.train_nomber}</td>
-                            <td>${oneschedule.station.station_name}</td>
-                            <td>${oneschedule.time_msk}</td>
-
-                        </tr>
-                    </c:forEach>
-                </table>
-
-            </div>
-
-            <div class="container">
-
-                <!-- Marketing Icons Section -->
-                <div class="row">
-                    <div class="col-lg-1 col-sm-1 col-md-1 portfolio-item" style="background-color: #ced4da" >
-                    </div>
-
-                    <div class="col-lg-10 col-sm-10 col-md-10 portfolio-item" style="background-color: #ced4da" >
-                        <div class="card h-100">
-                            <div class="card-body">
                                 <fieldset>
-                                    <form:form id="SelectRegisterForm" cssClass="form-horizontal" modelAttribute="selectform"
+                <form:form id="SelectRegisterForm" cssClass="form-horizontal" modelAttribute="selectform"
                                                method="post" action="selecttrain">
 
                                         <div class="form-group">
@@ -147,15 +113,15 @@
                                                 <form:label path="dateOne"
                                                             cssClass="control-label col-xs-3">from Time(hh:mm:ss)</form:label>
                                                 <div class="col-xs-6">
-                                                    <form:input cssClass="form-control" path="dateOne"
-                                                                value="${selectObject.dateOne}"/>
+                                                    <form:input  cssClass="form-control" path="dateOne"
+                                                                />
 
                                                 </div>
                                             </div>
                        <div class="form-group">
                                         <form:label path="dateTwo" cssClass="control-label col-xs-3">to Time(hh:mm:ss)</form:label>
                                         <div class="col-xs-6">
-                                            <form:input cssClass="form-control" path="dateTwo"   value="${selectObject.dateTwo}"/>
+                                            <form:input  cssClass="form-control" path="dateTwo"   value="${selectObject.dateTwo}"/>
                                         </div>
                                     </div>
 
@@ -164,7 +130,7 @@
                                         <div class="form-group">
                                             <form:label path="dateForSelect" cssClass="control-label col-xs-3">DATE(YYYY-mm-dd)</form:label>
                                             <div class="col-xs-6">
-                                                <form:input cssClass="form-control" path="dateForSelect"   value="${selectObject.dateForSelect}"/>
+                                                <form:input  cssClass="form-control" path="dateForSelect"/>
                                             </div>
                                         </div>
 
@@ -183,7 +149,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
                                     </form:form>
                                 </fieldset>
 
@@ -212,7 +177,6 @@
 
 </div>
 
-    <script type="text/javascript" src="yourPath/silviomoreto-bootstrap-select-83d5a1b/dist/js/bootstrap-select.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -233,7 +197,7 @@
                 $('#train_name').focus();
                 return false;
             }
-
+            var places = $('#places').val();
             if (places <= 0) {
                 alert('Please enter proper places');
                 $('#places').focus();
@@ -260,15 +224,34 @@
         function submitScheduleForm() {
 
             // getting the employee form values
-            var name = $('#stationOne').val().trim();
-
-            if (name.length == 0) {
-                alert('Please enter name');
+            var name1 = $('#stationOne').val().trim();
+            var name2 = $('#stationTwo').val().trim();
+            var date = $('#dateForSelect').val();
+            var time1 = $('#dateOne').val();
+            var tim2e = $('#dateTwo').val();
+            if (name1.length == 0) {
+                alert('Please enter station');
                 $('#stationOne').focus();
                 return false;
             }
+              if (name2.length == 0) {
+                    $('#stationOne').focus();
+                    return false;}
+                if (validate_date(date)) {
+                    return false; }
+
 
             return true;
+        };
+
+
+
+
+        function validate_time(value)
+        {
+            var arrD = value.split(":");
+            if(arrD[0]==0)return false;
+            if(arrD[1]==0)return false;
         };
 
     </script>
