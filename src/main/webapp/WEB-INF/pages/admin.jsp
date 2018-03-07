@@ -87,7 +87,7 @@
                                                     <div class="col-xs-6">
 
                                                         <form:select path="train.train_id" class="form-control">
-                                                            <option value="${trainList.get(1).train_id}">select
+                                                            <option value="">select
                                                             </option>
 
                                                             <c:forEach var="onetrain" items="${trainList}">
@@ -235,6 +235,7 @@
                                                 <div class="col-xs-6">
                                                     <form:input cssClass="form-control" path="places"
                                                                 value="${trainObject.places}"/>
+
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -389,19 +390,19 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
-    function submitEmployeeForm() {
+    function submitTrainForm() {
 
         // getting the employee form values
-        var name = $('#train_name').val().trim();
+        var name = $('#train_number').val().trim();
         var places = $('#places').val();
         if (name.length == 0) {
-            alert('Please enter name');
-            $('#train_name').focus();
+            alert('Please enter Train num');
+            $('#train_number').focus();
             return false;
         }
 
         if (places <= 0) {
-            alert('Please enter proper places');
+            alert('Please enter places');
             $('#places').focus();
             return false;
         }
@@ -423,19 +424,80 @@
         return true;
     };
 
+
+
+
+
+
     function submitScheduleForm() {
 
         // getting the employee form values
-        var name = $('#way_position').val();
+        var position = $('#way_position').val();
+        var time = $('#time_msk').val();
 
-        if (name.length == 0) {
-            alert('Please enter name');
+
+
+
+
+        if (position <= 0) {
+            alert('Please enter Way position');
             $('#way_position').focus();
             return false;
         }
 
+
+        if (time <= 0) {
+            alert('Please enter DATE');
+            $('#time_msk').focus();
+            return false;
+        }
         return true;
     };
+
+    function submitSearch() {
+
+        // getting the employee form values
+
+
+        var stationo = $('#stationTwo').val().trim();
+        var stationt = $('#stationOne').val().trim();
+
+        var one= $('#dateOne').val();
+        var two = $('#dateTwo').val();
+        var date = $('#dateForSelect').val();
+
+
+        if (stationt.length == 0) {
+            alert('Please select Departure Station');
+            $('#stationOne').focus();
+            return false;
+        }
+        if (stationo.length == 0) {
+            alert('Please select Arrival Station');
+            $('#stationTwo').focus();
+            return false;
+        }
+
+
+        if (one <= 0) {
+            alert('Please enter  Time');
+            $('#dateOne').focus();
+            return false;
+        }
+        if (two <= 0) {
+            alert('Please enter Time');
+            $('#dateTwo').focus();
+            return false;
+        }
+        if (date <= 0) {
+            alert('Please enter DATE');
+            $('#dateForSelect').focus();
+            return false;
+        }
+        return true;
+    };
+
+
 </script>
 
 

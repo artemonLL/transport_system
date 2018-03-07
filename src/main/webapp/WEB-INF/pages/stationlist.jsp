@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>${station.station_name}</td>
                                         <td>
-                                            <a href="<c:url value="/stationschedule/${station.station_id}" />" class="btn btn-primary">Users</a>
+                                            <a href="<c:url value="/stationschedule/${station.station_id}" />" class="btn btn-primary">Trains</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

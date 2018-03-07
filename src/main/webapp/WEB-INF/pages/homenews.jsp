@@ -7,6 +7,10 @@
             <!-- /.row -->
 
             <!-- Portfolio Section -->
+<section>
+
+    <div class="container">
+    <div class="col-md-12 col-sm-12">
             <h2>Our News</h2>
 
             <div class="row">
@@ -87,6 +91,8 @@
                 </div>
 
             </div>
+    </div>
+    </div>
     </section>
     <!-- /.container -->
 

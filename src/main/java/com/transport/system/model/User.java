@@ -72,8 +72,16 @@ public class User {
 
         User user = (User) o;
 
-        return user_id != null ? !user_id.equals(user.user_id) : user.user_id != null;
-
+        if (user_id != null ? !user_id.equals(user.user_id) : user.user_id != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (first_name != null ? !first_name.equals(user.first_name) : user.first_name != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (confirmPassword != null ? !confirmPassword.equals(user.confirmPassword) : user.confirmPassword != null)
+            return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (date_birth != null ? !date_birth.equals(user.date_birth) : user.date_birth != null) return false;
+        if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        return last_name != null ? last_name.equals(user.last_name) : user.last_name == null;
     }
 
     @Override

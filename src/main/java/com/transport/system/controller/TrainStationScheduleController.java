@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.log4j.Logger;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -42,84 +43,82 @@ public class TrainStationScheduleController {
     private TicketService ticketService;
 
 
-
-
     @RequestMapping("schedulelist")
-    public ModelAndView schedulelist()
-    {
+    public ModelAndView schedulelist() {
 
-        ModelAndView mod=new ModelAndView("schedulelist");
-        mod.addObject("scheduleList",scheduleService.getScheduleList());
+        ModelAndView mod = new ModelAndView("schedulelist");
+        mod.addObject("scheduleList", scheduleService.getScheduleList());
 
         return mod;
     }
-    @RequestMapping("stationlist")
-    public ModelAndView stationlist(@ModelAttribute Station station)
-    {
 
-        ModelAndView mod=new ModelAndView("stationlist");
-        mod.addObject("stationList",stationService.getStationList());
+    @RequestMapping("stationlist")
+    public ModelAndView stationlist(@ModelAttribute Station station) {
+
+        ModelAndView mod = new ModelAndView("stationlist");
+        mod.addObject("stationList", stationService.getStationList());
 
         return mod;
     }
 
 
     @RequestMapping("trainlist")
-    public ModelAndView trainlist(@ModelAttribute Train train)
-    {
+    public ModelAndView trainlist(@ModelAttribute Train train) {
 
-        ModelAndView mod=new ModelAndView("trainlist");
-        mod.addObject("trainList",trainService.getTrainList());
+        ModelAndView mod = new ModelAndView("trainlist");
+        mod.addObject("trainList", trainService.getTrainList());
+        return mod;
+    }
+
+
+    @RequestMapping("nonono")
+    public ModelAndView nonono() {
+
+        ModelAndView mod = new ModelAndView("nonono");
         return mod;
     }
 /////////////////////GET USERS FROM TRAIN
 
 
-    @RequestMapping(value ="/usersfromtrain/{train_id}")
-    public ModelAndView usersfromtrain(@PathVariable String train_id)
-    {
-        logr.warn(String.format("-----------/usersfromtrain/train_number ----"+train_id));
+    @RequestMapping(value = "/usersfromtrain/{train_id}")
+    public ModelAndView usersfromtrain(@PathVariable String train_id) {
+        logr.warn(String.format("-----------/usersfromtrain/train_number ----" + train_id));
 
-        Train train= trainService.getTrainById(Integer.parseInt(train_id));
+        Train train = trainService.getTrainById(Integer.parseInt(train_id));
 
-        logr.warn(String.format("-----------/usersfromtrain/train_number(getTrainByName) ----"+train.getTrain_number()+train.getTrain_id()));
+        logr.warn(String.format("-----------/usersfromtrain/train_number(getTrainByName) ----" + train.getTrain_number() + train.getTrain_id()));
 
-        List<User> userList=ticketService.getUserListFromTrain(train);
+        List<User> userList = ticketService.getUserListFromTrain(train);
 
-        logr.warn(String.format("-----------UserList ----"+userList.size()));
+        logr.warn(String.format("-----------UserList ----" + userList.size()));
 
-        ModelAndView mod=new ModelAndView("usersfromtrain");
+        ModelAndView mod = new ModelAndView("usersfromtrain");
 
 
-        mod.addObject("userList",userList);
+        mod.addObject("userList", userList);
         return mod;
     }
 
-    @RequestMapping(value ="/stationschedule/{station_id}")
-    public ModelAndView stationschedule(@PathVariable String station_id)
-    {
-        Station station=stationService.getStationById(Integer.parseInt(station_id));
+    @RequestMapping(value = "/stationschedule/{station_id}")
+    public ModelAndView stationschedule(@PathVariable String station_id) {
+        Station station = stationService.getStationById(Integer.parseInt(station_id));
 
-        logr.warn("-----------------/stationschedule/get station "+station.getStation_name());
-        List<Schedule> scheduleList=scheduleService.getScheduleListByStation(station.getStation_id());
+        logr.warn("-----------------/stationschedule/get station " + station.getStation_name());
+        List<Schedule> scheduleList = scheduleService.getScheduleListByStation(station.getStation_id());
 
-        logr.warn("-----------------/stationschedule/get scheduleList "+scheduleList.size());
-        ModelAndView mod=new ModelAndView("stationschedule");
+        logr.warn("-----------------/stationschedule/get scheduleList " + scheduleList.size());
+        ModelAndView mod = new ModelAndView("stationschedule");
 
 
-        mod.addObject("scheduleList",scheduleList);
+        mod.addObject("scheduleList", scheduleList);
         return mod;
     }
-
-
-
 
 
     @RequestMapping(value = "/buyticket", method = RequestMethod.POST)
-    public ModelAndView buyticket(@ModelAttribute BuyTicketForm buyticketform)
-    {
-        logr.warn(String.format("-----------/buyticket/POST ----"+
-                buyticketform.getArrival_station_id()+" "+buyticketform.getDeparture_station_id()+" "+buyticketform.getTrain_id()));
+    public ModelAndView buyticket(@ModelAttribute BuyTicketForm buyticketform) {
+
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object obj = auth.getPrincipal();
         String username = "";
@@ -130,96 +129,99 @@ public class TrainStationScheduleController {
         }
 
         User user1 = userService.getUserByName(username);
+        Train train = trainService.getTrainById(buyticketform.getTrain_id());
 
-        Ticket ticket=new Ticket();
-        ticket.setTrain_id(trainService.getTrainById(buyticketform.getTrain_id()));
-        ticket.setArrival_station_id(stationService.getStationById(buyticketform.getArrival_station_id()));
-        ticket.setDeparture_station_id(stationService.getStationById(buyticketform.getDeparture_station_id()));
-        ticket.setUser_id(user1);
-        ticketService.addTicket(ticket);
+        ModelAndView mod = new ModelAndView("nonono");
+        if (train.getPlaces() != 0) {
+            List<User> userList = ticketService.getUserListFromTrain(train);
+            boolean flag=true;
+            for(User user:userList)
+            {
+                if(user.getUser_id()==user1.getUser_id()){
+                    flag=false;}
+            }
+            if (flag) {
+                //  java.util.Date currentTime=Calendar.getInstance().getTime();
+                //  long currTime=currentTime.getTime();
 
-        ModelAndView mod=new ModelAndView("redirect:tickets");
+                Ticket ticket = new Ticket();
+                ticket.setTrain_id(trainService.getTrainById(buyticketform.getTrain_id()));
+                ticket.setArrival_station_id(stationService.getStationById(buyticketform.getArrival_station_id()));
+                ticket.setDeparture_station_id(stationService.getStationById(buyticketform.getDeparture_station_id()));
+                ticket.setUser_id(user1);
+                ticketService.addTicket(ticket);
 
+                mod = new ModelAndView("redirect:tickets");
+            }
+        } else {
+            mod = new ModelAndView("nonono");
 
+        }
         return mod;
+
+
     }
 
     @RequestMapping(value = "/selecttrain")
-    public ModelAndView selecttrain(@ModelAttribute Selectform selectform)
-    {
+    public ModelAndView selecttrain(@ModelAttribute Selectform selectform) {
 
-        Selectform newselectform=selectform;
-
-
-        List<Schedule> scheduleList=scheduleService.selectByDatesAndStations(selectform.getDateOne(),selectform.getDateTwo(),selectform.getDateForSelect(),selectform.getStationOne(),selectform.getStationTwo());
+        Selectform newselectform = selectform;
 
 
-        List<Train> trainList=new ArrayList<>();
-        if(scheduleList.size()!=0)
-        {
-            for(Schedule schedule:scheduleList)
-            {
+        List<Schedule> scheduleList = scheduleService.selectByDatesAndStations(selectform.getDateOne(), selectform.getDateTwo(), selectform.getDateForSelect(), selectform.getStationOne(), selectform.getStationTwo());
+
+
+        List<Train> trainList = new ArrayList<>();
+        if (scheduleList.size() != 0) {
+            for (Schedule schedule : scheduleList) {
                 trainList.add(schedule.getTrain());
             }
 
         }
-        logr.warn(String.format("-----------//selecttrain/add to model trainList size----"+trainList.size()));
+        logr.warn(String.format("-----------//selecttrain/add to model trainList size----" + trainList.size()));
 
-        ModelAndView mod=new ModelAndView("buytickettotrain");
+        ModelAndView mod = new ModelAndView("buytickettotrain");
 
-        mod.addObject("newselectform",newselectform);
-        mod.addObject("stationList",stationService.getStationList());
-        mod.addObject("scheduleList",scheduleList);
-        mod.addObject("buyticketform",new BuyTicketForm());
+        mod.addObject("newselectform", newselectform);
+        mod.addObject("stationList", stationService.getStationList());
+        mod.addObject("scheduleList", scheduleList);
+        mod.addObject("buyticketform", new BuyTicketForm());
 
-        mod.addObject("trainList",trainList);
-
+        mod.addObject("trainList", trainList);
 
 
         return mod;
     }
-
-
-
-
 
 
     @RequestMapping(value = "/selecttrain", method = RequestMethod.GET)
-    public ModelAndView selecttrain()
-    {
-        ModelAndView mod=new ModelAndView("selecttrain");
+    public ModelAndView selecttrain() {
+        ModelAndView mod = new ModelAndView("selecttrain");
 
-        mod.addObject("stationList",stationService.getStationList());
-        mod.addObject("selectform",new Selectform());
-
+        mod.addObject("stationList", stationService.getStationList());
+        mod.addObject("selectform", new Selectform());
 
 
         return mod;
     }
 
 
-
-
-
-
-
-////////// Page to control Train and Station
+    ////////// Page to control Train and Station
     @RequestMapping("/admin")
-    public ModelAndView createallschedule(@ModelAttribute Train train,Station station,Schedule schedule)
-    {
+    public ModelAndView createallschedule(@ModelAttribute Train train, Station station, Schedule schedule) {
 
 
-        ModelAndView mod=new ModelAndView("admin");
-        mod.addObject("trainList",trainService.getTrainList());
-        mod.addObject("stationList",stationService.getStationList());
-        mod.addObject("scheduleList",scheduleService.getScheduleList());
+        ModelAndView mod = new ModelAndView("admin");
+        mod.addObject("trainList", trainService.getTrainList());
+        mod.addObject("stationList", stationService.getStationList());
+        mod.addObject("scheduleList", scheduleService.getScheduleList());
 
         return mod;
     }
 ///////////ADD SCHEDULE
 
     @RequestMapping("/saveschedule")
-    public ModelAndView saveSchedule(@ModelAttribute Schedule schedule ) {
+    public ModelAndView saveSchedule(@ModelAttribute Schedule schedule) {
 
 
         scheduleService.addSchedule(schedule);
@@ -228,17 +230,15 @@ public class TrainStationScheduleController {
     }
 
     @RequestMapping("/editschedule")
-    public ModelAndView editSchedule(@RequestParam int id ,@ModelAttribute Schedule schedule) {
+    public ModelAndView editSchedule(@RequestParam int id, @ModelAttribute Schedule schedule) {
         schedule = scheduleService.getScheduleById(id);
-        return new ModelAndView("admin", "scheduleObject",schedule);
+        return new ModelAndView("admin", "scheduleObject", schedule);
     }
 
 
-
-///////// ADD TRAIN
-    @RequestMapping(value = "/savetrain",method = RequestMethod.POST)
-    public ModelAndView saveTrain(@ModelAttribute Train train)
-    {
+    ///////// ADD TRAIN
+    @RequestMapping(value = "/savetrain", method = RequestMethod.POST)
+    public ModelAndView saveTrain(@ModelAttribute Train train) {
 
         trainService.addTrain(train);
         return new ModelAndView("redirect:admin");
@@ -251,9 +251,8 @@ public class TrainStationScheduleController {
     }
 //////////ADD STATION
 
-    @RequestMapping(value = "/savestation",method = RequestMethod.POST)
-    public ModelAndView saveStation(@ModelAttribute Station station)
-    {
+    @RequestMapping(value = "/savestation", method = RequestMethod.POST)
+    public ModelAndView saveStation(@ModelAttribute Station station) {
         stationService.addStation(station);
         return new ModelAndView("redirect:admin");
 
@@ -264,8 +263,6 @@ public class TrainStationScheduleController {
         station = stationService.getStationById(id);
         return new ModelAndView("admin", "stationObject", station);
     }
-
-
 
 
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Администратор
-  Date: 28.02.2018
-  Time: 9:45
+  Date: 06.03.2018
+  Time: 14:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -30,26 +30,10 @@
                         <div class="card-body">
                             <h4 class="card-title">
 
+                                No NO NO
 
                             </h4>
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                <tr>
 
-                                    <th>Station Name</th>
-                                    <th>Trains Schedule</th>
-
-                                </tr>
-                                </thead>
-                                <c:forEach items="${stationList}" var="station">
-                                    <tr>
-                                        <td>${station.station_name}</td>
-                                        <td>
-                                            <a href="<c:url value="/stationschedule/${station.station_id}" />" class="btn btn-primary">Trains</a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
                         </div>
                     </div>
                 </div>

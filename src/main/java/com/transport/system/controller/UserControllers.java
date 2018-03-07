@@ -119,7 +119,6 @@ logr.warn(String.format("-----------/tickets/ GET USER TICKETS---------------Yes
 
         mod.addObject("stationList",stationService.getStationList());
         mod.addObject("selectform",new Selectform());
-
         return mod;
     }
 

@@ -63,11 +63,12 @@
             <!-- Marketing Icons Section -->
             <div class="row">
                 <div class="col-lg-12 mb-12">
-                    <div class="card h-100">
-                        <h4 class="card-header">Schedule</h4>
-                        <div class="card-body">
+                    <div class="card h-100" onload="startTime()">
+                        <h4 class="card-header" >Schedule</h4>
+                        <div id="txt"></div>
+                        <div class="card-body" >
 
-                            <section>
+
 
 
                                 <div class="container">
@@ -88,7 +89,7 @@
                                                         <div class="col-xs-6">
 
                                                             <form:select   path="stationOne" class="form-control" >
-                                                                <option value="${stationList.get(1).station_id}" >Select</option>
+                                                                <option value="">Select</option>
 
                                                                 <c:forEach var="onestation" items="${stationList}" >
                                                                     <option value="${onestation.station_id}"> ${onestation.station_name} </option>
@@ -107,7 +108,7 @@
                                                         <div class="col-xs-6">
 
                                                             <form:select   path="stationTwo" class="form-control" >
-                                                                <option value="${stationList.get(1).station_id}" >Select</option>
+                                                                <option value="" >Select</option>
 
                                                                 <c:forEach var="onestation" items="${stationList}" >
                                                                     <option value="${onestation.station_id}"> ${onestation.station_name} </option>
@@ -126,7 +127,7 @@
                                                         <div class="col-xs-6">
 
 
-              <input type="submit" id="selecttrain" class="btn btn-primary"   value="Find Train" onclick="return submitScheduleForm();"/>
+              <input type="submit" id="selecttrain" class="btn btn-primary"   value="Find Train" onclick="return submitSearch();"/>
 
 
                                                         </div>
@@ -164,12 +165,13 @@
                                                                     <div class="form-group">
                                                                         <form:label path="dateForSelect" cssClass="control-label col-xs-3">DATE(YYYY-mm-dd)</form:label>
                                                                         <div class="col-xs-6">
-                                                                            <form:input  cssClass="form-control" path="dateForSelect"/>
+                                                                            <form:input type="date" cssClass="form-control" path="dateForSelect"/>
                                                                         </div>
                                                                     </div>
 
-                                                            </fieldset>
 
+                                    </form:form>
+                                    </fieldset>
 
                                                         </div>
 
@@ -188,25 +190,85 @@
                                 <!--//////////////////////////////////////////////////////////////-->
 
 
-                            </section>
+
                         </div>
                     </div>
                 </div>
 
                         </div>
 
-    </form:form>
+
                     </div>
                 </div>
 
 
             </div>
 </section>
-            <!-- /.row -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
 
-            <!-- Portfolio Section -->
 
-            <!-- /.container -->
+        function submitSearch() {
 
-            <!-- Footer -->
-            <%@include file="/WEB-INF/pages/homenews.jsp" %>
+            // getting the employee form values
+
+
+            var stationo = $('#stationTwo').val().trim();
+            var stationt = $('#stationOne').val().trim();
+
+            var one= $('#dateOne').val();
+            var two = $('#dateTwo').val();
+            var date = $('#dateForSelect').val();
+
+
+            if (stationt.length == 0) {
+                alert('Please select Departure Station');
+                $('#stationOne').focus();
+                return false;
+            }
+            if (stationo.length == 0) {
+                alert('Please select Arrival Station');
+                $('#stationTwo').focus();
+                return false;
+            }
+
+
+            if (one <= 0) {
+                alert('Please enter  Time');
+                $('#dateOne').focus();
+                return false;
+            }
+            if (two <= 0) {
+                alert('Please enter Time');
+                $('#dateTwo').focus();
+                return false;
+            }
+            if (date <= 0) {
+                alert('Please enter DATE');
+                $('#dateForSelect').focus();
+                return false;
+            }
+            return true;
+        };
+
+
+        function startTime() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('txt').innerHTML =
+                h + ":" + m + ":" + s;
+            var t = setTimeout(startTime, 500);
+        }
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            return i;
+        }
+
+    </script>
+
+
+<%@include file="/WEB-INF/pages/homenews.jsp" %>

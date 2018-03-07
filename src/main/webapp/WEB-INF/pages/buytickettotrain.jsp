@@ -105,7 +105,7 @@
                   <c:if test="${pageContext.request.userPrincipal.name != null}">
 
                       <input type="submit" id="buyticket" class="btn btn-primary"
-                             value="Buy Ticket!" onclick="return true;"/>
+                             value="Buy Ticket!" onclick="return submitBuy();"/>
 
 
                   </c:if>
@@ -118,20 +118,8 @@
                   </c:if>
 
 
-
-
-
-
-
-
-
                                     </form:form>
-
-
-
                             </fieldset>
-
-
                         </h4>
                     </div>
                 </div>
@@ -156,7 +144,7 @@
                                             <div class="col-xs-6">
 
                                                 <form:select   path="stationOne" class="form-control" >
-                                                    <option value="${stationList.get(1).station_id}" >Select</option>
+                                                    <option value="" >Select</option>
 
                                                     <c:forEach var="onestation" items="${stationList}" >
                                                         <option value="${onestation.station_id}"> ${onestation.station_name} </option>
@@ -175,7 +163,7 @@
                                             <div class="col-xs-6">
 
                                                 <form:select   path="stationTwo" class="form-control" >
-                                                    <option value="${stationList.get(1).station_id}" >Select</option>
+                                                    <option value="" >Select</option>
 
                                                     <c:forEach var="onestation" items="${stationList}" >
                                                         <option value="${onestation.station_id}"> ${onestation.station_name} </option>
@@ -209,7 +197,7 @@
                                         <div class="form-group">
                                             <form:label path="dateForSelect" cssClass="control-label col-xs-3">DATE(YYYY-mm-dd)</form:label>
                                             <div class="col-xs-6">
-                                                <form:input  cssClass="form-control" path="dateForSelect"/>
+                                                <form:input type="date" cssClass="form-control" path="dateForSelect"/>
                                             </div>
                                         </div>
 
@@ -222,7 +210,7 @@
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <input type="submit" id="selecttrain" class="btn btn-primary"
-                                                           value="Find" onclick="return submitScheduleForm();"/>
+                                                           value="Find" onclick="return submitSearch();"/>
                                                 </div>
                                                 <div class="col-xs-4">
                                                 </div>
@@ -271,85 +259,69 @@
         </div>
 
 
-        <script>
-            $(document).ready(function () {
-                $('.selectpicker').selectpicker();
-            });
-        </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript">
-            function submitEmployeeForm() {
-
-                // getting the employee form values
-                var name = $('#train_name').val().trim();
-                var places = $('#places').val();
-                if (name.length == 0) {
-                    alert('Please enter name');
-                    $('#train_name').focus();
-                    return false;
-                }
-                var places = $('#places').val();
-                if (places <= 0) {
-                    alert('Please enter proper places');
-                    $('#places').focus();
-                    return false;
-                }
-                return true;
-            };
+    function submitBuy() {
 
 
-            function submitStationForm() {
+        var train= $('#train_id').val();
 
-                // getting the employee form values
-                var name = $('#station_name').val().trim();
-
-                if (name.length == 0) {
-                    alert('Please enter name');
-                    $('#station_name').focus();
-                    return false;
-                }
-
-                return true;
-            };
-
-            function submitScheduleForm() {
-
-                // getting the employee form values
-                var name1 = $('#stationOne').val().trim();
-                var name2 = $('#stationTwo').val().trim();
-                var date = $('#dateForSelect').val();
-                var time1 = $('#dateOne').val();
-                var tim2e = $('#dateTwo').val();
-                if (name1.length == 0) {
-                    alert('Please enter station');
-                    $('#stationOne').focus();
-                    return false;
-                }
-                if (name2.length == 0) {
-                    $('#stationOne').focus();
-                    return false;}
-                if (validate_date(date)) {
-                    return false; }
+        if (train <= 0) {
+            alert('Please select TRAIN');
+            $('#train_id').focus();
+            return false;
+        }
 
 
-                return true;
-            };
+        return true;
+    };
 
 
+    function submitSearch() {
+
+        // getting the employee form values
 
 
-            function validate_time(value)
-            {
-                var arrD = value.split(":");
-                if(arrD[0]==0)return false;
-                if(arrD[1]==0)return false;
-            };
+        var stationo = $('#stationTwo').val().trim();
+        var stationt = $('#stationOne').val().trim();
 
-        </script>
+        var one= $('#dateOne').val();
+        var two = $('#dateTwo').val();
+        var date = $('#dateForSelect').val();
 
 
+        if (stationt.length == 0) {
+            alert('Please select Departure Station');
+            $('#stationOne').focus();
+            return false;
+        }
+        if (stationo.length == 0) {
+            alert('Please select Arrival Station');
+            $('#stationTwo').focus();
+            return false;
+        }
+
+
+        if (one <= 0) {
+            alert('Please enter  Time');
+            $('#dateOne').focus();
+            return false;
+        }
+        if (two <= 0) {
+            alert('Please enter Time');
+            $('#dateTwo').focus();
+            return false;
+        }
+        if (date <= 0) {
+            alert('Please enter DATE');
+            $('#dateForSelect').focus();
+            return false;
+        }
+        return true;
+    };
+</script>
 
 
 
