@@ -43,7 +43,7 @@
                                         <td>${onetrain.places}</td>
                                         <td>
 
-     <a href="<c:url value="/usersfromtrain/${onetrain.train_id}" />" class="btn btn-primary">Users</a>
+     <a href="<c:url value="/usersfromtrain/${onetrain.train_id}" />" class="btn btn-primary">Passengers</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

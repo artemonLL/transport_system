@@ -6,8 +6,10 @@ import com.transport.system.model.Station;
 import com.transport.system.model.Train;
 import com.transport.system.service.StationService;
 import com.transport.system.service.TrainService;
+import com.transport.system.service.TrainServiceImpl;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +21,7 @@ import java.util.*;
 
 
 @Repository
-public class ScheduleDaoIml implements ScheduleDao{
+public class ScheduleDaoIml implements ScheduleDao {
 
 
     @Autowired
@@ -31,60 +33,91 @@ public class ScheduleDaoIml implements ScheduleDao{
     @Autowired
     private StationService stationService;
 
-  //  private static final Logger logger = LogManager.getLogger(ScheduleDaoIml.class);
 
-
-    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
-
+    private static final Logger logr = Logger.getLogger(ScheduleDaoIml.class);
 
 
     @Override
     public Schedule getScheduleById(int schedule_id) {
-        Session session=this.sessionFactory.getCurrentSession();
-        Schedule schedule=(Schedule)session.load(Schedule.class,new Integer(schedule_id));
+        Schedule schedule = new Schedule();
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            schedule = (Schedule) session.load(Schedule.class, new Integer(schedule_id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return schedule;
     }
 
     @Override
     public void addSchedule(Schedule schedule) {
-        Train train=trainService.getTrainById(schedule.getTrain().getTrain_id());
-        schedule.setTrain(train);
-        Session session=this.sessionFactory.getCurrentSession();
-        session.save(schedule);
+        try {
+            Train train = trainService.getTrainById(schedule.getTrain().getTrain_id());
+            schedule.setTrain(train);
+            Session session = this.sessionFactory.getCurrentSession();
+            session.save(schedule);
+
+            logr.warn("ADD SCHEDULE with TRAIN-" + schedule.getTrain().getTrain_number() + " and STATION " +
+                    schedule.getStation().getStation_name() + " and TIME- " + schedule.getTime_msk());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void updateSchedule(Schedule schedule) {
-
-        Session session=this.sessionFactory.getCurrentSession();
-        session.update(schedule);
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            session.update(schedule);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Schedule> getScheduleList() {
-        Session session=this.sessionFactory.getCurrentSession();
-        List<Schedule> scheduleList= session.createQuery("from Schedule").list();
+        List<Schedule> scheduleList = new ArrayList<>();
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            scheduleList = session.createQuery("from Schedule").list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return scheduleList;
     }
 
     @Override
     public List<Schedule> getScheduleByTrainId(int train_id) {
-        Session session=this.sessionFactory.getCurrentSession();
-        Criteria scheduleCriteria=session.createCriteria(Schedule.class);
-        scheduleCriteria.add(Restrictions.eq("train",trainService.getTrainById(train_id)));
-        List<Schedule> scheduleList =scheduleCriteria.list();
+        List<Schedule> scheduleList = new ArrayList<>();
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            Criteria scheduleCriteria = session.createCriteria(Schedule.class);
+            scheduleCriteria.add(Restrictions.eq("train", trainService.getTrainById(train_id)));
+            scheduleList = scheduleCriteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return scheduleList;
 
     }
 
     @Override
     public List<Schedule> getScheduleListByStation(int station_id) {
-        logr.warn("-----------------getScheduleListByStation -----station_id--- "+station_id);
-        Session session=this.sessionFactory.getCurrentSession();
-        Criteria userCriteria=session.createCriteria(Schedule.class);
-        userCriteria.add(Restrictions.eq("station",stationService.getStationById(station_id)));
-        List<Schedule> scheduleList=userCriteria.list();
-        logr.warn("-----------------getScheduleListByStation -----scheduleList--- "+scheduleList.size());
+
+        List<Schedule> scheduleList = new ArrayList<>();
+        try {
+            logr.warn("-----------------getScheduleListByStation -----station_id--- " + station_id);
+            Session session = this.sessionFactory.getCurrentSession();
+            Criteria userCriteria = session.createCriteria(Schedule.class);
+            userCriteria.add(Restrictions.eq("station", stationService.getStationById(station_id)));
+            scheduleList = userCriteria.list();
+            logr.warn("-----------------getScheduleListByStation -----scheduleList--- " + scheduleList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return scheduleList;
     }
 
@@ -102,56 +135,85 @@ public class ScheduleDaoIml implements ScheduleDao{
 */
 
     @Override
-    public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo) {
- Timestamp timestamp1=new Timestamp(date.getTime()+dateOne.getTime());
- Timestamp timestamp2=new Timestamp(date.getTime()+dateTwo.getTime());
+    public List<Schedule> selectByDatesAndStations(Timestamp dateOne, Timestamp dateTwo, int stationOne, int stationTwo) {
+        Timestamp timestamp1 = dateOne;
+        Timestamp timestamp2 = dateTwo;
 
 
-/*
-        Calendar cal1=Calendar.getInstance();
-        cal1.set(2000,10,10);
-        Calendar cal2=Calendar.getInstance();
-        cal2.set(2006,10,10);
-        Date date1=new Date(cal1.getTimeInMillis());
-
-        Date date2=new Date(cal2.getTimeInMillis());
-*/
+        Session session = this.sessionFactory.getCurrentSession();
 
 
-        Session session=this.sessionFactory.getCurrentSession();
-        String queryString1 = " from Schedule   where station.station_id= :stationTwo AND time_msk > :timestamp2";
-        Query query1=session.createQuery(queryString1);
-        query1.setParameter("stationTwo",stationTwo);
-      query1.setParameter("timestamp2",timestamp2);
-        List<Schedule> list1=query1.list();
-        String str="";
-        boolean flag=true;
-        for(Schedule schedule:list1) {
-            if(flag==false)
-            str=str+",";
-            str=str+schedule.getTrain().getTrain_id();
-            flag=false;
+        List<Schedule> list1 = new ArrayList<>();
+        try {
+            String queryString1 = " from Schedule   where station.station_id= :stationTwo and time_msk >  :dateOne ";
+            Query query1 = session.createQuery(queryString1);
+            query1.setParameter("stationTwo", stationTwo);
+            query1.setParameter("dateOne", dateOne);
+            list1 = query1.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String str = "";
+        boolean flag = true;
+        for (Schedule schedule : list1) {
+            if (flag == false)
+                str = str + ",";
+            str = str + schedule.getTrain().getTrain_id();
+            flag = false;
         }
 
- String queryString = " from Schedule  where time_msk >= :dateOne and time_msk <= :dateTwo  AND station.station_id= :stationOneId" +
-         " AND train.train_id in("+str+")" ;
-     Query query=session.createQuery(queryString);
-     query.setParameter("dateOne",timestamp1);
+
+        logr.warn(String.format("----LIIIISSSSST 2222" + list1.size()));
+
+       /* String queryString2 = " from Schedule  where time_msk >= :dateOne and time_msk <= :dateTwo  AND station.station_id= :stationOneId" +
+                " AND train.train_id in("+str+")" ;
+        Query query=session.createQuery(queryString);
+        query.setParameter("dateOne",timestamp1);
         query.setParameter("dateTwo",timestamp2);
         query.setParameter("stationOneId",stationOne);
 
         List <Schedule> list=query.list();
+*/
 
-        if(list!=null) {
-            logr.warn(String.format("----FIND THIS STATIONS-------", list));
-            logr.warn(String.format("----FIND THIS STATIONS-------", list));
+        List<Schedule> nullScheduleList = new ArrayList<>();
+        if (str == "") {
+            return nullScheduleList;
         }
-        else
-            {
-                logr.warn(String.format("-----------LIST NUUULLL---------------"));
-                logr.warn(String.format("-----------LIST NUUULLL-----------------"));
+        List<Schedule> list = new ArrayList<>();
+        try {
+            String queryString = " from Schedule  where time_msk >= :dateOne and time_msk <= :dateTwo  AND station.station_id= :stationOneId" +
+                    " AND train.train_id in(" + str + ")";
+            Query query = session.createQuery(queryString);
+            query.setParameter("dateOne", timestamp1);
+            query.setParameter("dateTwo", timestamp2);
+            query.setParameter("stationOneId", stationOne);
+
+            list = query.list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<Schedule> list_finall = new ArrayList<>();
+
+        //Date date=new
+
+        java.util.Date date=new java.util.Date();
+
+        for (int i = 0; i < list.size(); i++) {
+            for (Schedule schedule : list1) {
+                if (schedule.getTrain() == list.get(i).getTrain()) {
+                    if (schedule.getTime_msk().after(list.get(i).getTime_msk())) {
+                        if (list.get(i).getTrain().getPlaces() > 0) {
+                            if (list.get(i).getTime_msk().getTime()>date.getTime()+600000) {
+                                list_finall.add(list.get(i));
+                            }
+                        }
+                    }
+                }
             }
-        return list;
+        }
+
+        return list_finall;
     }
 
   /*  @Override
@@ -167,7 +229,6 @@ public class ScheduleDaoIml implements ScheduleDao{
         query.setParameter("stationTwo",stationTwo);
         List list=query.list();
         return list;  }*/
-
 
 
 }

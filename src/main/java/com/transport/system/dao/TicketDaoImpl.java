@@ -5,6 +5,8 @@ import com.transport.system.model.Schedule;
 import com.transport.system.model.Ticket;
 import com.transport.system.model.Train;
 import com.transport.system.model.User;
+import com.transport.system.service.UserService;
+import com.transport.system.service.UserServiceImpl;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -21,62 +23,72 @@ import java.util.List;
 @Repository
 public class TicketDaoImpl implements TicketDao {
 
+
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private UserService userService;
 
-    private static final Logger logr = Logger.getLogger(TrainStationScheduleController.class);
+    private static final Logger logr = Logger.getLogger(TicketDaoImpl.class);
+
     @Transactional
     @Override
     public List<Ticket> getTicketListsByUser(User user) {
-
-        logr.warn(String.format("----------getTicketListsByUser LIST user name "+user.getUsername()));
-        Session session=this.sessionFactory.getCurrentSession();
-        Criteria ticketCriteria=session.createCriteria(Ticket.class);
-        ticketCriteria.add(Restrictions.eq("user_id",user));
-        List<Ticket> ticketList=ticketCriteria.list();
-        logr.warn(String.format("----------getTicketListsByUser LIST "+ticketList.size()));
+        List<Ticket> ticketList=new ArrayList<>();
+        try {
+        logr.warn(String.format("----------getTicketListsByUser LIST user name " + user.getUsername()));
+        Session session = this.sessionFactory.getCurrentSession();
+        Criteria ticketCriteria = session.createCriteria(Ticket.class);
+        ticketCriteria.add(Restrictions.eq("user_id", user));
+        ticketList = ticketCriteria.list();
+        logr.warn(String.format("----------getTicketListsByUser LIST " + ticketList.size()));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
         return ticketList;
 
     }
+
     @Transactional
     @Override
     public void addTicket(Ticket ticket) {
 
-        Session session=this.sessionFactory.getCurrentSession();
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
 
-        session.persist(ticket);
+            session.persist(ticket);
+            logr.warn(("BUY TICKET with DEPARTURE STATION " + ticket.getDeparture_station_id() + " FOR USER " + ticket.getUser_id().getUsername()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+
     @Transactional
     @Override
     public List<User> getUserListFromTrain(Train train) {
 
-        logr.warn(String.format("-----------getUserListFromTrain "+train.getTrain_number()));
-            Session session=this.sessionFactory.getCurrentSession();
-            Criteria ticketCriteria=session.createCriteria(Ticket.class);
-            ticketCriteria.add(Restrictions.eq("train_id",train));
-            List<Ticket> ticketList=ticketCriteria.list();
-            List<User> userList=new ArrayList<>();
-        logr.warn(String.format("----------TICKETlist size "+ticketList.size()));
-            for(Ticket ticket:ticketList)
-            {
-                if(!userList.contains(ticket.getUser_id())) {
-                    userList.add(ticket.getUser_id());
-                }
+        List<User> userList = new ArrayList<>();
+        try {
+        Session session = this.sessionFactory.getCurrentSession();
+        Criteria ticketCriteria = session.createCriteria(Ticket.class);
+        ticketCriteria.add(Restrictions.eq("train_id", train));
+        List<Ticket> ticketList = ticketCriteria.list();
+        userList = new ArrayList<>();
+        for (Ticket ticket : ticketList) {
+            if (!userList.contains(ticket.getUser_id())) {
+                userList.add(ticket.getUser_id());
             }
-        logr.warn(String.format("----------USERlist size "+userList.size()));
-            return userList;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 
+        return userList;
 
 
     }
-
-
-
-
-
-
-
 
 
 /*
@@ -117,8 +129,6 @@ public class TicketDaoImpl implements TicketDao {
 
 
     */
-
-
 
 
 }

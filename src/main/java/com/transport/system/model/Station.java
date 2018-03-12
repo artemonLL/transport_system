@@ -7,6 +7,7 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,12 @@ public class Station {
     @Column(name = "station_name")
     private String station_name;
 
+    public static final Comparator<Station> COMPARE_BY_ID = new Comparator<Station>() {
+        @Override
+        public int compare(Station lhs, Station rhs) {
+            return   rhs.getStation_id()-lhs.getStation_id();
+        }
+    };
 
 
     public int getStation_id() {

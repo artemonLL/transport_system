@@ -1,16 +1,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+<!-- /.row -->
 
-
-
-            <!-- /.row -->
-
-            <!-- Portfolio Section -->
+<!-- Portfolio Section -->
 <section>
 
     <div class="container">
-    <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <h2>Our News</h2>
 
             <div class="row">
@@ -86,15 +83,14 @@
                     <div class="col-md-8"></p>
                     </div>
                     <div class="col-md-4">
-
                     </div>
                 </div>
 
             </div>
+        </div>
     </div>
-    </div>
-    </section>
-    <!-- /.container -->
+</section>
+<!-- /.container -->
 
-    <!-- Footer -->
-    <%@include file="/WEB-INF/pages/footer.jsp" %>
+<!-- Footer -->
+<%@include file="/WEB-INF/pages/footer.jsp" %>

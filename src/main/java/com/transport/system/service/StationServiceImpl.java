@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -33,9 +34,17 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void addStation(Station station) {
+    public boolean addStation(Station station) {
+
+
+        if(this.stationDao.getStationByName(station.getStation_name())!=null)
+        {
+            return false;
+        }
+
 
         this.stationDao.addStation(station);
+        return true;
     }
 
     @Override
@@ -45,8 +54,16 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public List<Station> getStationList() {
-        return this.stationDao.getStationList();
+    public List<Station> getStationList()
+    {
+
+
+        List<Station> stationList= this.stationDao.getStationList();
+
+        Collections.sort(stationList,Station.COMPARE_BY_ID);
+
+
+        return stationList;
     }
 
 

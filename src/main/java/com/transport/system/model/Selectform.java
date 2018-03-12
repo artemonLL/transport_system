@@ -6,39 +6,31 @@ import java.sql.Timestamp;
 
 public class Selectform {
 
-    private Time dateOne;
+    private Timestamp dateOne;
 
-    private Time dateTwo;
+    private Timestamp dateTwo;
 
-    public Date getDateForSelect() {
-        return dateForSelect;
+    public Timestamp getDateOne() {
+        return dateOne;
     }
 
-    public void setDateForSelect(Date dateForSelect) {
-        this.dateForSelect = dateForSelect;
+    public void setDateOne(Timestamp dateOne) {
+        this.dateOne = dateOne;
     }
 
-    private Date dateForSelect;
+    public Timestamp getDateTwo() {
+        return dateTwo;
+    }
+
+    public void setDateTwo(Timestamp dateTwo) {
+        this.dateTwo = dateTwo;
+    }
 
     private int stationOne;
 
     private int stationTwo;
 
-    public Time getDateOne() {
-        return dateOne;
-    }
 
-    public void setDateOne(Time dateOne) {
-        this.dateOne = dateOne;
-    }
-
-    public Time getDateTwo() {
-        return dateTwo;
-    }
-
-    public void setDateTwo(Time dateTwo) {
-        this.dateTwo = dateTwo;
-    }
 
     public int getStationOne() {
         return stationOne;

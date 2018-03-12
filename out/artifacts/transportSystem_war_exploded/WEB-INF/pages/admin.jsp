@@ -38,7 +38,6 @@
         }
 
 
-
     </style>
 
 
@@ -63,91 +62,98 @@
 
 
                                 <fieldset>
-                    <form:form id="ScheduleRegisterForm" cssClass="form-horizontal"
+                                    <form:form id="ScheduleRegisterForm" cssClass="form-horizontal"
                                                modelAttribute="schedule"
                                                method="post" action="saveschedule">
                                         <form>
                                             <!-- WAY nput-->
                                             <div class="form-group">
-                                                <div class="control-label col-xs-3"><form:label
-                                                        path="way_position">Way Position</form:label></div>
-                                                <div class="col-xs-6">
-                                                    <form:hidden path="schedule_id"
-                                                                 value="${scheduleObject.schedule_id}"/>
-                                                    <form:input cssClass="form-control" path="way_position"
-                                                                value="${scheduleObject.way_position}"/>
-                                                </div>
-
-
-                                                <!-- TRAIN input-->
-
-                                                <div class="form-group">
-                                                    <div cssClass="control-label col-xs-3">Train</div>
+                                                <div class="control-label col-xs-3">
 
                                                     <div class="col-xs-6">
 
-                                                        <form:select path="train.train_id" class="form-control">
-                                                            <option value="">select
-                                                            </option>
 
-                                                            <c:forEach var="onetrain" items="${trainList}">
-                                                                <option value="${onetrain.train_id}"> ${onetrain.train_number} </option>
-                                                            </c:forEach>
+                                                        <form:hidden path="way_position"
+                                                                     value="1"/>
 
-
-                                                        </form:select>
+                                                        <form:hidden path="schedule_id"
+                                                                     value="${scheduleObject.schedule_id}"/>
 
 
                                                     </div>
-                                                </div>
 
 
-                                                <!-- TRAIN input-->
+                                                    <!-- TRAIN input-->
 
-                                                <div class="form-group">
-                                                    <div cssClass="control-label col-xs-3">Station</div>
+                                                    <div class="form-group">
+                                                        <div cssClass="control-label col-xs-3">Train</div>
 
-                                                    <div class="col-xs-6">
+                                                        <div class="col-xs-6">
 
-                                                        <form:select path="station.station_id" class="form-control">
-                                                            <option value="${stationList.get(1).station_id}">select
-                                                            </option>
+                                                            <form:select path="train.train_id" class="form-control">
+                                                                <option value="">select
+                                                                </option>
 
-                                                            <c:forEach var="onestation" items="${stationList}">
-                                                                <option value="${onestation.station_id}"> ${onestation.station_name} </option>
-                                                            </c:forEach>
-                                                        </form:select>
-                                                    </div>
-                                                </div>
+                                                                <c:forEach var="onetrain" items="${trainList}">
+                                                                    <option value="${onetrain.train_id}"> ${onetrain.train_number} </option>
+                                                                </c:forEach>
 
 
-                                                <!-- DATE input-->
-
-                                                <div class="form-group">
+                                                            </form:select>
 
 
-                                                    <div class="col-xs-6">
-                                                        <form:input  path="time_msk"
-                                                                    class="form-control"
-                                                                    placeholder="Date"></form:input>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-xs-4">
-                                                        </div>
-                                                        <div class="col-xs-4">
-                                                            <input type="submit" id="saveschedule"
-                                                                   class="btn btn-primary"
-                                                                   value="Save" onclick="return submitScheduleForm();"/>
-                                                        </div>
-                                                        <div class="col-xs-4">
                                                         </div>
                                                     </div>
+
+
+                                                    <!-- TRAIN input-->
+
+                                                    <div class="form-group">
+                                                        <div cssClass="control-label col-xs-3">Station</div>
+
+                                                        <div class="col-xs-6">
+
+                                                            <form:select path="station.station_id" class="form-control">
+                                                                <option value="">select
+                                                                </option>
+
+                                                                <c:forEach var="onestation" items="${stationList}">
+                                                                    <option value="${onestation.station_id}"> ${onestation.station_name} </option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <!-- DATE input-->
+
+                                                    <div class="form-group">
+                                                        <div cssClass="control-label col-xs-3">Date</div>
+
+
+                                                        <div class="col-xs-6">
+                                                            <form:input path="time_msk"
+                                                                        class="form-control"
+                                                                        placeholder="Date"></form:input>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-xs-4">
+                                                            </div>
+                                                            <div class="col-xs-4">
+                                                                <input type="submit" id="saveschedule"
+                                                                       class="btn btn-primary"
+                                                                       value="Save"
+                                                                       onclick="return submitScheduleForm();"/>
+                                                            </div>
+                                                            <div class="col-xs-4">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
                                         </form>
                                     </form:form>
                                 </fieldset>
@@ -165,28 +171,28 @@
                                 <a href="<c:url value="schedulelist" />"> Schedule List </a>
 
                             </h4>
-                            <div class="scrollit" >
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                <tr>
+                            <div class="scrollit">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                    <tr>
 
-                                    <th>Train</th>
-                                    <th>Station</th>
-                                    <th>Date</th>
-
-                                </tr>
-                                </thead>
-
-
-                                <c:forEach items="${scheduleList}" var="oneschedule">
-                                    <tr class="fixed">
-                                        <td>${oneschedule.train.train_number}</td>
-                                        <td>${oneschedule.station.station_name}</td>
-                                        <td>${oneschedule.time_msk}</td>
+                                        <th>Train</th>
+                                        <th>Station</th>
+                                        <th>Date</th>
 
                                     </tr>
-                                </c:forEach>
-                            </table>
+                                    </thead>
+
+
+                                    <c:forEach items="${scheduleList}" var="oneschedule">
+                                        <tr class="fixed">
+                                            <td>${oneschedule.train.train_number}</td>
+                                            <td>${oneschedule.station.station_name}</td>
+                                            <td>${oneschedule.time_msk}</td>
+
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -267,25 +273,25 @@
                                 <a href="<c:url value="trainlist" />"> Tains </a>
 
                             </h4>
-                            <div class="scrollit2" >
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                <tr>
-
-                                    <th>Train Number</th>
-                                    <th>Free Places</th>
-
-                                </tr>
-                                </thead>
-
-
-                                <c:forEach items="${trainList}" var="onetrain">
+                            <div class="scrollit2">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
                                     <tr>
-                                        <td>${onetrain.train_number}</td>
-                                        <td>${onetrain.places}</td>
+
+                                        <th>Train Number</th>
+                                        <th>Free Places</th>
+
                                     </tr>
-                                </c:forEach>
-                            </table>
+                                    </thead>
+
+
+                                    <c:forEach items="${trainList}" var="onetrain">
+                                        <tr>
+                                            <td>${onetrain.train_number}</td>
+                                            <td>${onetrain.places}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -294,6 +300,18 @@
         </div>
 
         <!-- Station///////////////////////////////////////////////////////////////-->
+        <c:if test="${errorTrain == true}">
+            <div class="container">
+
+                <!-- Marketing Icons Section -->
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 portfolio-item">
+                        HEEEEY
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
 
         <div class="container">
 
@@ -355,21 +373,21 @@
                                 <a href="<c:url value="stationlist" />"> Stations </a>
 
                             </h4>
-                            <div class="scrollit2" >
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                <tr>
-
-                                    <th>Station Name</th>
-
-                                </tr>
-                                </thead>
-                                <c:forEach items="${stationList}" var="station" >
+                            <div class="scrollit2">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
                                     <tr>
-                                        <td>${station.station_name}</td>
+
+                                        <th>Station Name</th>
+
                                     </tr>
-                                </c:forEach>
-                            </table>
+                                    </thead>
+                                    <c:forEach items="${stationList}" var="station">
+                                        <tr>
+                                            <td>${station.station_name}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -380,12 +398,6 @@
 
     </div>
 </section>
-
-
-
-
-
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -425,18 +437,11 @@
     };
 
 
-
-
-
-
     function submitScheduleForm() {
 
         // getting the employee form values
         var position = $('#way_position').val();
         var time = $('#time_msk').val();
-
-
-
 
 
         if (position <= 0) {
@@ -462,7 +467,7 @@
         var stationo = $('#stationTwo').val().trim();
         var stationt = $('#stationOne').val().trim();
 
-        var one= $('#dateOne').val();
+        var one = $('#dateOne').val();
         var two = $('#dateTwo').val();
         var date = $('#dateForSelect').val();
 
@@ -499,9 +504,6 @@
 
 
 </script>
-
-
-
 
 
 <%@include file="/WEB-INF/pages/footer.jsp" %>

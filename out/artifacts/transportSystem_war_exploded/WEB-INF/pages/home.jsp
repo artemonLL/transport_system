@@ -73,7 +73,7 @@
 
                                 <div class="container">
                                     <fieldset>
-                                        <form:form id="SelectRegisterForm" cssClass="form-horizontal" modelAttribute="selectform"
+            <form:form id="SelectRegisterForm" cssClass="form-horizontal" modelAttribute="selectform"
                                                    method="post" action="selecttrain">
                                     <!-- Marketing Icons Section -->
                                     <div class="row">
@@ -108,7 +108,7 @@
                                                         <div class="col-xs-6">
 
                                                             <form:select   path="stationTwo" class="form-control" >
-                                                                <option value="" >Select</option>
+                                                                <option value="">Select</option>
 
                                                                 <c:forEach var="onestation" items="${stationList}" >
                                                                     <option value="${onestation.station_id}"> ${onestation.station_name} </option>
@@ -139,22 +139,17 @@
                                         <div class="col-lg-6 col-sm-6 col-md-6 portfolio-item">
                                             <div class="card h-100">
                                                 <div class="card-body">
-
-
-
                                                     <div class="row">
                                                         <div class="col-lg-12 mb-12">
                                                                     <div class="form-group">
-                                                                        <form:label path="dateOne"
-                                                                                    cssClass="control-label col-xs-3">from Time(hh:mm:ss)</form:label>
+                                <form:label path="dateOne"                cssClass="control-label col-xs-3">from Time(hh:mm:ss)</form:label>
                                                                         <div class="col-xs-6">
-                                                                            <form:input  cssClass="form-control" path="dateOne"
-                                                                            />
+                                        <form:input  cssClass="form-control" path="dateOne"  />
 
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <form:label path="dateTwo" cssClass="control-label col-xs-3">to Time(hh:mm:ss)</form:label>
+                                               <form:label path="dateTwo" cssClass="control-label col-xs-3">to Time(hh:mm:ss)</form:label>
                                                                         <div class="col-xs-6">
                                                                             <form:input  cssClass="form-control" path="dateTwo"   value="${selectObject.dateTwo}"/>
                                                                         </div>
@@ -162,12 +157,6 @@
 
 
 
-                                                                    <div class="form-group">
-                                                                        <form:label path="dateForSelect" cssClass="control-label col-xs-3">DATE(YYYY-mm-dd)</form:label>
-                                                                        <div class="col-xs-6">
-                                                                            <form:input type="date" cssClass="form-control" path="dateForSelect"/>
-                                                                        </div>
-                                                                    </div>
 
 
                                     </form:form>

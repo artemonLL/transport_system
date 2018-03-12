@@ -5,10 +5,10 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
-
-    /**
+/**
      * Simple JavaBean  object that represents a User
      */
     @Entity
@@ -41,7 +41,19 @@ import java.sql.Date;
         @JoinColumn (name = "train_id")
         private Train train_id;
 
-        public Integer getTicket_id() {
+
+        @Column(name = "time")
+        private Timestamp departDateTime;
+
+    public Timestamp getDepartDateTime() {
+        return departDateTime;
+    }
+
+    public void setDepartDateTime(Timestamp departDateTime) {
+        this.departDateTime = departDateTime;
+    }
+
+    public Integer getTicket_id() {
             return ticket_id;
         }
 

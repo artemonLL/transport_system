@@ -4,6 +4,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Comparator;
 
 
 @Entity
@@ -22,6 +23,19 @@ public class Train
     @Column(name = "train_number")
     private String train_number;
 
+
+    @Column(name = "places")
+    private int places;
+
+
+    public static final Comparator<Train> COMPARE_BY_ID = new Comparator<Train>() {
+        @Override
+        public int compare(Train lhs, Train rhs) {
+            return   rhs.getTrain_id()-lhs.getTrain_id();
+        }
+    };
+
+
     public String getTrain_number() {
         return train_number;
     }
@@ -30,18 +44,10 @@ public class Train
         this.train_number = train_number;
     }
 
-    @Column(name = "places")
-    private int places;
-
-
 
     @Override
     public String toString() {
-        return "Train{" +
-                "train_id=" + train_id +
-                ", train_number='" + train_number + '\'' +
-                ", places=" + places +
-                '}';
+        return train_number;
     }
 
     public int getTrain_id() {

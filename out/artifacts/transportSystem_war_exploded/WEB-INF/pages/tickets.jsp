@@ -35,6 +35,7 @@
                                 <thead>
                                 <tr>
 
+                                    <th>Date and Time</th>
                                     <th>Departure_station</th>
                                     <th>Arrival station</th>
                                     <th>Train Number</th>
@@ -45,6 +46,7 @@
 
                                 <c:forEach items="${ticketList}" var="ticket">
                                     <tr>
+                                        <td>${ticket.departDateTime}</td>
                                         <td>${ticket.departure_station_id.station_name}</td>
                                         <td>${ticket.arrival_station_id.station_name}</td>
                                         <td> ${ticket.train_id.train_number} </td>

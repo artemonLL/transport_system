@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -28,6 +30,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void addSchedule(Schedule schedule) {
+
+
         this.scheduleDao.addSchedule(schedule);
 
     }
@@ -40,8 +44,13 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 
     @Override
-    public List<Schedule> getScheduleList() {
-        return this.scheduleDao.getScheduleList();
+    public List<Schedule> getScheduleList()
+    {
+
+        List<Schedule> scheduleList=this.scheduleDao.getScheduleList();
+        Collections.reverse(scheduleList);
+
+        return scheduleList;
     }
 
     @Override
@@ -55,20 +64,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<Schedule> selectByDatesAndStations (Time dateOne, Time dateTwo, Date date, int stationOne, int stationTwo) {
+    public List<Schedule> selectByDatesAndStations (Timestamp dateOne, Timestamp dateTwo, int stationOne, int stationTwo) {
 
-        List<Schedule> list=this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,date,stationOne,stationTwo);
+        List<Schedule> list=this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,stationOne,stationTwo);
         Schedule schedule;
-        if(list==null)
-        {
-            Train train=new Train();
-            train.setTrain_number("Nothing found");
 
-            schedule=new Schedule();
-           schedule.setTrain(train);
-            list.add(schedule);
-        }
 
-        return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,date,stationOne,stationTwo);
+        return this.scheduleDao.selectByDatesAndStations(dateOne,dateTwo,stationOne,stationTwo);
     }
 }

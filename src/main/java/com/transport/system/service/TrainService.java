@@ -12,7 +12,7 @@ public interface TrainService
     public Train getTrainByName(String train_number);
 
 
-    public void addTrain(Train train);
+    public boolean addTrain(Train train);
 
 
     public void updateTrain(Train train);

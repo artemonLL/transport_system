@@ -1,22 +1,17 @@
 package com.transport.system.controller;
 
-import com.transport.system.dao.ScheduleDaoIml;
 import com.transport.system.model.*;
 import com.transport.system.service.*;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.apache.log4j.Logger;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -131,14 +126,17 @@ public class TrainStationScheduleController {
         User user1 = userService.getUserByName(username);
         Train train = trainService.getTrainById(buyticketform.getTrain_id());
 
+        int places = train.getPlaces();
+
+
         ModelAndView mod = new ModelAndView("nonono");
-        if (train.getPlaces() != 0) {
+
             List<User> userList = ticketService.getUserListFromTrain(train);
-            boolean flag=true;
-            for(User user:userList)
-            {
-                if(user.getUser_id()==user1.getUser_id()){
-                    flag=false;}
+            boolean flag = true;
+            for (User user : userList) {
+                if (user.getUser_id() == user1.getUser_id()) {
+                    flag = false;
+                }
             }
             if (flag) {
                 //  java.util.Date currentTime=Calendar.getInstance().getTime();
@@ -149,34 +147,38 @@ public class TrainStationScheduleController {
                 ticket.setArrival_station_id(stationService.getStationById(buyticketform.getArrival_station_id()));
                 ticket.setDeparture_station_id(stationService.getStationById(buyticketform.getDeparture_station_id()));
                 ticket.setUser_id(user1);
+                ticket.setDepartDateTime(buyticketform.getDepartDateTime());
                 ticketService.addTicket(ticket);
-
+                train.setPlaces(places-1);
+                trainService.updateTrain(train);
                 mod = new ModelAndView("redirect:tickets");
+            } else {
+                mod = new ModelAndView("onlyoneticket");
+                mod.addObject("train", train);
+
             }
-        } else {
-            mod = new ModelAndView("nonono");
+
+
+
+
+            return mod;
+
 
         }
-        return mod;
 
-
-    }
-
-    @RequestMapping(value = "/selecttrain")
+    @RequestMapping(value = "/selecttrain", method = RequestMethod.POST)
     public ModelAndView selecttrain(@ModelAttribute Selectform selectform) {
 
         Selectform newselectform = selectform;
 
 
-        List<Schedule> scheduleList = scheduleService.selectByDatesAndStations(selectform.getDateOne(), selectform.getDateTwo(), selectform.getDateForSelect(), selectform.getStationOne(), selectform.getStationTwo());
-
+        List<Schedule> scheduleList = scheduleService.selectByDatesAndStations(selectform.getDateOne(), selectform.getDateTwo(), selectform.getStationOne(), selectform.getStationTwo());
 
         List<Train> trainList = new ArrayList<>();
         if (scheduleList.size() != 0) {
             for (Schedule schedule : scheduleList) {
                 trainList.add(schedule.getTrain());
             }
-
         }
         logr.warn(String.format("-----------//selecttrain/add to model trainList size----" + trainList.size()));
 
@@ -207,7 +209,7 @@ public class TrainStationScheduleController {
 
 
     ////////// Page to control Train and Station
-    @RequestMapping("/admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ModelAndView createallschedule(@ModelAttribute Train train, Station station, Schedule schedule) {
 
 
@@ -217,6 +219,32 @@ public class TrainStationScheduleController {
         mod.addObject("scheduleList", scheduleService.getScheduleList());
 
         return mod;
+    }
+
+    ///////// ADD TRAIN
+    @RequestMapping(value = "/savetrain", method = RequestMethod.POST)
+    public ModelAndView saveTrain(@ModelAttribute Train train) {
+
+        boolean isAdd = trainService.addTrain(train);
+
+        ModelAndView mod = new ModelAndView();
+
+        if (isAdd == true) {
+            mod = new ModelAndView("redirect:admin");
+        }
+        if (isAdd == false) {
+            mod = new ModelAndView("/errortrain");
+            mod.addObject("train", train);
+        }
+
+
+        return mod;
+    }
+
+    @RequestMapping("/edittrain")
+    public ModelAndView editTrain(@RequestParam int id, @ModelAttribute Train train) {
+        train = trainService.getTrainById(id);
+        return new ModelAndView("admin", "trainObject", train);
     }
 ///////////ADD SCHEDULE
 
@@ -236,25 +264,24 @@ public class TrainStationScheduleController {
     }
 
 
-    ///////// ADD TRAIN
-    @RequestMapping(value = "/savetrain", method = RequestMethod.POST)
-    public ModelAndView saveTrain(@ModelAttribute Train train) {
-
-        trainService.addTrain(train);
-        return new ModelAndView("redirect:admin");
-    }
-
-    @RequestMapping("/edittrain")
-    public ModelAndView editTrain(@RequestParam int id, @ModelAttribute Train train) {
-        train = trainService.getTrainById(id);
-        return new ModelAndView("admin", "trainObject", train);
-    }
 //////////ADD STATION
 
     @RequestMapping(value = "/savestation", method = RequestMethod.POST)
     public ModelAndView saveStation(@ModelAttribute Station station) {
-        stationService.addStation(station);
-        return new ModelAndView("redirect:admin");
+
+        boolean isAdd = stationService.addStation(station);
+
+        ModelAndView mod = new ModelAndView();
+
+        if (isAdd == true) {
+            mod = new ModelAndView("redirect:admin");
+        }
+        if (isAdd == false) {
+            mod = new ModelAndView("/errorstation");
+            mod.addObject("station", station);
+        }
+        return mod;
+
 
     }
 

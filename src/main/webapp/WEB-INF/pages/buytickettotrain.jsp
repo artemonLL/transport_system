@@ -84,25 +84,29 @@
                             <a href="#">Add Shedule</a>
 
                                 <fieldset>
-              <form:form id="BuyRegisterForm" cssClass="form-horizontal" modelAttribute="buyticketform"  method="post" action="buyticket">
+                                    <form:form id="BuyRegisterForm" cssClass="form-horizontal"
+                                               modelAttribute="buyticketform" method="post" action="buyticket">
 
-                                        <form:select   path="train_id"  multiple="multiple" class="form-control" >
-                                            <c:forEach var="schedule" items="${scheduleList}" >
+                                        <form:select path="train_id" multiple="multiple" class="form-control">
+                                            <c:forEach var="schedule" items="${scheduleList}">
 
-   <option value="${schedule.train.train_id}">train num-<h3>${schedule.train.train_number}</h3>    departure station-${schedule.station.station_name}
-            time-${schedule.time_msk}</option>
+                                                <option value="${schedule.train.train_id}">train num-
+                                                    <h4>${schedule.train.train_number}</h4> departure
+                                                    station-${schedule.station.station_name}
+                                                    time-${schedule.time_msk}</option>
 
                                             </c:forEach>
 
                                         </form:select>
 
+                                        <form:hidden path="departDateTime" value="${newselectform.dateOne}"/>
 
-                                        <form:hidden path="departure_station_id"   value="${newselectform.stationOne}"/>
+                                        <form:hidden path="departure_station_id" value="${newselectform.stationOne}"/>
 
-                                        <form:hidden path="arrival_station_id"   value="${newselectform.stationTwo}"/>
+                                        <form:hidden path="arrival_station_id" value="${newselectform.stationTwo}"/>
 
 
-                  <c:if test="${pageContext.request.userPrincipal.name != null}">
+                                        <c:if test="${pageContext.request.userPrincipal.name != null}">
 
                       <input type="submit" id="buyticket" class="btn btn-primary"
                              value="Buy Ticket!" onclick="return submitBuy();"/>
@@ -192,14 +196,6 @@
                                             </div>
                                         </div>
 
-
-
-                                        <div class="form-group">
-                                            <form:label path="dateForSelect" cssClass="control-label col-xs-3">DATE(YYYY-mm-dd)</form:label>
-                                            <div class="col-xs-6">
-                                                <form:input type="date" cssClass="form-control" path="dateForSelect"/>
-                                            </div>
-                                        </div>
 
 
 

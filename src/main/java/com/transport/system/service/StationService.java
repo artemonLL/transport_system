@@ -12,7 +12,7 @@ public interface StationService {
 
     public Station getStationByName(String station_name);
 
-    public void addStation(Station station);
+    public boolean addStation(Station station);
 
     public void updateStation(Station station);
 

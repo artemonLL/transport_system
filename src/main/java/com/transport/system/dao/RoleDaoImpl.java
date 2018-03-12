@@ -19,19 +19,39 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleById(int role_id) {
-        Session session=this.sessionFactory.getCurrentSession();
-        Role role=(Role)session.load(Role.class,new Integer(role_id));
+        Role role=new Role();
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            role = (Role) session.load(Role.class, new Integer(role_id));
+
+    }catch (Exception e)
+    {
+        e.printStackTrace();
+    }
+
         return role;
     }
+
+
+
 
     @Override
     public Role getRoleByName(String role_name) {
+
+        Role role=new Role();
+        try{
         Session session=this.sessionFactory.getCurrentSession();
         Criteria userCriteria=session.createCriteria(Role.class);
         userCriteria.add(Restrictions.eq("role_name",role_name));
-        Role role=(Role)userCriteria.uniqueResult();
+        role=(Role)userCriteria.uniqueResult();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         return role;
     }
+
+
 }
 

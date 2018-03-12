@@ -9,5 +9,4 @@ public interface RoleDao
     public Role getRoleByName(String role_name);
 
 
-
 }

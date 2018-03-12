@@ -25,12 +25,17 @@ public class Schedule {
     @JoinColumn (name = "train_id")
     private Train train;
 
+
     @ManyToOne
     @JoinColumn (name = "station_id")
     private Station station;
 
+
+
     @Column(name = "time_msk")
     private Timestamp time_msk;
+
+
 
     @Column(name = "way_position")
     private int way_position;
@@ -38,13 +43,7 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" +
-                "schedule_id=" + schedule_id +
-                ", train=" + train +
-                ", station=" + station +
-                ", time_msk=" + time_msk +
-                ", way_position=" + way_position +
-                '}';
+        return ""+schedule_id;
     }
 
 

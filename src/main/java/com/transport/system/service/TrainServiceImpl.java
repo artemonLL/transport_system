@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -26,8 +29,21 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public void addTrain(Train train) {
-        this.trainDao.addTrain(train);
+    public boolean addTrain(Train train)
+    {
+
+
+        if(trainDao.getTrainByName(train.getTrain_number())!=null)
+        {
+            return false;
+        }
+        else
+            {
+                this.trainDao.addTrain(train);
+        }
+
+
+        return true;
     }
 
     @Override
@@ -36,8 +52,12 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public List<Train> getTrainList() {
-        return this.trainDao.getTrainList();
+    public List<Train> getTrainList()
+    {
+        List<Train> trainList= this.trainDao.getTrainList();
+
+        Collections.sort(trainList, Train.COMPARE_BY_ID);
+        return trainList;
     }
 
     @Override

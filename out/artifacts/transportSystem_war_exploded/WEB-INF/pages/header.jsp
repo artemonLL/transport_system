@@ -123,13 +123,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/login" />">Sing_In</a>
                     </li>
+                </c:if>
+
+
+
+                <c:if test="${not empty pageContext.request.userPrincipal}">
+
+                    <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
+
+                        <li class="nav-item">
+                            <a   class="nav-link" href="<c:url value="/admin" />"> Admin </a>
+                        </li>
+
+                    </c:if>
 
                 </c:if>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin" />"> Admin </a>
-                    </li>
 
 
 

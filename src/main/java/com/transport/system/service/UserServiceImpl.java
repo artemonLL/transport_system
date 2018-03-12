@@ -61,10 +61,6 @@ public class UserServiceImpl implements UserService {
         return this.userDao.getUserByNameLastName(username,last_name,date_birth);
     }
 
-    @Override
-    public int getUserId(User user) {
-        return this.userDao.getUserId(user);
-    }
 
     @Override
     public void removeUser(int id) {

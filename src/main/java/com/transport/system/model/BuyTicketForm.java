@@ -1,5 +1,7 @@
 package com.transport.system.model;
 
+import java.sql.Timestamp;
+
 public class BuyTicketForm {
 
 
@@ -9,7 +11,15 @@ public class BuyTicketForm {
 
     private int train_id;
 
+    private Timestamp departDateTime;
 
+    public Timestamp getDepartDateTime() {
+        return departDateTime;
+    }
+
+    public void setDepartDateTime(Timestamp departDateTime) {
+        this.departDateTime = departDateTime;
+    }
 
     public int getDeparture_station_id() {
         return departure_station_id;

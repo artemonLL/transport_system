@@ -26,7 +26,7 @@ public interface ScheduleDao {
 
 
 
-    public List<Schedule> selectByDatesAndStations(Time dateOne, Time dateTwo,Date date, int stationOne, int stationTwo);
+    public List<Schedule> selectByDatesAndStations(Timestamp dateOne, Timestamp dateTwo, int stationOne, int stationTwo);
 
 
 
