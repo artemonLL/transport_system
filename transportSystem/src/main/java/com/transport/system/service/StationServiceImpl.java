@@ -1,13 +1,14 @@
 package com.transport.system.service;
 
 import com.transport.system.dao.StationDao;
-import com.transport.system.model.Schedule;
+import com.transport.system.messaging.MessageSender;
 import com.transport.system.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Date;
+import com.transport.system.messaging.MessageSender;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,12 @@ public class StationServiceImpl implements StationService {
 
     @Autowired
     StationDao stationDao;
+
+    @Autowired
+    ScheduleService scheduleService;
+
+    @Autowired
+    MessageSender messageSender;
 
 
     @Override
@@ -61,6 +68,9 @@ public class StationServiceImpl implements StationService {
         List<Station> stationList= this.stationDao.getStationList();
 
         Collections.sort(stationList,Station.COMPARE_BY_ID);
+
+
+        messageSender.sendMessage(scheduleService.getScheduleList());
 
 
         return stationList;
