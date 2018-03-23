@@ -2,8 +2,10 @@ package com.train.newtask.scheduleController;
 
 
 
+import com.train.newtask.EJB.UpdateListener;
 import com.train.newtask.entity.Schedule;
 import com.train.newtask.EJB.ScheduleEJB;
+import com.train.newtask.entity.SimpleSchedule;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -25,7 +27,7 @@ public class ScheduleController implements Serializable
     @EJB
     private ScheduleEJB scheduleEJB;
 
-    private List<Schedule> scheduleList;
+    private List<SimpleSchedule> scheduleList;
 
     @PostConstruct
     private void init()
@@ -33,7 +35,7 @@ public class ScheduleController implements Serializable
         scheduleList=scheduleEJB.getAllSchedule();
     }
 
-    public List<Schedule> getScheduleList()
+    public List<SimpleSchedule> getScheduleList()
     {
         return scheduleList;
     }

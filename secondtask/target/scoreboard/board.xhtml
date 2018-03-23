@@ -78,21 +78,21 @@
             <f:facet name="header">
                 <h:outputText value="Station" />
             </f:facet>
-            <h:outputText value="#{schedule.station.station_name}" />
+            <h:outputText value="#{schedule.station}" />
         </h:column>
 
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Train" />
             </f:facet>
-            <h:outputText value="#{schedule.train.train_number}" />
+            <h:outputText value="#{schedule.train}" />
         </h:column>
 
         <h:column>
             <f:facet name="header">
                 <h:outputText value="Time" />
             </f:facet>
-            <h:outputText value="#{schedule.time_msk}" />
+            <h:outputText value="#{schedule.time}" />
         </h:column>
 
     </h:dataTable>

@@ -2,6 +2,7 @@ package com.train.newtask.EJB;
 
 
 import com.train.newtask.entity.Schedule;
+import com.train.newtask.entity.SimpleSchedule;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -25,14 +26,14 @@ public class ScheduleEJB
 
 
 
-    public List<Schedule> getAllSchedule() {
+    public List<SimpleSchedule> getAllSchedule() {
 
-        List<Schedule> scheduleList=new ArrayList<>();
-         new UpdateListener().start();
+        List<SimpleSchedule> simpleScheduleList=new ArrayList<>();
+        simpleScheduleList=new UpdateListener().start();
 
 
 
-        return scheduleList;
+        return simpleScheduleList;
     }
 
 }

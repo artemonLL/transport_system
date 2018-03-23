@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Scoreboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+
+    <h:outputStylesheet type="text/css" name="vendor/bootstrap/css/bootstrap.min.css"/>
+    <h:outputStylesheet  name="fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <h:outputStylesheet type="text/css"  name="vendor/animate/animate.css"/>
+    <h:outputStylesheet type="text/css"  name="vendor/select2/select2.min.css"/>
+    <h:outputStylesheet type="text/css"  name="vendor/perfect-scrollbar/perfect-scrollbar.css"/>
+    <h:outputStylesheet type="text/css"  name="css/util.css"/>
+    <h:outputStylesheet type="text/css"  name="css/main.css"/>
+
+
+
+</h:head>
+<h:body  style="background: black">
+
+
+<div >
+    <div>
+
+        <div class="table100 ver3 m-b-110" >
+            <div class="table100-head">
+                <table>
+                    <thead>
+                    <tr class="row100 head">
+                        <th class="cell100 column1" >Class name</th>
+                        <th class="cell100 column2" >Type</th>
+                        <th class="cell100 column3">Hours</th>
+                        <th class="cell100 column4">Trainer</th>
+                        <th class="cell100 column5">Spots</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="table100-body js-pscroll" >
+            <table>
+                <tbody>
+                <tr class="row100 body" style="border: 1px solid #100f1d;">
+                    <td class="cell100 column1" style="color: #4cba1e">Like a butterfly</td>
+                    <td class="cell100 column2" style="color: #4cba1e">Boxing</td>
+                    <td class="cell100 column3" style="color: #4cba1e">9:00 AM - 11:00 AM</td>
+                    <td class="cell100 column4" style="color: #4cba1e">Aaron Chapman</td>
+                    <td class="cell100 column5" style="color: #4cba1e">10</td>
+                </tr>
+                </tbody>
+            </table>
+                <table>
+                    <tbody>
+                    <tr class="row100 body" style="border: 1px solid #100f1d;">
+                        <td class="cell100 column1" style="color: #4cba1e"  >Like a butterfly</td>
+                        <td class="cell100 column2" style="color: #4cba1e">Boxing</td>
+                        <td class="cell100 column3" style="color: #4cba1e">9:00 AM - 11:00 AM</td>
+                        <td class="cell100 column4" style="color: #4cba1e">Aaron Chapman</td>
+                        <td class="cell100 column5" style="color: #4cba1e">10</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
+                    <tr class="row100 body" style="border: 1px solid #100f1d;">
+                        <td class="cell100 column1" style="color: #4cba1e"  >Like a butterfly</td>
+                        <td class="cell100 column2" style="color: #4cba1e">Boxing</td>
+                        <td class="cell100 column3" style="color: #4cba1e">9:00 AM - 11:00 AM</td>
+                        <td class="cell100 column4" style="color: #4cba1e">Aaron Chapman</td>
+                        <td class="cell100 column5" style="color: #4cba1e">10</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+
+    <h:outputScript name="vendor/jquery/jquery-3.2.1.min.js"/>
+    <h:outputScript name="vendor/bootstrap/js/popper.js"/>
+    <h:outputScript name="vendor/bootstrap/js/bootstrap.min.js"/>
+    <h:outputScript name="vendor/select2/select2.min.js"/>
+    <h:outputScript name="vendor/perfect-scrollbar/perfect-scrollbar.min.js"/>
+    <h:outputScript name="js/main.js"/>
+
+
+<h:outputScript>
+    $('.js-pscroll').each(function(){
+        var ps = new PerfectScrollbar(this);
+
+        $(window).on('resize', function(){
+            ps.update();
+        })
+    });
+</h:outputScript>
+
+
+
+</h:body>
+        </html>
