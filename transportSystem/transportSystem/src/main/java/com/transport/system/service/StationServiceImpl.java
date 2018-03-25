@@ -2,6 +2,7 @@ package com.transport.system.service;
 
 import com.transport.system.dao.StationDao;
 import com.transport.system.messaging.MessageSender;
+import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,6 @@ public class StationServiceImpl implements StationService {
             return false;
         }
 
-
         this.stationDao.addStation(station);
         return true;
     }
@@ -69,8 +69,10 @@ public class StationServiceImpl implements StationService {
 
         Collections.sort(stationList,Station.COMPARE_BY_ID);
 
-
-        messageSender.sendMessage(scheduleService.getScheduleList());
+List<Schedule> scheduleList=scheduleService.getScheduleList();
+        messageSender.sendMessage(scheduleList);
+        messageSender.sendMessage(scheduleList);
+        messageSender.sendMessage(scheduleList);
 
 
         return stationList;

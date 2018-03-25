@@ -51,12 +51,11 @@ public class StationsServiceTests {
     }
 
     @Test
-    public void testStationGetByID() {
+    public void testGetStationById() {
 
         Station station=new Station();
         station=stationService.getStationByName("TestStation");
         Assert.assertEquals("TestStation", station.getStation_name());
-
     }
 
     @Test
@@ -65,7 +64,7 @@ public class StationsServiceTests {
         Station station=new Station();
         station=stationService.getStationByName("TestStation");
         boolean isRemove=stationService.removeStation(station.getStation_id());
-        Assert.assertTrue("Station was remove", isRemove);
+        Assert.assertTrue("TestStation was remove", isRemove);
 
     }
 }

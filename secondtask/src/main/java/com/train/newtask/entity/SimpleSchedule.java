@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 
+
 @XmlRootElement
 public class SimpleSchedule
 {

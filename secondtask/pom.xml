@@ -60,6 +60,23 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.1</version>
+        </dependency>
+
+        <!-- JSF 2 -->
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.1.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.1.11</version>
+        </dependency>
 
         <dependency>
             <groupId>javax</groupId>
@@ -68,9 +85,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>2.1.11</version>
+            <groupId>javax.faces</groupId>
+            <artifactId>javax.faces-api</artifactId>
+            <version>2.3-pfd</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

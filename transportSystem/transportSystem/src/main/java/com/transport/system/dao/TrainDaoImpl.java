@@ -94,6 +94,19 @@ public class TrainDaoImpl implements TrainDao {
 
     }
 
+    @Override
+    public void removeTrain(int id) {
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            Train train= (Train)session.load(Train.class, new Integer(id));
+            if (train != null) {
+                session.delete(train);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void addTrain(Train train) {

@@ -1,14 +1,16 @@
 package com.train.newtask.EJB;
 
 
-import com.train.newtask.entity.Schedule;
 import com.train.newtask.entity.SimpleSchedule;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.commons.lang3.SerializationUtils;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import javax.jms.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,18 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Stateless
-public class UpdateListener implements ExceptionListener {
+@Stateful
+@ApplicationScoped
+public class UpdateListener{
+    private static   List<SimpleSchedule> simpleScheduleList=new ArrayList<>();
+        public List<SimpleSchedule> start() throws JMSException {
 
-        public List<SimpleSchedule> start() {
-            List<SimpleSchedule> simpleScheduleList=new ArrayList<>();
-            try {
+
                 // Create a ConnectionFactory
                 ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
                 // Create a Connection
                 Connection connection = connectionFactory.createConnection();
                 connection.start();
-                connection.setExceptionListener(this);
                 // Create a Session
                 Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
                 // Create the destination (Topic or Queue)
@@ -38,48 +40,45 @@ public class UpdateListener implements ExceptionListener {
                 // Create a MessageConsumer from the Session to the Topic or Queue
                 MessageConsumer consumer = session.createConsumer(destination);
                 // Wait for a message
-                Message message = consumer.receive();
+                Message message = consumer.receiveNoWait();
 
-                if (message instanceof TextMessage) {
-                   TextMessage textMessage = (TextMessage) message;
-                    String text = textMessage.getText();
-                    
-                    String[] splitText=text.split(" ");
-                    for(int i=0;i<splitText.length;)
-                    {
+                   if(message!=null) {
+                       simpleScheduleList=new ArrayList<>();
+                       TextMessage textMessage = (TextMessage) message;
+                       String text = textMessage.getText();
 
-                            SimpleSchedule simpleSchedule=new SimpleSchedule();
-                            simpleSchedule.setTrain(splitText[i]);
-                            i++;
-                        simpleSchedule.setStation(splitText[i]);
-                        i++;
-                        long time=Long.parseLong(splitText[i]);
-                        Timestamp timestamp=new Timestamp(time);
-                        simpleSchedule.setTime(timestamp);
-                        i++;
-                        simpleScheduleList.add(simpleSchedule);
-                    }
+                       String[] splitText = text.split(" ");
+                       for (int i = 0; i < splitText.length; ) {
 
-                   // TextMessage textMessage = (TextMessage) message;
-                  //  String text = textMessage.getText();
-                  System.out.println("Received: " + simpleScheduleList);
-                } else {
-                    System.out.println("Received: " + message);
-                }
-                consumer.close();
-                session.close();
-                connection.close();
-            } catch (Exception e) {
-                System.out.println("Caught: " + e);
-                e.printStackTrace();
-            }
+                           SimpleSchedule simpleSchedule = new SimpleSchedule();
+                           simpleSchedule.setTrain(splitText[i]);
+                           i++;
+                           simpleSchedule.setStation(splitText[i]);
+                           i++;
+                           long time = Long.parseLong(splitText[i]);
+                           Timestamp timestamp = new Timestamp(time);
+                           simpleSchedule.setTime(timestamp);
+                           i++;
+                           simpleScheduleList.add(simpleSchedule);
+                       }
+                       // TextMessage textMessage = (TextMessage) message;
+                       //  String text = textMessage.getText();
+                       System.out.println("Received: " + simpleScheduleList);
+                   }
+                   else
+                       {
+                           System.out.println("Received: " +" NULL MASSAGe");
+                       }
+                       consumer.close();
+                       session.close();
+                       connection.close();
+
+
 
 
 
             return simpleScheduleList;
         }
-        public synchronized void onException(JMSException ex) {
-            System.out.println("JMS Exception occured.  Shutting down client.");
-        }
+
     }
 

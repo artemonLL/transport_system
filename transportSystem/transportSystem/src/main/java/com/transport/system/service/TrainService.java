@@ -22,6 +22,8 @@ public interface TrainService
 
     public int getFreePlaces(int train_id);
 
+    public boolean removeTrain(int id);
+
 
 
     public int getTrainIdByName(String train_number);

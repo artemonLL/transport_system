@@ -22,6 +22,8 @@ public interface TrainDao
 
     public int getFreePlaces(int train_id);
 
+    public void removeTrain(int id);
+
 
 
 
