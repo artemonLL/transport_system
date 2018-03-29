@@ -1,8 +1,9 @@
 package com.transport.system.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class SimpleSchedule
+public class SimpleSchedule implements Serializable
 {
 
     private String station;
@@ -11,6 +12,24 @@ public class SimpleSchedule
 
     private Timestamp time;
 
+    private int platform;
+
+    public int getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(int platform) {
+        this.platform = platform;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleSchedule{" +
+                "station='" + station + '\'' +
+                ", train='" + train + '\'' +
+                ", time=" + time +
+                '}';
+    }
 
     public String getStation() {
         return station;

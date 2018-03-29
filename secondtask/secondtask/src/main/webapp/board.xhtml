@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+
+
+    <h:dataTable value="#{scheduleBean.scheduleList}" var="schedule">
+
+        <f:facet name="header">
+            <h:outputText value="Scoreboard" />
+        </f:facet>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Station" />
+            </f:facet>
+            <h:outputText value="#{schedule.station}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Train" />
+            </f:facet>
+            <h:outputText value="#{schedule.train}" />
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Time" />
+            </f:facet>
+            <h:outputText value="#{schedule.time_msk}" />
+        </h:column>
+
+    </h:dataTable>
+
+
+
+</h:body>
+</html>

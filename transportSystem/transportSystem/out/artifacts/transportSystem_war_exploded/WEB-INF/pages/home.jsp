@@ -26,21 +26,21 @@
                 <div class="carousel-item active" style="background-image:  url('http://i50.tinypic.com/2d9cnyb.jpg') " >
                     <div class="carousel-caption d-none d-md-block">
                         <h3>                 </h3>
-                        <p>This is a description for the first slide.</p>
+                        <p style="font-size: 2em">Cool Railways</p>
                     </div>
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('http://i50.tinypic.com/2d9cnyb.jpg')">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>                </h3>
-                        <p>This is a description for the second slide.</p>
+                        <p style="font-size: 2em">Cool Railways</p>
                     </div>
                 </div>
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('http://i50.tinypic.com/2d9cnyb.jpg')">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>                 </h3>
-                        <p>This is a description for the third slide.</p>
+                        <p style="font-size: 2em">Cool Railways</p>
                     </div>
                 </div>
             </div>
@@ -57,9 +57,6 @@
     <section>
         <!-- Page Content -->
         <div class="container">
-
-            <h1 class="my-4">Any Railways</h1>
-
             <!-- Marketing Icons Section -->
             <div class="row">
                 <div class="col-lg-12 mb-12">

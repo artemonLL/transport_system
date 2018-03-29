@@ -16,6 +16,44 @@
 
 <head>
 
+    <style>
+
+        #onhoverr a:hover {
+            color: #a3deff;
+        }
+        #onhoverr {
+            color: grey;
+        }
+        .navbar-brand:hover, .navbar-brand:focus {
+            color: #a3deff;
+        }
+
+
+    </style>
+
+    <style>
+        .bootstrap-select.show>.dropdown-menu>.dropdown-menu {
+            display: block;
+        }
+
+        .bootstrap-select > .dropdown-menu > .dropdown-menu li.hidden{
+            display:none;
+        }
+
+        .bootstrap-select > .dropdown-menu > .dropdown-menu li a{
+            display: block;
+            width: 100%;
+            padding: 3px 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #292b2c;
+            text-align: inherit;
+            white-space: nowrap;
+            background: 0 0;
+            border: 0;
+        }
+    </style>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -30,7 +68,6 @@
     <link href="<c:url value="/resources/css/modern-business.css"/> " rel="stylesheet">
 
 </head>
-
 <body>
 
 
@@ -42,33 +79,10 @@
     <div class="container">
 
 
-        <style>
-            .bootstrap-select.show>.dropdown-menu>.dropdown-menu {
-                display: block;
-            }
-
-            .bootstrap-select > .dropdown-menu > .dropdown-menu li.hidden{
-                display:none;
-            }
-
-            .bootstrap-select > .dropdown-menu > .dropdown-menu li a{
-                display: block;
-                width: 100%;
-                padding: 3px 1.5rem;
-                clear: both;
-                font-weight: 400;
-                color: #292b2c;
-                text-align: inherit;
-                white-space: nowrap;
-                background: 0 0;
-                border: 0;
-            }
-        </style>
-
-        <a class="navbar-brand" href="<c:url value="/" />">Any railways</a>
+        <a class="navbar-brand"  href="<c:url value="/" />">Any railways</a>
 
 
-        <a class="navbar-brand" href="<c:url value="/stationlist" />">Train schedule</a>
+        <a  class="navbar-brand"   href="<c:url value="/stationlist" />">Train schedule</a>
 
 
 
@@ -92,8 +106,8 @@
 
                     <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <li class="nav-item">
-                        <h5 a class="nav-link" >${pageContext.request.userPrincipal.name} <a  onclick="document.forms['logoutForm'].submit()"></a>
-                        </h5>
+                        <a class="nav-link" >${pageContext.request.userPrincipal.name} <a  onclick="document.forms['logoutForm'].submit()"></a>
+
                 </li>
 
                         <li class="nav-item">
@@ -101,12 +115,12 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </form>
 
-           <h5 a class="nav-link" ><a  onclick="document.forms['logoutForm'].submit()">Logout</a>
-                            </h5>
+           <a  class="nav-link" onclick="document.forms['logoutForm'].submit()">Logout</a>
+
                         </li>
 
 
-                        <li class="nav-item">
+                        <li id="onhover" class="nav-item">
                             <a class="nav-link" href="<c:url value="/tickets" />"> Tickets </a>
                         </li>
 
@@ -117,11 +131,11 @@
 
 
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <li class="nav-item">
+                    <li id="onhoverr" class="nav-item">
                         <a class="nav-link" href="<c:url value="/registration" />"> Registration </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/login" />">Sing_In</a>
+                    <li id="onhoverr" class="nav-item" >
+                        <a  class="nav-link" href="<c:url value="/login" />">SingIn</a>
                     </li>
                 </c:if>
 
@@ -131,8 +145,8 @@
 
                     <c:if test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
 
-                        <li class="nav-item">
-                            <a   class="nav-link" href="<c:url value="/admin" />"> Admin </a>
+                        <li id="onhoverr" class="nav-item">
+                            <a   class="nav-link"  href="<c:url value="/admin" />"> Admin </a>
                         </li>
 
                     </c:if>

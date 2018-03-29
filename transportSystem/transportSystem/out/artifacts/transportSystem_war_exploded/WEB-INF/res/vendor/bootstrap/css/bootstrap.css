@@ -3970,12 +3970,11 @@ tbody.collapse.show {
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
   font-size: 1.25rem;
-  line-height: inherit;
-  white-space: nowrap;
+  color: gray;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
-  text-decoration: none;
+  color: #a3deff;
 }
 
 .navbar-nav {

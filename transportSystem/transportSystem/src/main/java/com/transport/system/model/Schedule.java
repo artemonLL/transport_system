@@ -45,11 +45,12 @@ public class Schedule implements Serializable {
 
     @Override
     public String toString() {
-        return ""+schedule_id;
+        return "Schedule{" +
+                ", train=" + train.getTrain_number() +
+                ", station=" + station.getStation_name() +
+                ", time_msk=" + time_msk +
+                '}';
     }
-
-
-
 
     public Integer getSchedule_id() {
         return schedule_id;

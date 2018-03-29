@@ -63,17 +63,8 @@ public class StationServiceImpl implements StationService {
     @Override
     public List<Station> getStationList()
     {
-
-
         List<Station> stationList= this.stationDao.getStationList();
-
         Collections.sort(stationList,Station.COMPARE_BY_ID);
-
-List<Schedule> scheduleList=scheduleService.getScheduleList();
-        messageSender.sendMessage(scheduleList);
-        messageSender.sendMessage(scheduleList);
-        messageSender.sendMessage(scheduleList);
-
 
         return stationList;
     }

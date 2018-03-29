@@ -118,10 +118,7 @@
 
                       <a href="<c:url value="/login" />" class="btn btn-primary">Sing IN and Buy ticket!</a>
 
-
                   </c:if>
-
-
                                     </form:form>
                             </fieldset>
                         </h4>

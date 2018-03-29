@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.jms.ConnectionFactory;
 
+import com.transport.system.messaging.MessageReceiver;
 import org.apache.activemq.network.jms.SimpleJmsMessageConvertor;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class MessagingConfiguration {
     private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 
     private static final String ORDER_QUEUE = "scheduleUpdate";
-    private static final String ORDER_RESPONSE_QUEUE = "order-response-queue";
+    private static final String ORDER_RESPONSE_QUEUE = "GiveMe";
 
- //   @Autowired
-  //  MessageReceiver messageReceiver;
+    @Autowired
+    MessageReceiver messageReceiver;
 
     @Bean
     public ConnectionFactory connectionFactory(){
@@ -51,7 +52,7 @@ public class MessagingConfiguration {
 
     /*
      * Message listener container, used for invoking messageReceiver.onMessage on message reception.
-
+     */
     @Bean
     public MessageListenerContainer getContainer(){
         DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
@@ -60,7 +61,7 @@ public class MessagingConfiguration {
         container.setMessageListener(messageReceiver);
         return container;
     }
- */
+
     /*
      * Used for Sending Messages.
      */

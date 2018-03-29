@@ -1,9 +1,11 @@
 package com.transport.system.dao;
 
 import com.transport.system.controller.TrainStationScheduleController;
+import com.transport.system.messaging.MessageSender;
 import com.transport.system.model.Schedule;
 import com.transport.system.model.Station;
 import com.transport.system.model.Train;
+import com.transport.system.service.ScheduleService;
 import com.transport.system.service.StationService;
 import com.transport.system.service.TrainService;
 import com.transport.system.service.TrainServiceImpl;
@@ -53,15 +55,17 @@ public class ScheduleDaoIml implements ScheduleDao {
     public void addSchedule(Schedule schedule) {
         try {
             Train train = trainService.getTrainById(schedule.getTrain().getTrain_id());
+            Station station = stationService.getStationById(schedule.getStation().getStation_id());
             schedule.setTrain(train);
+            schedule.setStation(station);
             Session session = this.sessionFactory.getCurrentSession();
             session.save(schedule);
-
             logr.warn("ADD SCHEDULE with TRAIN-" + schedule.getTrain().getTrain_number() + " and STATION " +
                     schedule.getStation().getStation_name() + " and TIME- " + schedule.getTime_msk());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -197,14 +201,14 @@ public class ScheduleDaoIml implements ScheduleDao {
 
         //Date date=new
 
-        java.util.Date date=new java.util.Date();
+        java.util.Date date = new java.util.Date();
 
         for (int i = 0; i < list.size(); i++) {
             for (Schedule schedule : list1) {
                 if (schedule.getTrain() == list.get(i).getTrain()) {
                     if (schedule.getTime_msk().after(list.get(i).getTime_msk())) {
                         if (list.get(i).getTrain().getPlaces() > 0) {
-                            if (list.get(i).getTime_msk().getTime()>date.getTime()+600000) {
+                            if (list.get(i).getTime_msk().getTime() > date.getTime() + 600000) {
                                 list_finall.add(list.get(i));
                             }
                         }

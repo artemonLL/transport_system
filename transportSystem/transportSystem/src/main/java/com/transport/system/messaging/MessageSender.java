@@ -4,6 +4,7 @@ import javax.jms.*;
 
 import com.transport.system.model.Schedule;
 import com.transport.system.model.SimpleSchedule;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -20,29 +21,20 @@ public class MessageSender {
     @Autowired
     JmsTemplate jmsTemplate;
 
-    public void sendMessage(final List<Schedule> scheduleList) {
+    private static final Logger logr = Logger.getLogger(MessageSender.class);
 
-        jmsTemplate.send(new MessageCreator(){
+    public void sendMessage(final String message) {
+
+        jmsTemplate.send(new MessageCreator() {
             @Override
-            public Message createMessage(Session session) throws JMSException{
+            public Message createMessage(Session session) throws JMSException {
 
-                String text="";
-
-                boolean flag=false;
-               for(Schedule schedule:scheduleList)
-               {
-                   if(flag==true)
-                   {
-                       text=text+" ";
-                   }
-                   text=text+schedule.getTrain().getTrain_number()+
-                           " "+schedule.getStation().getStation_name()+" "+schedule.getTime_msk().getTime();
-                   flag=true;
-               }
+                String text = message;
 
 
                 TextMessage message = session.createTextMessage(text);
-                return message ;
+                logr.warn("SEND MESSAGE ///////////////////////////////////////////"+text);
+                return message;
             }
         });
     }

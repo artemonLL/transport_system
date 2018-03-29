@@ -1,8 +1,11 @@
 package com.transport.system.service;
 
 import com.transport.system.dao.ScheduleDao;
+import com.transport.system.dao.ScheduleDaoIml;
+import com.transport.system.messaging.MessageSender;
 import com.transport.system.model.Schedule;
 import com.transport.system.model.Train;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     ScheduleDao scheduleDao;
 
+
+    @Autowired
+    MessageSender messageSender;
+
+    private static final Logger logr = Logger.getLogger(ScheduleDaoIml.class);
+
     @Override
     public Schedule getScheduleById(int schedule_id) {
         return this.scheduleDao.getScheduleById(schedule_id);
@@ -33,6 +42,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 
 
         this.scheduleDao.addSchedule(schedule);
+
+      messageSender.sendMessage(schedule.getStation().getStation_name());
+       // logr.warn("**********************************GET LIST  "+scheduleList.toString());
 
     }
 
