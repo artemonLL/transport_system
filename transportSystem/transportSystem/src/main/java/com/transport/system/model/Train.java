@@ -7,9 +7,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 
+/**
+ * Simple object that represents a Train
+ */
 
 @Entity
-
 @Proxy(lazy=false)
 @Table(name = "train")
 public class Train implements Serializable

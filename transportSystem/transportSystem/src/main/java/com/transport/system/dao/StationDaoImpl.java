@@ -23,6 +23,13 @@ public class StationDaoImpl implements StationDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * Get Station by station ID  method returns Station from database
+     * by Station ID. Method get Station from station table.
+     *
+     * @param station_id Station ID.
+     * @return Station entity.
+     */
     @Override
     public Station getStationById(int station_id) {
         Station station = new Station();
@@ -33,11 +40,16 @@ public class StationDaoImpl implements StationDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return station;
-
     }
 
+    /**
+     * Get station station by name  method returns Station from database
+     * by station name. Method get station from station table.
+     *
+     * @param station_name Station Name.
+     * @return Station entity.
+     */
     @Override
     public Station getStationByName(String station_name) {
         Station station = new Station();
@@ -53,8 +65,15 @@ public class StationDaoImpl implements StationDao {
         return station;
     }
 
+    /**
+     * Add station method adds  station to database
+     * by station entity. Method add station in station table.
+     *
+     * @param station Station entity.
+     * @return void.
+     */
     @Override
-    public void addStation(Station station) {
+    public boolean addStation(Station station) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
             session.persist(station);
@@ -63,9 +82,16 @@ public class StationDaoImpl implements StationDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return true;
     }
 
+    /**
+     * Update station method update  station at database
+     * by station entity. The method updates the station from the station table.
+     *
+     * @param station Station entity.
+     * @return void.
+     */
     @Override
     public void updateStation(Station station) {
 
@@ -73,6 +99,12 @@ public class StationDaoImpl implements StationDao {
         session.update(station);
     }
 
+    /**
+     * Get station list method get List<Station> from database.
+     * The method get the List<Station> from the station table.
+     *
+     * @return List<Station>.
+     */
     @Override
     public List<Station> getStationList() {
         Session session = this.sessionFactory.getCurrentSession();
@@ -80,11 +112,17 @@ public class StationDaoImpl implements StationDao {
         return stationList;
     }
 
-
+    /**
+     * Remove station method remove station from database
+     * by station id. The method remove the station from station table.
+     *
+     * @param id Station ID.
+     * @return void.
+     */
     public void removeStation(int id) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            Station station= (Station) session.load(Station.class, new Integer(id));
+            Station station = (Station) session.load(Station.class, new Integer(id));
             if (station != null) {
                 session.delete(station);
             }

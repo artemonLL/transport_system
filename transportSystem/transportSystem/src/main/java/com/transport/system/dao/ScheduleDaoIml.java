@@ -16,11 +16,11 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
-
 
 @Repository
 public class ScheduleDaoIml implements ScheduleDao {
@@ -39,6 +39,12 @@ public class ScheduleDaoIml implements ScheduleDao {
     private static final Logger logr = Logger.getLogger(ScheduleDaoIml.class);
 
 
+    /**
+     * Get Schedule by ID  method returns Schedule from database
+     * by ID. Method search Schedule from Schedule table.
+     * @param schedule_id Schedule ID.
+     * @return Schedule entity
+     * */
     @Override
     public Schedule getScheduleById(int schedule_id) {
         Schedule schedule = new Schedule();
@@ -48,11 +54,40 @@ public class ScheduleDaoIml implements ScheduleDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return schedule;
     }
 
+    /**
+     * Remove cheduleS by ID remove Schedule from database by ID.
+     * Method remove Schedule from Schedule table.
+     * @param schedule_id Schedule ID.
+     * @return void.
+     * */
     @Override
-    public void addSchedule(Schedule schedule) {
+    public boolean removeSchedule(int schedule_id) {
+        try {
+            Session session = this.sessionFactory.getCurrentSession();
+            Schedule schedule = (Schedule) session.load(Schedule.class, new Integer(schedule_id));
+            if (schedule != null) {
+                session.delete(schedule);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    /**
+     * Add Schedule by schedule method add Schedule to database
+     * by schedule entity.
+     * Method add Schedule to schedule table.
+     * @param schedule the Schedule entity.
+     * @return void.
+     * */
+    @Override
+    public boolean addSchedule(Schedule schedule) {
         try {
             Train train = trainService.getTrainById(schedule.getTrain().getTrain_id());
             Station station = stationService.getStationById(schedule.getStation().getStation_id());
@@ -65,20 +100,38 @@ public class ScheduleDaoIml implements ScheduleDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+return true;
 
     }
 
+
+    /**
+     * Update Schedule method update Schedule at database
+     * by schedule entity.
+     * Method update Schedule at schedule table.
+     * @param schedule the Schedule entity.
+     * @return void.
+     * */
+
     @Override
-    public void updateSchedule(Schedule schedule) {
+    public boolean updateSchedule(Schedule schedule) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
-            session.update(schedule);
+            session.flush();
+            session.clear();
+          session.update(schedule);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
+    /**
+     * Get Schedule List method return List<Schedule> from database.
+     * Method return List<Schedule> from schedule table.
+     * @return List<Schedule>.
+     * */
     @Override
     public List<Schedule> getScheduleList() {
         List<Schedule> scheduleList = new ArrayList<>();
@@ -91,6 +144,12 @@ public class ScheduleDaoIml implements ScheduleDao {
         return scheduleList;
     }
 
+    /**
+     * Get Schedule by Train ID  method returns List<Schedule> from database
+     * by Train ID. Method get List<Schedule> from Schedule table.
+     * @param train_id  Train ID.
+     * @return List<Schedule> .
+     * */
     @Override
     public List<Schedule> getScheduleByTrainId(int train_id) {
         List<Schedule> scheduleList = new ArrayList<>();
@@ -102,11 +161,15 @@ public class ScheduleDaoIml implements ScheduleDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return scheduleList;
-
     }
 
+    /**
+     * Get Schedule by Station method returns List<Schedule> from database
+     * by Station ID. Method get List<Schedule> from Schedule table.
+     * @param station_id  Station ID .
+     * @return List<Schedule> .
+     * */
     @Override
     public List<Schedule> getScheduleListByStation(int station_id) {
 
@@ -126,27 +189,21 @@ public class ScheduleDaoIml implements ScheduleDao {
     }
 
 
-
-/*
-    @Override
-    public List<Station> getTrainListFromStation(int station_id) {
-        Session session=this.sessionFactory.getCurrentSession();
-        Criteria stationCriteria=session.createCriteria(Schedule.class);
-        stationCriteria.add(Restrictions.eq("station",stationService.getStationById(station_id)));
-        List<Station> trainFromstationList =stationCriteria.list();
-        return trainFromstationList;
-    }
-*/
+    /**
+     * Select by Dates and Station method returns List<Schedule> from database
+     * by between date One and date Two,and where Train follow from stationOne ID to stationTwo ID. Method get List<Schedule> from Schedule table.
+     * @param dateOne the first date in Schedule.
+     * @param dateTwo the second date in Schedule.
+     * @param stationOne  the ID of the departure station in the Schedule.
+     * @param dateTwo  second date in Schedule.
+     * @return List<Schedule> .
+     * */
 
     @Override
     public List<Schedule> selectByDatesAndStations(Timestamp dateOne, Timestamp dateTwo, int stationOne, int stationTwo) {
         Timestamp timestamp1 = dateOne;
         Timestamp timestamp2 = dateTwo;
-
-
         Session session = this.sessionFactory.getCurrentSession();
-
-
         List<Schedule> list1 = new ArrayList<>();
         try {
             String queryString1 = " from Schedule   where station.station_id= :stationTwo and time_msk >  :dateOne ";
@@ -165,20 +222,6 @@ public class ScheduleDaoIml implements ScheduleDao {
             str = str + schedule.getTrain().getTrain_id();
             flag = false;
         }
-
-
-        logr.warn(String.format("----LIIIISSSSST 2222" + list1.size()));
-
-       /* String queryString2 = " from Schedule  where time_msk >= :dateOne and time_msk <= :dateTwo  AND station.station_id= :stationOneId" +
-                " AND train.train_id in("+str+")" ;
-        Query query=session.createQuery(queryString);
-        query.setParameter("dateOne",timestamp1);
-        query.setParameter("dateTwo",timestamp2);
-        query.setParameter("stationOneId",stationOne);
-
-        List <Schedule> list=query.list();
-*/
-
         List<Schedule> nullScheduleList = new ArrayList<>();
         if (str == "") {
             return nullScheduleList;
@@ -198,9 +241,6 @@ public class ScheduleDaoIml implements ScheduleDao {
             e.printStackTrace();
         }
         List<Schedule> list_finall = new ArrayList<>();
-
-        //Date date=new
-
         java.util.Date date = new java.util.Date();
 
         for (int i = 0; i < list.size(); i++) {
@@ -219,22 +259,6 @@ public class ScheduleDaoIml implements ScheduleDao {
 
         return list_finall;
     }
-
-  /*  @Override
-    public List<Schedule> selectByDatesAndStations(Date dateOne, Date dateTwo, int stationOne, int stationTwo) {
-
-        Session session=this.sessionFactory.getCurrentSession();
-        SQLQuery query=session.createSQLQuery("SELECT * FROM schedule WHERE time_msk > :dateOne AND time_msk < :dateTwo " +
-                "AND station.station_id = :stationOneId AND train.train_id in(SELECT train.train_id FROM schedule" +
-                " WHERE station.station_id = :stationTwo)");
-        query.setParameter("dateOne",dateOne);
-        query.setParameter("dateTwo",dateTwo);
-        query.setParameter("stationOneId",stationOne);
-        query.setParameter("stationTwo",stationTwo);
-        List list=query.list();
-        return list;  }*/
-
-
 }
 
 

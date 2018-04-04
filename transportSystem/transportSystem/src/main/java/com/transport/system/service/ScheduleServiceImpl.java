@@ -39,21 +39,39 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public void addSchedule(Schedule schedule) {
-
+        schedule.setWay_position(1 + (int)(Math.random() * 15));
 
         this.scheduleDao.addSchedule(schedule);
 
       messageSender.sendMessage(schedule.getStation().getStation_name());
        // logr.warn("**********************************GET LIST  "+scheduleList.toString());
-
     }
 
     @Override
-    public void updateSchedule(Schedule schedule) {
+    public boolean updateSchedule(Schedule schedule) {
+        Schedule newSchedule=scheduleDao.getScheduleById(schedule.getSchedule_id());
 
-        this.scheduleDao.updateSchedule(schedule);
+        if(newSchedule.getStation().getStation_name()!=null) {
+            scheduleDao.updateSchedule(schedule);
+            messageSender.sendMessage(schedule.getStation().getStation_name());
+
+            return true;
+        }
+        return false;
     }
 
+    @Override
+    public boolean removeSchedule(int schedule_id) {
+
+        Schedule schedule=scheduleDao.getScheduleById(schedule_id);
+        if(schedule!=null)
+        {
+            scheduleDao.removeSchedule(schedule_id);
+            messageSender.sendMessage(schedule.getStation().getStation_name());
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public List<Schedule> getScheduleList()
@@ -63,11 +81,6 @@ public class ScheduleServiceImpl implements ScheduleService {
         Collections.reverse(scheduleList);
 
         return scheduleList;
-    }
-
-    @Override
-    public List<Schedule> getScheduleByTrainId(int train_id) {
-        return this.scheduleDao.getScheduleByTrainId(train_id);
     }
 
     @Override

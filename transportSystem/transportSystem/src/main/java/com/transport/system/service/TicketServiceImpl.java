@@ -36,6 +36,4 @@ public class TicketServiceImpl implements TicketService
     public List<User> getUserListFromTrain(Train train) {
         return this.ticketDao.getUserListFromTrain(train);
     }
-
-
 }

@@ -9,8 +9,8 @@ import java.sql.Timestamp;
 
 
 /**
-     * Simple JavaBean  object that represents a User
-     */
+ * Simple JavaBean  object that represents a Ticket
+ * */
     @Entity
 
     @Proxy(lazy=false)

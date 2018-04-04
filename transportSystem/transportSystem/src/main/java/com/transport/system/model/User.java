@@ -9,10 +9,9 @@ import java.sql.Date;
 
 
 /**
- * Simple JavaBean  object that represents a User
+ * Simple object that represents a User
  */
 @Entity
-
 @Proxy(lazy=false)
 @Table(name = "user")
 public class User {

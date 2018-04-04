@@ -23,8 +23,13 @@ public class MessageSender {
 
     private static final Logger logr = Logger.getLogger(MessageSender.class);
 
-    public void sendMessage(final String message) {
 
+    /**
+     * Send Message  method for sending an ActiveMq message to notify the second
+     * applications
+     * @param message message.
+     * */
+    public void sendMessage(final String message) {
         jmsTemplate.send(new MessageCreator() {
             @Override
             public Message createMessage(Session session) throws JMSException {

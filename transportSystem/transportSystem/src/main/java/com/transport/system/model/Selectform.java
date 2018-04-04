@@ -3,7 +3,10 @@ package com.transport.system.model;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
-
+/**
+ *The class to help selection sends from the JSP page
+ *to the controller to select the train for the ticket.
+ */
 public class Selectform {
 
     private Timestamp dateOne;

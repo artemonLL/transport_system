@@ -146,7 +146,7 @@
                                                             <div class="col-xs-4">
                                                                 <input type="submit" id="saveschedule"
                                                                        class="btn btn-primary"
-                                                                       value="Save"
+                                                                       value="Save Schedule"
                                                                        onclick="return submitScheduleForm();"/>
                                                             </div>
                                                             <div class="col-xs-4">
@@ -250,7 +250,7 @@
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <input type="submit" id="savetrain" class="btn btn-primary"
-                                                               value="Save" onclick="return submitTrainForm();"/>
+                                                               value="Save Train" onclick="return submitTrainForm();"/>
                                                     </div>
                                                     <div class="col-xs-4">
                                                     </div>
@@ -337,7 +337,7 @@
                                                 <div class="control-label col-xs-3"><form:label
                                                         path="station_name">Station Name</form:label></div>
                                                 <div class="col-xs-6">
-                                                    <form:hidden path="station_id" value="${stationObject.station_id}"/>
+
                                                     <form:input cssClass="form-control" path="station_name"
                                                                 value="${stationObject.station_name}"/>
                                                 </div>
@@ -350,7 +350,7 @@
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <input type="submit" id="saveStation" class="btn btn-primary"
-                                                               value="Save" onclick="return submitStationForm();"/>
+                                                               value="Save Station" onclick="return submitStationForm();"/>
                                                     </div>
                                                     <div class="col-xs-4">
                                                     </div>

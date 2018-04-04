@@ -11,6 +11,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Set;
 
+/**
+ * Simple JavaBean  object that represents a Station
+ * */
 @Entity
 @Proxy(lazy=false)
 @Table(name = "station")

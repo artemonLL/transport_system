@@ -3,6 +3,9 @@ package com.transport.system.model;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ *Class of Schedule for forwarding the schedule to the second application
+ */
 public class SimpleSchedule implements Serializable
 {
 

@@ -21,7 +21,13 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-
+<style>
+    em {
+        font-style: normal;
+        font-size: 130%;
+        text-transform: uppercase;
+    }
+</style>
 <section >
     <header >
 
@@ -81,19 +87,25 @@
 
                     <div class="card-body">
                         <h4 class="card-title">
-                            <a href="#">Add Shedule</a>
+                            <a href="#">Choose You Train</a>
 
                                 <fieldset>
                                     <form:form id="BuyRegisterForm" cssClass="form-horizontal"
                                                modelAttribute="buyticketform" method="post" action="buyticket">
 
-                                        <form:select path="train_id" multiple="multiple" class="form-control">
+                                        <form:select cssStyle="  border-radius: 15px;
+      padding: 10px 10px;
+      width: 100%;
+      border: 1px solid grey;
+      box-shadow: none;
+      background: transparent;
+      background-image: none;"  path="train_id" multiple="multiple" class="form-control">
                                             <c:forEach var="schedule" items="${scheduleList}">
 
-                                                <option value="${schedule.train.train_id}">train num-
-                                                    <h4>${schedule.train.train_number}</h4> departure
-                                                    station-${schedule.station.station_name}
-                                                    time-${schedule.time_msk}</option>
+                                                <option style="border-radius: 15px;
+      padding: 15px;
+      width: 97%;
+      border: 1px solid grey;" value="${schedule.train.train_id}">Train -> ${schedule.train.train_number}  Station of departure -> -${schedule.station.station_name}  Time -> ${schedule.time_msk}</option>
 
                                             </c:forEach>
 
@@ -140,7 +152,7 @@
                                                method="post" action="selecttrain">
 
                                         <div class="form-group">
-                                            <div  cssClass="control-label col-xs-3">Departure Station</div>
+                                            <div  cssClass="control-label col-xs-3">Station of departure</div>
 
                                             <div class="col-xs-6">
 

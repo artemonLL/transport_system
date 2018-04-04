@@ -1,8 +1,8 @@
 package com.transport.system.service;
+
 import com.transport.system.dao.RoleDao;
 import com.transport.system.model.Role;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 
 
 import com.transport.system.dao.UserDao;
@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 /**
@@ -33,39 +32,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Transactional
-    @Override
-    public User getUserById(int id) {
-
-      return this.userDao.getUserById(id);
-    }
 
     @Override
-    public void addUser(User user)
-    {
+    public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Role role_user=roleDao.getRoleById(2);
+        Role role_user = roleDao.getRoleById(2);
         user.setRole(role_user);
         userDao.addUser(user);
-
     }
 
-    @Transactional
-    @Override
-    public List<User> getUserList() {
-        return this.userDao.getUserList();
-    }
-
-    @Override
-    public User getUserByNameLastName(String username, String last_name,Date date_birth) {
-        return this.userDao.getUserByNameLastName(username,last_name,date_birth);
-    }
-
-
-    @Override
-    public void removeUser(int id) {
-        this.userDao.removeUser(id);
-    }
 
     @Override
     public User getUserByName(String username) {

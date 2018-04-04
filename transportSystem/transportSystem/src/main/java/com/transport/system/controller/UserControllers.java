@@ -19,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-
+/**
+ * The User controller, which allows user to view pages.
+ */
 @Controller
 @RequestMapping
 public class UserControllers {
@@ -153,11 +155,7 @@ public class UserControllers {
         logr.warn(String.format("-----------train train " + train.getTrain_number()));
 
         if (trainService.getFreePlaces(train.getTrain_id()) != 0) {
-
-
         }
-
-
         Ticket ticket = new Ticket();
         ModelAndView mod = new ModelAndView("redirect:tickets");
 

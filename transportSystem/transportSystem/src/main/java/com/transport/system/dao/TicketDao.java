@@ -16,5 +16,4 @@ public interface TicketDao
 
     public List<User> getUserListFromTrain(Train train);
 
-
 }

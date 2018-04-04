@@ -14,12 +14,18 @@ import java.util.List;
  */
 public interface UserService {
 
-
-    public User getUserById(int id);
+    /**
+     * Add User to database.
+     * @param user user entity.
+     *                 @return  void.
+     **/
     public void addUser(User user);
-    public List<User> getUserList();
-    public User getUserByNameLastName(String username, String last_name,Date date_birth);
-    public void removeUser(int id);
+
+    /**
+     * Returns User from database by user's name.
+     * @param username user's name in the database.
+     *                 @return User obj.
+     **/
     public User getUserByName(String username);
 
 

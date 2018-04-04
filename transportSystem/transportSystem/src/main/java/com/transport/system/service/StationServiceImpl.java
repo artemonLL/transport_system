@@ -43,21 +43,12 @@ public class StationServiceImpl implements StationService {
 
     @Override
     public boolean addStation(Station station) {
-
-
         if(this.stationDao.getStationByName(station.getStation_name())!=null)
         {
             return false;
         }
-
         this.stationDao.addStation(station);
         return true;
-    }
-
-    @Override
-    public void updateStation(Station station) {
-
-        this.updateStation(station);
     }
 
     @Override
@@ -69,16 +60,7 @@ public class StationServiceImpl implements StationService {
         return stationList;
     }
 
-    @Override
-    public boolean removeStation(int id) {
-        Station station= stationDao.getStationById(id);
-        if(station!=null)
-        {
-            stationDao.removeStation(id);
-            return true;
-        }
-        return false;
-    }
+
 
 
 }

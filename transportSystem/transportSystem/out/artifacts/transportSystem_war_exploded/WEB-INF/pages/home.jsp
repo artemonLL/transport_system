@@ -81,7 +81,7 @@
 
 
                                                     <div class="form-group">
-                                                        <div  cssClass="control-label col-xs-3">Departure Station</div>
+                                                        <div  cssClass="control-label col-xs-3">Station of departure</div>
 
                                                         <div class="col-xs-6">
 

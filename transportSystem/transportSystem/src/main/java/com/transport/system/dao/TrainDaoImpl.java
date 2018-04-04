@@ -29,7 +29,13 @@ public class TrainDaoImpl implements TrainDao {
     @Autowired
     private StationService stationService;
 
-
+    /**
+     * Get Train by ID  method returns Train from database
+     * by Train ID. Method get Train from train table.
+     *
+     * @param train_id train id.
+     * @return Train entity.
+     */
     @Override
     public Train getTrainById(int train_id) {
 
@@ -44,6 +50,13 @@ public class TrainDaoImpl implements TrainDao {
         return train;
     }
 
+    /**
+     * Get Train by Name  method returns Train from database
+     * by Train Name. Method get Train from train table.
+     *
+     * @param train_number train number.
+     * @return Train entity.
+     */
     @Override
     public Train getTrainByName(String train_number) {
 
@@ -59,26 +72,13 @@ public class TrainDaoImpl implements TrainDao {
         return train;
     }
 
-
-    @Override
-    public int getTrainIdByName(String train_number) {
-
-
-        Train train = new Train();
-        try {
-            logr.warn(String.format("----------trainDAO getTrainIdByName get " + train_number));
-            Session session = this.sessionFactory.getCurrentSession();
-            Criteria userCriteria = session.createCriteria(Train.class);
-            userCriteria.add(Restrictions.eq("train_number", train_number));
-            train = (Train) userCriteria.uniqueResult();
-
-            logr.warn(String.format("----------trainDAO getfrom database" + train.getTrain_number() + " " + train.getTrain_id()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return train.getTrain_id();
-    }
-
+    /**
+     * Get Free Places method returns free places in the train from the database.
+     * by the train ID. A way to get free seats on the train from the train table.
+     *
+     * @param train_id train ID.
+     * @return int free places.
+     */
     @Override
     public int getFreePlaces(int train_id) {
 
@@ -94,22 +94,15 @@ public class TrainDaoImpl implements TrainDao {
 
     }
 
+    /**
+     * Add Train method add Train to database.
+     * Method add Train to train table.
+     *
+     * @param train train entity.
+     * @return void.
+     */
     @Override
-    public void removeTrain(int id) {
-        try {
-            Session session = this.sessionFactory.getCurrentSession();
-            Train train= (Train)session.load(Train.class, new Integer(id));
-            if (train != null) {
-                session.delete(train);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public void addTrain(Train train) {
+    public boolean addTrain(Train train) {
         try {
             Session session = this.sessionFactory.getCurrentSession();
             session.persist(train);
@@ -118,10 +111,16 @@ public class TrainDaoImpl implements TrainDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+        return true;
     }
 
+    /**
+     * Update Train method returns Update Train in database.
+     * by the train. Method update Train in train table.
+     *
+     * @param train Train entity.
+     * @return void.
+     */
     @Override
     public void updateTrain(Train train) {
         try {
@@ -135,6 +134,12 @@ public class TrainDaoImpl implements TrainDao {
 
     }
 
+    /**
+     * Get Train List method get List<Train> from database.
+     * Method get List<Train> from train table.
+     *
+     * @return List<Train>.
+     */
     @Override
     public List<Train> getTrainList() {
         List<Train> trainList = new ArrayList<>();
@@ -147,6 +152,7 @@ public class TrainDaoImpl implements TrainDao {
         }
         return trainList;
     }
+
 }
 
 

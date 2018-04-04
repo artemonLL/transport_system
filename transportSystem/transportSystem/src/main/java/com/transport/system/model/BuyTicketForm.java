@@ -2,9 +2,12 @@ package com.transport.system.model;
 
 import java.sql.Timestamp;
 
+/**
+ * A class that will help you transfer values from the JSP page
+ *to the controller to buy a {@link Ticket}
+ */
+
 public class BuyTicketForm {
-
-
     private int departure_station_id;
 
     private int arrival_station_id;

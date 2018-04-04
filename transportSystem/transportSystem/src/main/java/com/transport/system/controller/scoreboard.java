@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+/**
+ * RESTful controller. Provides web services of application.
+ */
 @RestController
 @RequestMapping(value = "/scoreboard")
 public class scoreboard {
@@ -64,7 +66,7 @@ public ResponseEntity<List<SimpleSchedule>> stationSchedule(@PathVariable("stati
       SimpleSchedule simpleSchedule =new SimpleSchedule();
       simpleSchedule.setTrain(schedule.getTrain().getTrain_number());
       simpleSchedule.setStation(schedule.getStation().getStation_name());
-      simpleSchedule.setPlatform(2);
+      simpleSchedule.setPlatform(schedule.getWay_position());
       simpleSchedule.setTime(schedule.getTime_msk());
       simpleScheduleList.add(simpleSchedule);
   }

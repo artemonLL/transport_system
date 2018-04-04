@@ -22,10 +22,8 @@
                     <div class="card h-100">
                         <div class="card-body">
                             <h4 class="card-title">
-
-
                             </h4>
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-striped table-hover table-bordered" id="data">
                                 <thead>
                                 <tr>
 

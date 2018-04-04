@@ -25,14 +25,13 @@ position: relative;
 </footer>
 </div>
 </div>
-<
-<!--jQuery -->
-
-
 
 <!-- Bootstrap core JavaScript -->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/> "> </script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/> "> </script>
+
+<script src="<c:url value="/resources/vendor/bootstrap/pagination/pagination.js"/> "> </script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 

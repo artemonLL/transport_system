@@ -9,8 +9,9 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
-
+/**
+ * Simple object that represents a Schedule
+ */
 @Entity
 @Proxy(lazy=false)
 @Table(name = "schedule")

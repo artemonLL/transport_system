@@ -68,27 +68,5 @@ public class TrainServiceImpl implements TrainService {
         return this.getFreePlaces(train_id);
     }
 
-    @Override
-    public boolean removeTrain(int id)
-    {
-        boolean flag;
-        Train train=trainDao.getTrainById(id);
-        if(train.getTrain_number()!=null)
-        {
-            trainDao.removeTrain(id);
-            flag= true;
-        }
-        else
-            {
-                flag= false;
-            }
-        return flag;
-    }
-
-    @Override
-    public int getTrainIdByName(String train_number) {
-        return this.trainDao.getTrainIdByName(train_number);
-    }
-
 
 }

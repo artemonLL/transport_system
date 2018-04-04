@@ -12,10 +12,11 @@ public interface ScheduleDao {
 
     public Schedule getScheduleById(int schedule_id) ;
 
+    public boolean removeSchedule(int schedule_id);
 
-    public void addSchedule(Schedule schedule);
+    public boolean addSchedule(Schedule schedule);
 
-    public void updateSchedule(Schedule schedule);
+    public boolean updateSchedule(Schedule schedule);
 
     public List<Schedule> getScheduleList();
 

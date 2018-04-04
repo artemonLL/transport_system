@@ -32,9 +32,10 @@ public class MessageReceiver implements MessageListener{
     @Autowired
     MessageSender messageSender;
 
-
-
-
+    /**
+     * Message Receiver from ActiveMQ  dont use now.
+     * @param message message.
+     * */
     @Override
     public void onMessage(Message message) {
         if(message!=null) {
@@ -54,12 +55,10 @@ public class MessageReceiver implements MessageListener{
 
             // TextMessage textMessage = (TextMessage) message;
             //  String text = textMessage.getText();
-
         }
         else
         {
             System.out.println("Received: " +" NULL MASSAGe");
         }
-
     }
 }

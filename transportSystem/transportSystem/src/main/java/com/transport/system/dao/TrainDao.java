@@ -12,18 +12,13 @@ public interface TrainDao
 
     public Train getTrainByName(String train_number);
 
-    public void addTrain(Train train);
+    public boolean addTrain(Train train);
 
     public void updateTrain(Train train);
 
     public List<Train> getTrainList();
 
-    public int getTrainIdByName(String train_number);
-
     public int getFreePlaces(int train_id);
-
-    public void removeTrain(int id);
-
 
 
 
