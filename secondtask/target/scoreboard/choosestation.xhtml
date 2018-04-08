@@ -11,25 +11,26 @@
     <title>Scoreboard</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-
-
-    <h:outputStylesheet type="text/css" name="css/main.css"/>
-
+    <h:outputStylesheet type="text/css" name="css/style.css"/>
+    <h:outputStylesheet type="text/css" name="css/newname.css"/>
 
 </h:head>
-<h:body styleClass="container" >
+
+<h:body styleClass="container">
     <div>
         <div>
             <div class="container">
 
                 <h:dataTable value="#{scheduleBean.stationList}" var="schedule"
-                             headerClass="container"
                              styleClass="container">
+                    <f:facet name="header">
+                        <h:outputText style="border-bottom: 2px solid teal; margin-left: 170px;
+     color:cornsilk; text-align: right; font-size: 40px " value="CHOOSE YOU STATION"/>
+                    </f:facet>
                     <h:column>
                         <h:form>
-                            <h:commandButton type="submit" id="choose" value="#{schedule}"
-                                             styleClass="buttonn"
+                            <h:commandButton styleClass="button blue" type="submit" id="choose" value="#{schedule}"
+
                                              action="#{scheduleBean.getOneStationList(schedule)}"/>
                         </h:form>
                     </h:column>
@@ -37,13 +38,7 @@
             </div>
         </div>
     </div>
-
-
-    <h:outputScript name="js/main.js"/>
-
-
-
-
-
+    <h:outputScript name="js/index.js"/>
 </h:body>
+
 </html>

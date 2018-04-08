@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Schedule controller, which allows scoreboard to view pages.
+ */
 @ManagedBean(name = "scheduleBean")
 @RequestScoped
 public class ScheduleController implements Serializable

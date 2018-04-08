@@ -1,9 +1,5 @@
 package com.train.newtask.Listener;
 
-
-
-
-
 import com.train.newtask.EJB.ScheduleEJB;
 import com.train.newtask.WebSocket.WebSocketEndpoint;
 import com.train.newtask.entity.SimpleSchedule;
@@ -17,11 +13,13 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Message Listener From ActiveMQ.
+ * listens for notifications from the main application when need update application.
+ */
 public class MessageListenerImpl implements MessageListener {
 
     private ScheduleEJB scheduleEJB;
-
 
     public WebSocketEndpoint getWebSocketEndpoint() {
         return webSocketEndpoint;
@@ -32,8 +30,6 @@ public class MessageListenerImpl implements MessageListener {
     }
 
     private WebSocketEndpoint webSocketEndpoint;
-
-
 
     public void setScheduleEJB(ScheduleEJB scheduleEJB) {
         this.scheduleEJB = scheduleEJB;

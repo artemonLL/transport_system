@@ -15,6 +15,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+
+
+
+/**
+ * To update the html schedule page for the station when
+ * a notification comes from the first application by massage listener.
+ */
 @Singleton
 @ServerEndpoint("/websocket")
 public class WebSocketEndpoint implements Serializable
@@ -36,7 +43,7 @@ public class WebSocketEndpoint implements Serializable
 
     @OnOpen
     public void onOpen (Session peer) {
-        logger.info("::::::::::::::::::::::::::::::::::::Соединение установленно "+peer.toString());
+    //    logger.info("::::::::::::::::::::::::::::::::::::Соединение установленно "+peer.toString());
         peers.add(peer);
     }
 
@@ -44,7 +51,7 @@ public class WebSocketEndpoint implements Serializable
     @OnClose
     public void onClose (Session peer) {
         peers.remove(peer);
-        logger.info("::::::::::::::::::::::::::::::::::::Соединение Закрыто ");
+     //   logger.info("::::::::::::::::::::::::::::::::::::Соединение Закрыто ");
     }
 
 
@@ -52,7 +59,7 @@ public class WebSocketEndpoint implements Serializable
     public String EventMessage(String message){
         System.out.println("Получено сообщение от клиента:"+message);
         String reply="Ваше сообщение: "+message+" было полученно;";
-        logger.info("::::::::::::::::::::::::::::::::::::GET "+message);
+     //   logger.info("::::::::::::::::::::::::::::::::::::GET "+message);
         return reply;
     }
 

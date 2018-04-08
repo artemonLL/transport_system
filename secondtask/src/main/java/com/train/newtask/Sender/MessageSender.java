@@ -14,9 +14,7 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 /**
- *
- *
- *
+ *Class dont work now
  */
 
 public class MessageSender {

@@ -11,10 +11,6 @@
     <name>scoreboard</name>
 
 
-
-
-
-
     <properties>
 
 
@@ -261,6 +257,17 @@
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.0.2.Final</version>
+                <configuration>
+                    <hostname>localhost</hostname>
+                    <port>9990</port>
+                    <username>foma</username>
+                    <password>4444foma@</password>
                 </configuration>
             </plugin>
             <plugin>

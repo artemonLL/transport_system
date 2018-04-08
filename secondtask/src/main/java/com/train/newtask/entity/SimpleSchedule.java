@@ -6,17 +6,27 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-
+/**
+ * Simple object that represents a Schedule.
+ */
 @XmlRootElement
 public class SimpleSchedule implements Serializable
 {
-
+    /**
+     * Station name
+     */
     private String station;
-
+    /**
+     * Train number
+     */
     private String train;
-
+    /**
+     * Time
+     */
     private Timestamp time;
-
+    /**
+     * Platform where train will stay.
+     */
     private int platform;
 
     public int getPlatform() {

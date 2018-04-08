@@ -14,16 +14,16 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.Properties;
 
-
+/**
+ * Java Message Service Config.
+ * Set properties at work with activeMQ.
+ **/
 @Singleton
 @Startup
 public class JMSConfig {
 
-
     private QueueConnection connection;
-
     private QueueSession session;
-
     private QueueReceiver receiver;
 
     @EJB
@@ -53,8 +53,6 @@ public class JMSConfig {
         listener.setScheduleEJB(scheduleEJB);
         listener.setWebSocketEndpoint(webSocketEndpoint);
         receiver.setMessageListener(listener);
-
-
 
     }
 
