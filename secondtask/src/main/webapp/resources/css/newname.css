@@ -1,13 +1,13 @@
 
 
 html{
-    min-height: 600px;
+    min-height: 900px;
 }
 .container {
-    padding-top: 30px ;
+    padding-top: 50px ;
     text-align:center;
     position: absolute;
-    top: 65%;
+    top: 70%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);

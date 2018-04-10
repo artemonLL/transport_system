@@ -38,7 +38,7 @@ public class MessageSender {
 
 
                 TextMessage message = session.createTextMessage(text);
-                logr.warn("SEND MESSAGE ///////////////////////////////////////////"+text);
+                logr.warn("SEND MESSAGE ///////"+text);
                 return message;
             }
         });

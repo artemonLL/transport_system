@@ -6,4 +6,5 @@ com\train\newtask\entity\SimpleSchedule.class
 com\train\newtask\scheduleController\ScheduleController.class
 com\train\newtask\EJB\ScheduleEJB.class
 com\train\newtask\Sender\MessageSender.class
+com\train\newtask\entity\SimpleSchedule$1.class
 com\train\newtask\Listener\MessageListenerImpl.class

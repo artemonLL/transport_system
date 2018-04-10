@@ -61,6 +61,7 @@ public class StationServiceImpl implements StationService {
         {
             return false;
         }
+        messageSender.sendMessage("stationList");
         logr.info("Station was add "+station);
         this.stationDao.addStation(station);
         return true;

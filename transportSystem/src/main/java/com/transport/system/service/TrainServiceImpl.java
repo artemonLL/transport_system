@@ -88,5 +88,4 @@ public class TrainServiceImpl implements TrainService {
         return this.getFreePlaces(train_id);
     }
 
-
 }

@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.persistence.EntityManager;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import com.sun.jersey.api.client.Client;
@@ -66,7 +66,7 @@ public class ScheduleEJB {
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
-        WebResource webResource = client.resource("http://localhost:8081/system/scoreboard/stationlist");
+        WebResource webResource = client.resource("http://localhost:8081/scoreboard/stationlist");
         ClientResponse response = webResource
                 .accept(MediaType.APPLICATION_JSON)
                 .type(MediaType.APPLICATION_JSON)
@@ -92,7 +92,7 @@ public class ScheduleEJB {
             ClientConfig clientConfig = new DefaultClientConfig();
             clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
             Client client = Client.create(clientConfig);
-            WebResource webResource = client.resource("http://localhost:8081/system/scoreboard/stationSchedule/"+stationn);
+            WebResource webResource = client.resource("http://localhost:8081/scoreboard/stationSchedule/"+stationn);
             ClientResponse response = webResource
                     .accept(MediaType.APPLICATION_JSON)
                     .type(MediaType.APPLICATION_JSON)
@@ -104,7 +104,10 @@ public class ScheduleEJB {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            oneStationScheduleList= simpleSchedule;
+
+            oneStationScheduleList= getCurrendDay(simpleSchedule);
+
+            Collections.sort(oneStationScheduleList,SimpleSchedule.COMPARE_BY_TIME);
             //  SimpleSchedule simpleSchedule= objectMapper(,SimpleSchedule.class);
             logger.info("ScheduleEJB->getLstFromStation->" + station );
         }
@@ -113,4 +116,31 @@ public class ScheduleEJB {
     public void start() throws JMSException {
         updateStationList();
     }
+    public List<SimpleSchedule> getCurrendDay(List<SimpleSchedule> list)
+    {
+        List<SimpleSchedule> outList=new ArrayList<>();
+        Date newDate=new Date();
+        for(SimpleSchedule simpleSchedule:list)
+        {
+           if(byToday(simpleSchedule)==true)
+
+           {
+               outList.add(simpleSchedule);
+           }
+        }
+        return outList;
+    }
+    private boolean byToday(SimpleSchedule schedule) {
+        Date date=new Date(schedule.getTime().getTime());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(schedule.getTime());
+        LocalDate localDate = LocalDate.of(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DAY_OF_MONTH));
+        LocalDate departure =localDate;
+        LocalDate now = LocalDate.now();
+
+
+        return departure.isEqual(now);
+}
 }

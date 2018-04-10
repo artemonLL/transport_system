@@ -34,6 +34,7 @@ public class ScheduleServiceImpl implements ScheduleService {
      **/
     @Override
     public Schedule getScheduleById(int schedule_id) {
+
         return this.scheduleDao.getScheduleById(schedule_id);
     }
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Comparator;
 
 /**
  * Simple object that represents a Schedule.
@@ -28,6 +29,14 @@ public class SimpleSchedule implements Serializable
      * Platform where train will stay.
      */
     private int platform;
+
+    public static final Comparator<SimpleSchedule> COMPARE_BY_TIME = new Comparator<SimpleSchedule>() {
+        @Override
+        public int compare(SimpleSchedule lhs, SimpleSchedule rhs) {
+            return (int) (rhs.getTime().getTime()-lhs.getTime().getTime());
+        }
+    };
+
 
     public int getPlatform() {
         return platform;

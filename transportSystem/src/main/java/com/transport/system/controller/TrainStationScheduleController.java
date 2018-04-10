@@ -1,6 +1,8 @@
 package com.transport.system.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.transport.system.exception.ScheduleNotFoundException;
+import com.transport.system.exception.StationNotFoundException;
 import com.transport.system.model.*;
 import com.transport.system.service.*;
 import org.apache.log4j.Logger;
@@ -99,10 +101,13 @@ public class TrainStationScheduleController {
  ////////////////////EDIT SCHEDULE PAGE
 
  @RequestMapping(value = "/editschedule/{schedule_id}",method = RequestMethod.GET)
- public ModelAndView editschedule(@PathVariable String schedule_id) {
+ public ModelAndView editschedule(@PathVariable String schedule_id) throws ScheduleNotFoundException {
     //Schedule schedule=scheduleService.getScheduleById(Integer.parseInt(schedule_id));
    logr.info("****************************** editschedule************* with  ");
    Schedule schedule=scheduleService.getScheduleById(Integer.parseInt(schedule_id));
+
+     if(schedule==null) throw new ScheduleNotFoundException();
+
      ModelAndView mod = new ModelAndView("edit_schedule");
      ScheduleUpdate scheduleupdate=new ScheduleUpdate();
      mod.addObject("carcass",scheduleupdate);
@@ -112,13 +117,14 @@ public class TrainStationScheduleController {
 ///////////////////////////UPDATE SCHEDULE
 
     @RequestMapping(value = "/editschedule/{schedule_id}",method = RequestMethod.POST)
-    public ModelAndView changeschedule(@ModelAttribute ScheduleUpdate carcass) {
+    public ModelAndView changeschedule(@ModelAttribute ScheduleUpdate carcass) throws ScheduleNotFoundException {
         //Schedule schedule=scheduleService.getScheduleById(Integer.parseInt(schedule_id));
         logr.info("****************************** changeschedule************* with "+
                 carcass.getNew_id()+" "+
                 carcass.getDate_time());
 
        Schedule schedule=scheduleService.getScheduleById(Integer.parseInt(carcass.getNew_id()));
+       if(schedule==null) throw new ScheduleNotFoundException();
         schedule.setTime_msk(carcass.getDate_time());
         boolean isChange=scheduleService.updateSchedule(schedule);
         ModelAndView mod = new ModelAndView("schedulelist");
@@ -143,8 +149,9 @@ public class TrainStationScheduleController {
 
 /////////////////SCHEDULE BY STATION
     @RequestMapping(value = "/stationschedule/{station_id}")
-    public ModelAndView stationschedule(@PathVariable String station_id) {
+    public ModelAndView stationschedule(@PathVariable String station_id) throws StationNotFoundException {
         Station station = stationService.getStationById(Integer.parseInt(station_id));
+        if(station ==null)throw new StationNotFoundException();
         logr.info("-----------------/stationschedule/get station " + station.getStation_name());
         List<Schedule> scheduleList = scheduleService.getScheduleListByStation(station.getStation_id());
         logr.info("-----------------/stationschedule/get scheduleList " + scheduleList.size());
@@ -268,7 +275,7 @@ public class TrainStationScheduleController {
 
 //////////ADD STATION
     @RequestMapping(value = "/savestation", method = RequestMethod.POST)
-    public ModelAndView saveStation(@ModelAttribute Station station) {
+    public ModelAndView saveStation(@ModelAttribute Station station){
 
         boolean isAdd = stationService.addStation(station);
         ModelAndView mod = new ModelAndView();

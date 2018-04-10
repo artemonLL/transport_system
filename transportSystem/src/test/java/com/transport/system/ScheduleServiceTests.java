@@ -53,7 +53,6 @@ public class ScheduleServiceTests {
         schedule1.setTrain(train);
         schedule1.setStation(station);
     }
-
     /**
      * Testing the removeSchedule method from ScheduleService
      * with not null param.

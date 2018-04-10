@@ -9,18 +9,15 @@
 
 <h:head>
     <title>Scoreboard</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <h:outputStylesheet type="text/css" name="css/style.css"/>
     <h:outputStylesheet type="text/css" name="css/newname.css"/>
-
 </h:head>
 
 <h:body styleClass="container">
     <div>
         <div>
             <div class="container">
-
                 <h:dataTable value="#{scheduleBean.stationList}" var="schedule"
                              styleClass="container">
                     <f:facet name="header">
